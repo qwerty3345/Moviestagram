@@ -9,10 +9,15 @@
 /* Begin PBXBuildFile section */
 		B45638D0298DF02D00C42861 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45638CF298DF02D00C42861 /* AppDelegate.swift */; };
 		B45638D2298DF02D00C42861 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45638D1298DF02D00C42861 /* SceneDelegate.swift */; };
-		B45638D4298DF02D00C42861 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45638D3298DF02D00C42861 /* ViewController.swift */; };
+		B45638D4298DF02D00C42861 /* FeedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45638D3298DF02D00C42861 /* FeedController.swift */; };
 		B45638D9298DF02F00C42861 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B45638D8298DF02F00C42861 /* Assets.xcassets */; };
 		B45638DC298DF02F00C42861 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B45638DA298DF02F00C42861 /* LaunchScreen.storyboard */; };
 		B45638E7298DF02F00C42861 /* MoviestagramTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45638E6298DF02F00C42861 /* MoviestagramTests.swift */; };
+		B4563908298DF46000C42861 /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4563907298DF46000C42861 /* UIView+.swift */; };
+		B456390A298DF4F400C42861 /* UITableViewCell+.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4563909298DF4F400C42861 /* UITableViewCell+.swift */; };
+		B456390C298DF50000C42861 /* UITableView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = B456390B298DF50000C42861 /* UITableView+.swift */; };
+		B456390E298DF56A00C42861 /* Array+.swift in Sources */ = {isa = PBXBuildFile; fileRef = B456390D298DF56A00C42861 /* Array+.swift */; };
+		B4563910298DF66B00C42861 /* FeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B456390F298DF66B00C42861 /* FeedCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,12 +34,17 @@
 		B45638CC298DF02D00C42861 /* Moviestagram.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Moviestagram.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B45638CF298DF02D00C42861 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B45638D1298DF02D00C42861 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		B45638D3298DF02D00C42861 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		B45638D3298DF02D00C42861 /* FeedController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedController.swift; sourceTree = "<group>"; };
 		B45638D8298DF02F00C42861 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B45638DB298DF02F00C42861 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B45638DD298DF02F00C42861 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B45638E2298DF02F00C42861 /* MoviestagramTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MoviestagramTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B45638E6298DF02F00C42861 /* MoviestagramTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviestagramTests.swift; sourceTree = "<group>"; };
+		B4563907298DF46000C42861 /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
+		B4563909298DF4F400C42861 /* UITableViewCell+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewCell+.swift"; sourceTree = "<group>"; };
+		B456390B298DF50000C42861 /* UITableView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+.swift"; sourceTree = "<group>"; };
+		B456390D298DF56A00C42861 /* Array+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+.swift"; sourceTree = "<group>"; };
+		B456390F298DF66B00C42861 /* FeedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +119,7 @@
 		B4563900298DF32000C42861 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				B456390F298DF66B00C42861 /* FeedCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -116,7 +127,7 @@
 		B4563901298DF32300C42861 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				B45638D3298DF02D00C42861 /* ViewController.swift */,
+				B45638D3298DF02D00C42861 /* FeedController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -138,6 +149,10 @@
 		B4563906298DF35F00C42861 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				B4563907298DF46000C42861 /* UIView+.swift */,
+				B4563909298DF4F400C42861 /* UITableViewCell+.swift */,
+				B456390B298DF50000C42861 /* UITableView+.swift */,
+				B456390D298DF56A00C42861 /* Array+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -242,9 +257,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B45638D4298DF02D00C42861 /* ViewController.swift in Sources */,
+				B45638D4298DF02D00C42861 /* FeedController.swift in Sources */,
+				B456390A298DF4F400C42861 /* UITableViewCell+.swift in Sources */,
 				B45638D0298DF02D00C42861 /* AppDelegate.swift in Sources */,
+				B4563908298DF46000C42861 /* UIView+.swift in Sources */,
+				B456390E298DF56A00C42861 /* Array+.swift in Sources */,
+				B4563910298DF66B00C42861 /* FeedCell.swift in Sources */,
 				B45638D2298DF02D00C42861 /* SceneDelegate.swift in Sources */,
+				B456390C298DF50000C42861 /* UITableView+.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
