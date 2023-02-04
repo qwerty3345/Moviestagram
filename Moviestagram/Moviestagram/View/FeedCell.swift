@@ -11,13 +11,13 @@ import Kingfisher
 final class FeedCell: UITableViewCell {
 
     // MARK: - UI Properties
-    private lazy var profileImageView: UIImageView = {
+    private lazy var movieProfileImageView: UIImageView = {
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFill
         iv.clipsToBounds = true
         iv.isUserInteractionEnabled = true
-        iv.backgroundColor = .lightGray
-        let tap = UITapGestureRecognizer(target: self, action: #selector(showUserProfile))
+        iv.backgroundColor = appColor
+        let tap = UITapGestureRecognizer(target: self, action: #selector(showMovieDetail))
         iv.isUserInteractionEnabled = true
         iv.addGestureRecognizer(tap)
         return iv
@@ -26,102 +26,56 @@ final class FeedCell: UITableViewCell {
     private lazy var movieTitleButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitleColor(.black, for: .normal)
-        button.setTitle("name", for: .normal)
-        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 13)
-        button.addTarget(self, action: #selector(showUserProfile), for: .touchUpInside)
+        button.setTitle("---", for: .normal)
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+        button.addTarget(self, action: #selector(showMovieDetail), for: .touchUpInside)
         return button
     }()
 
-    private let postImageView: UIImageView = {
+    private let posterImageView: UIImageView = {
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFit
         iv.clipsToBounds = true
         iv.isUserInteractionEnabled = true
-        iv.backgroundColor = .lightGray
+        iv.backgroundColor = .white
         return iv
     }()
 
-    lazy var likeButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setImage(UIImage(systemName: "heart"), for: .normal)
-        button.tintColor = .black
-        button.addTarget(self, action: #selector(didTapLike), for: .touchUpInside)
-        return button
-    }()
-
-    private lazy var commentButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setImage(UIImage(systemName: "bubble.right"), for: .normal)
-        button.tintColor = .black
-        button.addTarget(self, action: #selector(didTapComments), for: .touchUpInside)
-        return button
-    }()
-
-    private let likesLabel: UILabel = {
+    private let ratingLabel: UILabel = {
         let label = UILabel()
-        label.text = "1 like"
-        label.font = UIFont.boldSystemFont(ofSize: 13)
+        label.text = "평균: ★"
+        label.font = .preferredFont(forTextStyle: .caption1)
         return label
     }()
 
-    private let captionLabel: UILabel = {
+    private let summaryLabel: UILabel = {
         let label = UILabel()
-        label.text = "댓글 테스트..."
-        label.font = UIFont.systemFont(ofSize: 14)
+        label.text = "---"
+        label.numberOfLines = 3
+        label.font = .preferredFont(forTextStyle: .caption1)
         return label
     }()
 
-    private let postTimeLabel: UILabel = {
+    private lazy var summaryViewMoreButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitleColor(.gray, for: .normal)
+        button.setTitle("더 보기", for: .normal)
+        button.titleLabel?.font = .preferredFont(forTextStyle: .caption1)
+        button.addTarget(self, action: #selector(viewMoreSummary), for: .touchUpInside)
+    }()
+
+    private let yearLabel: UILabel = {
         let label = UILabel()
-        label.text = "0시간 전"
-        label.font = UIFont.boldSystemFont(ofSize: 12)
+        label.text = "2000년"
+        label.font = .preferredFont(forTextStyle: .caption2)
         label.textColor = .lightGray
         return label
     }()
 
     // MARK: - Lifecycle
-
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-
-        addSubview(profileImageView)
-        profileImageView.anchor(top: topAnchor,
-                                left: leftAnchor,
-                                paddingTop: 12,
-                                paddingLeft: 12)
-        profileImageView.setDimensions(height: 40, width: 40)
-        profileImageView.layer.cornerRadius = 40 / 2
-
-        addSubview(movieTitleButton)
-        movieTitleButton.centerY(inView: profileImageView,
-                               leftAnchor: profileImageView.rightAnchor, paddingLeft: 8)
-
-        addSubview(postImageView)
-        postImageView.anchor(top: profileImageView.bottomAnchor,
-                             left: leftAnchor,
-                             right: rightAnchor,
-                             paddingTop: 8)
-        postImageView.heightAnchor.constraint(equalTo: widthAnchor, multiplier: 1).isActive = true
-
-        congifureActionButtons()
-
-        addSubview(likesLabel)
-        likesLabel.anchor(top: likeButton.bottomAnchor,
-                          left: leftAnchor,
-                          paddingTop: -4,
-                          paddingLeft: 8)
-
-        addSubview(captionLabel)
-        captionLabel.anchor(top: likesLabel.bottomAnchor,
-                            left: leftAnchor,
-                            paddingTop: 8,
-                            paddingLeft: 8)
-
-        addSubview(postTimeLabel)
-        postTimeLabel.anchor(top: captionLabel.bottomAnchor,
-                             left: leftAnchor,
-                             paddingTop: 8,
-                             paddingLeft: 8)
+        configureLayout()
     }
 
     required init?(coder: NSCoder) {
@@ -129,35 +83,72 @@ final class FeedCell: UITableViewCell {
     }
 
     // MARK: - Actions
+    @objc private func showMovieDetail() {
 
-    @objc private func showUserProfile() {
     }
 
-    @objc private func didTapComments() {
-    }
-
-    @objc private func didTapLike() {
-    }
-
-    @objc private func didTapShare() {
+    @objc private func viewMoreSummary() {
+        summaryLabel.numberOfLines = 0
     }
 
     // MARK: - Helpers
-
     func configure(with movie: Movie) {
         movieTitleButton.setTitle(movie.title, for: .normal)
-        profileImageView.setImage(with: movie.backgroundImage)
-        postImageView.setImage(with: movie.mediumCoverImage)
-        captionLabel.text = movie.summary
+        movieProfileImageView.setImage(with: movie.backgroundImage)
+        posterImageView.setImage(with: movie.mediumCoverImage)
+        summaryLabel.text = movie.summary
+        ratingLabel.attributedText = ratingAttributedText(with: movie.rating ?? 0.0)
+        yearLabel.text = "\(movie.year ?? 0)년"
     }
 
-    private func congifureActionButtons() {
-        let stack = UIStackView(arrangedSubviews: [likeButton, commentButton])
-        stack.axis = .horizontal
-        stack.distribution = .fillEqually
-        stack.spacing = 8
-        addSubview(stack)
-        stack.anchor(top: postImageView.bottomAnchor,
-                     height: 50)
+    private func ratingAttributedText(with rating: Double) -> NSMutableAttributedString {
+        var attributedString = NSMutableAttributedString()
+        attributedString.append(NSAttributedString(string: "평균: "))
+        attributedString.append(NSAttributedString(string: "★", attributes: [.foregroundColor: appColor]))
+        attributedString.append(NSAttributedString(string: "\(rating / 2)"))
+        return attributedString
+    }
+
+    private func configureLayout() {
+        addSubview(movieProfileImageView)
+        movieProfileImageView.anchor(top: topAnchor,
+                                     left: leftAnchor,
+                                     paddingTop: 12,
+                                     paddingLeft: 12)
+        movieProfileImageView.setDimensions(height: 40, width: 40)
+        movieProfileImageView.layer.cornerRadius = 40 / 2
+
+        addSubview(movieTitleButton)
+        movieTitleButton.centerY(inView: movieProfileImageView,
+                                 leftAnchor: movieProfileImageView.rightAnchor, paddingLeft: 8)
+
+        addSubview(posterImageView)
+        posterImageView.anchor(top: movieProfileImageView.bottomAnchor,
+                               left: leftAnchor,
+                               right: rightAnchor,
+                               paddingTop: 8)
+        posterImageView.heightAnchor.constraint(equalTo: widthAnchor, multiplier: 1).isActive = true
+
+        addSubview(ratingLabel)
+        ratingLabel.anchor(top: posterImageView.bottomAnchor,
+                           left: leftAnchor,
+                           paddingTop: 8,
+                           paddingLeft: 8)
+
+        addSubview(summaryLabel)
+        summaryLabel.anchor(top: ratingLabel.bottomAnchor,
+                            left: leftAnchor,
+                            right: rightAnchor,
+                            paddingTop: 8,
+                            paddingLeft: 8,
+                            paddingRight: 8)
+
+        addSubview(yearLabel)
+        yearLabel.anchor(top: summaryLabel.bottomAnchor,
+                         left: leftAnchor,
+                         bottom: bottomAnchor,
+                         paddingTop: 8,
+                         paddingLeft: 8,
+                         paddingBottom: 8)
     }
 }

@@ -55,7 +55,8 @@ class FeedController: UIViewController {
         var rowHeight = view.frame.width + 8 + 40 + 8
         rowHeight += 50
         rowHeight += 60
-        feedTableView.rowHeight = rowHeight
+        feedTableView.rowHeight = UITableView.automaticDimension
+        feedTableView.estimatedRowHeight = rowHeight
     }
 
     private func updateFeed(with movies: [Movie]) {

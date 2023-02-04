@@ -11,7 +11,7 @@ final class FeedDataSource: NSObject, UITableViewDataSource {
     var movies: [Movie] = []
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return movies.count
+        return movies.isEmpty ? 2 : movies.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
