@@ -33,12 +33,12 @@ final class MainTabController: UITabBarController {
                                                   selected: UIImage(systemName: "film.stack.fill"),
                                                   viewController: FeedController())
         let searchNavigation = navigationController(unselected: UIImage(systemName: "magnifyingglass"),
-                                                  selected: UIImage(systemName: "magnifyingglass"),
-                                                  viewController: SearchController())
+                                                    selected: UIImage(systemName: "magnifyingglass"),
+                                                    viewController: SearchController())
         let layout = UICollectionViewFlowLayout()
         let profileNavigation = navigationController(unselected: UIImage(systemName: "person.crop.circle"),
-                                                  selected: UIImage(systemName: "person.crop.circle.fill"),
-                                                  viewController: ProfileController(collectionViewLayout: layout))
+                                                     selected: UIImage(systemName: "person.crop.circle.fill"),
+                                                     viewController: ProfileController(collectionViewLayout: layout))
 
         viewControllers = [feedNavigation, searchNavigation, profileNavigation]
 

@@ -10,18 +10,25 @@ import Foundation
 final class MovieRepository {
 
     static let shared = MovieRepository()
+    let baseURLString = "https://yts.mx/api/v2/list_movies.json"
+
     private init() { }
 
     typealias MovieNetworkingCompletion = (Result<[Movie], NetworkError>) -> Void
 
-    func fetchMovie(completion: @escaping MovieNetworkingCompletion) {
-        let urlString = "https://yts.mx/api/v2/list_movies.json"
-
-        performRequest(with: urlString, completion: completion)
+    // TODO: 페이지 별로 로딩해서 띄우게도 구현...!
+    func fetchMovie(with option: FetchMovieOptionQuery, completion: @escaping MovieNetworkingCompletion) {
+        let url = movieQueryURL(with: option)
+        performRequest(with: url, completion: completion)
     }
 
-    private func performRequest(with urlString: String, completion: @escaping MovieNetworkingCompletion) {
-        guard let url = URL(string: urlString) else { return }
+    private func movieQueryURL(with option: FetchMovieOptionQuery) -> URL? {
+        let urlString = baseURLString + option.queryString
+        return URL(string: urlString)
+    }
+
+    private func performRequest(with url: URL?, completion: @escaping MovieNetworkingCompletion) {
+        guard let url else { return }
         let session = URLSession(configuration: .default)
 
         let task = session.dataTask(with: url) { (data, _, error) in

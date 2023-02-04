@@ -16,17 +16,16 @@ final class FeedController: UITableViewController {
         super.viewDidLoad()
 
         configureTableView()
-        configureNavigationBar()
+        configureNavigationBarTitle(with: "Movies")
         fetchMovie()
     }
 
     // MARK: - API
     func fetchMovie() {
-        MovieRepository.shared.fetchMovie { result in
+        MovieRepository.shared.fetchMovie(with: .sortByLike) { result in
             switch result {
             case .success(let movies):
-                self.updateFeed(with: movies)
-                print(movies.first)
+                self.updateTableView(with: movies)
             case .failure(let error):
                 print(error.localizedDescription)
             }
@@ -36,19 +35,11 @@ final class FeedController: UITableViewController {
     // MARK: - Helpers
     private func configureTableView() {
         tableView.registerCell(cellClass: FeedCell.self)
-        tableView.dataSource = self
 
         tableView.separatorStyle = .none
         tableView.allowsSelection = false
 
         setTableViewRowHeight()
-    }
-
-    private func configureNavigationBar() {
-        navigationItem.title = "Movies"
-        navigationController?.navigationBar.titleTextAttributes = [
-            .font: UIFont.customFont(name: .rachel, size: 24)
-        ]
     }
 
     private func setTableViewRowHeight() {
@@ -59,7 +50,7 @@ final class FeedController: UITableViewController {
         tableView.estimatedRowHeight = rowHeight
     }
 
-    private func updateFeed(with movies: [Movie]) {
+    private func updateTableView(with movies: [Movie]) {
         DispatchQueue.main.async {
             self.movies = movies
             self.tableView.reloadData(with: .transitionCrossDissolve)
