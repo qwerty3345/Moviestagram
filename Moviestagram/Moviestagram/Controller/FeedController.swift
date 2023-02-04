@@ -23,6 +23,15 @@ class FeedController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .systemPink
 
+        MovieRepository.shared.fetchMovie { result in
+            switch result {
+            case .success(let movies):
+                print(movies.first)
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+
         configureTableView()
     }
 

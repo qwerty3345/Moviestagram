@@ -8,12 +8,15 @@
 import UIKit
 
 final class FeedDataSource: NSObject, UITableViewDataSource {
+    var movies: [Movie] = []
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return movies.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(cellClass: FeedCell.self, for: indexPath)
+        
         return cell
     }
 }

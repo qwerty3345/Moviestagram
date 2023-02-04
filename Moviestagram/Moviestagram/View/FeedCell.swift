@@ -9,8 +9,7 @@ import UIKit
 
 final class FeedCell: UITableViewCell {
 
-    // MARK: - Properties
-
+    // MARK: - UI Properties
     private lazy var profileImageView: UIImageView = {
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFill
@@ -152,8 +151,8 @@ final class FeedCell: UITableViewCell {
 
     // MARK: - Helpers
 
-    private func configure() {
-
+    private func configure(with movie: Movie) {
+        
     }
 
     private func congifureActionButtons() {
