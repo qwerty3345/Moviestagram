@@ -15,7 +15,7 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         window = UIWindow(windowScene: windowScene)
         window?.overrideUserInterfaceStyle = .light
-        window?.rootViewController = FeedController()
+        window?.rootViewController = MainTabController()
         window?.makeKeyAndVisible()
     }
 }

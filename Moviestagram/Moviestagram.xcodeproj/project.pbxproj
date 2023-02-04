@@ -24,6 +24,12 @@
 		B456391D298E09DE00C42861 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B456391C298E09DE00C42861 /* NetworkError.swift */; };
 		B4563920298E19A500C42861 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = B456391F298E19A500C42861 /* Kingfisher */; };
 		B4563922298E1A8E00C42861 /* UIImageView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4563921298E1A8E00C42861 /* UIImageView+.swift */; };
+		B47B9AC4298E563700025D0C /* MainTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47B9AC3298E563700025D0C /* MainTabController.swift */; };
+		B47B9AC6298E582D00025D0C /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47B9AC5298E582D00025D0C /* ProfileController.swift */; };
+		B47B9AC8298E589300025D0C /* SearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47B9AC7298E589300025D0C /* SearchController.swift */; };
+		B47B9ACD298E5C3800025D0C /* Rachel Roman.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B47B9ACB298E5C3800025D0C /* Rachel Roman.ttf */; };
+		B47B9ACE298E5C3800025D0C /* Rachel italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B47B9ACC298E5C3800025D0C /* Rachel italic.ttf */; };
+		B47B9AD0298E5C9E00025D0C /* UIFont+.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47B9ACF298E5C9E00025D0C /* UIFont+.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +62,12 @@
 		B4563919298E08D300C42861 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		B456391C298E09DE00C42861 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		B4563921298E1A8E00C42861 /* UIImageView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+.swift"; sourceTree = "<group>"; };
+		B47B9AC3298E563700025D0C /* MainTabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabController.swift; sourceTree = "<group>"; };
+		B47B9AC5298E582D00025D0C /* ProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileController.swift; sourceTree = "<group>"; };
+		B47B9AC7298E589300025D0C /* SearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchController.swift; sourceTree = "<group>"; };
+		B47B9ACB298E5C3800025D0C /* Rachel Roman.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rachel Roman.ttf"; sourceTree = "<group>"; };
+		B47B9ACC298E5C3800025D0C /* Rachel italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rachel italic.ttf"; sourceTree = "<group>"; };
+		B47B9ACF298E5C9E00025D0C /* UIFont+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,8 +119,7 @@
 				B4563906298DF35F00C42861 /* Extension */,
 				B456391B298E09D100C42861 /* Enum */,
 				B4563905298DF35600C42861 /* Util */,
-				B45638D8298DF02F00C42861 /* Assets.xcassets */,
-				B45638DA298DF02F00C42861 /* LaunchScreen.storyboard */,
+				B47B9AC9298E5C0C00025D0C /* Resource */,
 				B45638DD298DF02F00C42861 /* Info.plist */,
 			);
 			path = Moviestagram;
@@ -142,7 +153,10 @@
 		B4563901298DF32300C42861 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				B47B9AC3298E563700025D0C /* MainTabController.swift */,
 				B45638D3298DF02D00C42861 /* FeedController.swift */,
+				B47B9AC5298E582D00025D0C /* ProfileController.swift */,
+				B47B9AC7298E589300025D0C /* SearchController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -170,6 +184,7 @@
 				B456390D298DF56A00C42861 /* Array+.swift */,
 				B4563921298E1A8E00C42861 /* UIImageView+.swift */,
 				B4563907298DF46000C42861 /* UIView+.swift */,
+				B47B9ACF298E5C9E00025D0C /* UIFont+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -180,6 +195,25 @@
 				B456391C298E09DE00C42861 /* NetworkError.swift */,
 			);
 			path = Enum;
+			sourceTree = "<group>";
+		};
+		B47B9AC9298E5C0C00025D0C /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				B47B9ACA298E5C1C00025D0C /* Font */,
+				B45638D8298DF02F00C42861 /* Assets.xcassets */,
+				B45638DA298DF02F00C42861 /* LaunchScreen.storyboard */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		B47B9ACA298E5C1C00025D0C /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				B47B9ACC298E5C3800025D0C /* Rachel italic.ttf */,
+				B47B9ACB298E5C3800025D0C /* Rachel Roman.ttf */,
+			);
+			path = Font;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -270,6 +304,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				B45638DC298DF02F00C42861 /* LaunchScreen.storyboard in Resources */,
+				B47B9ACD298E5C3800025D0C /* Rachel Roman.ttf in Resources */,
+				B47B9ACE298E5C3800025D0C /* Rachel italic.ttf in Resources */,
 				B45638D9298DF02F00C42861 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -290,13 +326,17 @@
 			files = (
 				B45638D4298DF02D00C42861 /* FeedController.swift in Sources */,
 				B4563914298DFE1900C42861 /* MovieResponse.swift in Sources */,
+				B47B9AC4298E563700025D0C /* MainTabController.swift in Sources */,
 				B4563922298E1A8E00C42861 /* UIImageView+.swift in Sources */,
 				B456391A298E08D300C42861 /* Movie.swift in Sources */,
+				B47B9AC6298E582D00025D0C /* ProfileController.swift in Sources */,
 				B456390A298DF4F400C42861 /* UITableViewCell+.swift in Sources */,
 				B45638D0298DF02D00C42861 /* AppDelegate.swift in Sources */,
 				B4563908298DF46000C42861 /* UIView+.swift in Sources */,
 				B456390E298DF56A00C42861 /* Array+.swift in Sources */,
 				B4563910298DF66B00C42861 /* FeedCell.swift in Sources */,
+				B47B9AC8298E589300025D0C /* SearchController.swift in Sources */,
+				B47B9AD0298E5C9E00025D0C /* UIFont+.swift in Sources */,
 				B4563918298DFEA300C42861 /* MovieRepository.swift in Sources */,
 				B456391D298E09DE00C42861 /* NetworkError.swift in Sources */,
 				B45638D2298DF02D00C42861 /* SceneDelegate.swift in Sources */,

@@ -7,24 +7,16 @@
 
 import UIKit
 
-class FeedController: UIViewController {
+final class FeedController: UITableViewController {
     // MARK: - Properties
     private var movies: [Movie] = []
-
-    // MARK: - UI Properties
-    private let feedTableView: UITableView = {
-        let tableView = UITableView()
-        tableView.separatorStyle = .none
-        tableView.allowsSelection = false
-        return tableView
-    }()
 
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemPink
 
         configureTableView()
+        configureNavigationBar()
         fetchMovie()
     }
 
@@ -43,38 +35,49 @@ class FeedController: UIViewController {
 
     // MARK: - Helpers
     private func configureTableView() {
-        feedTableView.registerCell(cellClass: FeedCell.self)
-        feedTableView.dataSource = self
+        tableView.registerCell(cellClass: FeedCell.self)
+        tableView.dataSource = self
 
-        view.addSubview(feedTableView)
-        feedTableView.fillSuperview()
+        tableView.separatorStyle = .none
+        tableView.allowsSelection = false
 
         setTableViewRowHeight()
+    }
+
+    private func configureNavigationBar() {
+        navigationItem.title = "Movies"
+        navigationController?.navigationBar.titleTextAttributes = [
+            .font: UIFont.customFont(name: .rachel, size: 24)
+        ]
     }
 
     private func setTableViewRowHeight() {
         var rowHeight = view.frame.width + 8 + 40 + 8
         rowHeight += 50
         rowHeight += 60
-        feedTableView.rowHeight = UITableView.automaticDimension
-        feedTableView.estimatedRowHeight = rowHeight
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = rowHeight
     }
 
     private func updateFeed(with movies: [Movie]) {
         DispatchQueue.main.async {
             self.movies = movies
-            self.feedTableView.reloadData(with: .transitionCrossDissolve)
+            self.tableView.reloadData(with: .transitionCrossDissolve)
         }
+    }
+
+    private func moveToDetailController(with movie: Movie) {
+        // TODO: 자세한 영화 소개 화면으로 이동
     }
 }
 
 // MARK: - UITableViewDataSource
-extension FeedController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+extension FeedController {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return movies.isEmpty ? 2 : movies.count
     }
 
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(cellClass: FeedCell.self, for: indexPath)
         cell.delegate = self
 
@@ -89,6 +92,6 @@ extension FeedController: UITableViewDataSource {
 // MARK: - FeedCellDelegate
 extension FeedController: FeedCellDelegate {
     func cell(_ cell: FeedCell, wantsToShowMovieDetailFor movie: Movie) {
-        
+        moveToDetailController(with: movie)
     }
 }
