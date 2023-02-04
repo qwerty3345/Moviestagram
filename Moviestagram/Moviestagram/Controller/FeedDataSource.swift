@@ -16,7 +16,11 @@ final class FeedDataSource: NSObject, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(cellClass: FeedCell.self, for: indexPath)
-        
+
+        if let movie = movies[safe: indexPath.row] {
+            cell.configure(with: movie)
+        }
+
         return cell
     }
 }

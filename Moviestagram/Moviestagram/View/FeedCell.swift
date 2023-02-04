@@ -22,7 +22,7 @@ final class FeedCell: UITableViewCell {
         return iv
     }()
 
-    private lazy var userNameButton: UIButton = {
+    private lazy var movieTitleButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitleColor(.black, for: .normal)
         button.setTitle("name", for: .normal)
@@ -53,14 +53,6 @@ final class FeedCell: UITableViewCell {
         button.setImage(UIImage(systemName: "bubble.right"), for: .normal)
         button.tintColor = .black
         button.addTarget(self, action: #selector(didTapComments), for: .touchUpInside)
-        return button
-    }()
-
-    private lazy var shareButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setImage(UIImage(systemName: "paperplane"), for: .normal)
-        button.tintColor = .black
-        button.addTarget(self, action: #selector(didTapShare), for: .touchUpInside)
         return button
     }()
 
@@ -99,8 +91,8 @@ final class FeedCell: UITableViewCell {
         profileImageView.setDimensions(height: 40, width: 40)
         profileImageView.layer.cornerRadius = 40 / 2
 
-        addSubview(userNameButton)
-        userNameButton.centerY(inView: profileImageView,
+        addSubview(movieTitleButton)
+        movieTitleButton.centerY(inView: profileImageView,
                                leftAnchor: profileImageView.rightAnchor, paddingLeft: 8)
 
         addSubview(postImageView)
@@ -151,12 +143,12 @@ final class FeedCell: UITableViewCell {
 
     // MARK: - Helpers
 
-    private func configure(with movie: Movie) {
-        
+    func configure(with movie: Movie) {
+        movieTitleButton.setTitle(movie.title, for: .normal)
     }
 
     private func congifureActionButtons() {
-        let stack = UIStackView(arrangedSubviews: [likeButton, commentButton, shareButton])
+        let stack = UIStackView(arrangedSubviews: [likeButton, commentButton])
         stack.axis = .horizontal
         stack.distribution = .fillEqually
         stack.spacing = 8

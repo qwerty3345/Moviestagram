@@ -10,8 +10,17 @@ import UIKit
 class FeedController: UIViewController {
     // MARK: - Properties
     private let feedDataSource = FeedDataSource()
+    private var movies: [Movie] = [] {
+        didSet {
+            feedDataSource.movies = movies
+            DispatchQueue.main.async {
+                self.feedTableView.reloadData()
+            }
+        }
+    }
 
-    private let movieTableView: UITableView = {
+    // MARK: - UI Properties
+    private let feedTableView: UITableView = {
         let tableView = UITableView()
         tableView.separatorStyle = .none
         tableView.allowsSelection = false
@@ -26,6 +35,7 @@ class FeedController: UIViewController {
         MovieRepository.shared.fetchMovie { result in
             switch result {
             case .success(let movies):
+                self.movies = movies
                 print(movies.first)
             case .failure(let error):
                 print(error.localizedDescription)
@@ -40,11 +50,11 @@ class FeedController: UIViewController {
 
     // MARK: - Helpers
     private func configureTableView() {
-        movieTableView.registerCell(cellClass: FeedCell.self)
-        movieTableView.dataSource = feedDataSource
+        feedTableView.registerCell(cellClass: FeedCell.self)
+        feedTableView.dataSource = feedDataSource
 
-        view.addSubview(movieTableView)
-        movieTableView.fillSuperview()
+        view.addSubview(feedTableView)
+        feedTableView.fillSuperview()
 
         setTableViewRowHeight()
     }
@@ -53,6 +63,6 @@ class FeedController: UIViewController {
         var rowHeight = view.frame.width + 8 + 40 + 8
         rowHeight += 50
         rowHeight += 60
-        movieTableView.rowHeight = rowHeight
+        feedTableView.rowHeight = rowHeight
     }
 }
