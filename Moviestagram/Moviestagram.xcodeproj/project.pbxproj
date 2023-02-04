@@ -35,6 +35,9 @@
 		B47B9AD6298E8BFF00025D0C /* FetchMovieOptionQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47B9AD5298E8BFF00025D0C /* FetchMovieOptionQuery.swift */; };
 		B47B9AD8298E93BA00025D0C /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47B9AD7298E93BA00025D0C /* Util.swift */; };
 		B47B9ADA298E9BE900025D0C /* DetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47B9AD9298E9BE900025D0C /* DetailController.swift */; };
+		B4A4BD81298EBFA3006FC77B /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A4BD80298EBFA3006FC77B /* ProfileCell.swift */; };
+		B4A4BD83298EBFBB006FC77B /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A4BD82298EBFBB006FC77B /* ProfileHeaderView.swift */; };
+		B4A4BD85298EC0C2006FC77B /* UICollectionView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A4BD84298EC0C2006FC77B /* UICollectionView+.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,6 +81,9 @@
 		B47B9AD5298E8BFF00025D0C /* FetchMovieOptionQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchMovieOptionQuery.swift; sourceTree = "<group>"; };
 		B47B9AD7298E93BA00025D0C /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 		B47B9AD9298E9BE900025D0C /* DetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailController.swift; sourceTree = "<group>"; };
+		B4A4BD80298EBFA3006FC77B /* ProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCell.swift; sourceTree = "<group>"; };
+		B4A4BD82298EBFBB006FC77B /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
+		B4A4BD84298EC0C2006FC77B /* UICollectionView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -157,6 +163,8 @@
 			children = (
 				B456390F298DF66B00C42861 /* FeedCell.swift */,
 				B47B9AD1298E602F00025D0C /* SearchCell.swift */,
+				B4A4BD80298EBFA3006FC77B /* ProfileCell.swift */,
+				B4A4BD82298EBFBB006FC77B /* ProfileHeaderView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -194,6 +202,7 @@
 			children = (
 				B4563909298DF4F400C42861 /* UITableViewCell+.swift */,
 				B456390B298DF50000C42861 /* UITableView+.swift */,
+				B4A4BD84298EC0C2006FC77B /* UICollectionView+.swift */,
 				B456390D298DF56A00C42861 /* Array+.swift */,
 				B4563921298E1A8E00C42861 /* UIImageView+.swift */,
 				B4563907298DF46000C42861 /* UIView+.swift */,
@@ -342,10 +351,13 @@
 				B45638D4298DF02D00C42861 /* FeedController.swift in Sources */,
 				B4563914298DFE1900C42861 /* MovieResponse.swift in Sources */,
 				B47B9ADA298E9BE900025D0C /* DetailController.swift in Sources */,
+				B4A4BD81298EBFA3006FC77B /* ProfileCell.swift in Sources */,
 				B47B9AC4298E563700025D0C /* MainTabController.swift in Sources */,
 				B4563922298E1A8E00C42861 /* UIImageView+.swift in Sources */,
 				B47B9AD8298E93BA00025D0C /* Util.swift in Sources */,
+				B4A4BD83298EBFBB006FC77B /* ProfileHeaderView.swift in Sources */,
 				B456391A298E08D300C42861 /* Movie.swift in Sources */,
+				B4A4BD85298EC0C2006FC77B /* UICollectionView+.swift in Sources */,
 				B47B9AC6298E582D00025D0C /* ProfileController.swift in Sources */,
 				B456390A298DF4F400C42861 /* UITableViewCell+.swift in Sources */,
 				B45638D0298DF02D00C42861 /* AppDelegate.swift in Sources */,
