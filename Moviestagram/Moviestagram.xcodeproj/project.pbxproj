@@ -34,6 +34,7 @@
 		B47B9AD4298E7AF400025D0C /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47B9AD3298E7AF400025D0C /* UIViewController+.swift */; };
 		B47B9AD6298E8BFF00025D0C /* FetchMovieOptionQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47B9AD5298E8BFF00025D0C /* FetchMovieOptionQuery.swift */; };
 		B47B9AD8298E93BA00025D0C /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47B9AD7298E93BA00025D0C /* Util.swift */; };
+		B47B9ADA298E9BE900025D0C /* DetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47B9AD9298E9BE900025D0C /* DetailController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,6 +77,7 @@
 		B47B9AD3298E7AF400025D0C /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
 		B47B9AD5298E8BFF00025D0C /* FetchMovieOptionQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchMovieOptionQuery.swift; sourceTree = "<group>"; };
 		B47B9AD7298E93BA00025D0C /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
+		B47B9AD9298E9BE900025D0C /* DetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -166,6 +168,7 @@
 				B45638D3298DF02D00C42861 /* FeedController.swift */,
 				B47B9AC5298E582D00025D0C /* ProfileController.swift */,
 				B47B9AC7298E589300025D0C /* SearchController.swift */,
+				B47B9AD9298E9BE900025D0C /* DetailController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -338,6 +341,7 @@
 			files = (
 				B45638D4298DF02D00C42861 /* FeedController.swift in Sources */,
 				B4563914298DFE1900C42861 /* MovieResponse.swift in Sources */,
+				B47B9ADA298E9BE900025D0C /* DetailController.swift in Sources */,
 				B47B9AC4298E563700025D0C /* MainTabController.swift in Sources */,
 				B4563922298E1A8E00C42861 /* UIImageView+.swift in Sources */,
 				B47B9AD8298E93BA00025D0C /* Util.swift in Sources */,

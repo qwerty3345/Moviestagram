@@ -16,13 +16,13 @@ enum FetchMovieOptionQuery {
     var queryString: String {
         switch self {
         case .sortByRating:
-            return "?sort_by=rating"
+            return "sort_by=rating"
         case .sortByLike:
-            return "?sort_by=download_count"
+            return "sort_by=like_count"
         case .sortByRecent:
-            return "?sort_by=date_added"
+            return "sort_by=date_added"
         case .search(let keyword):
-            return "?query_term=\(keyword)"
+            return "query_term=\(keyword)"
         }
     }
 }

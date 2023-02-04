@@ -19,13 +19,22 @@ final class MovieRepository {
 
     // MARK: - Helpers
     // TODO: 페이지 별로 로딩해서 띄우게도 구현...!
-    func fetchMovie(with option: FetchMovieOptionQuery, completion: @escaping MovieNetworkingCompletion) {
-        let url = movieQueryURL(with: option)
+    func fetchMovie(with options: [FetchMovieOptionQuery], completion: @escaping MovieNetworkingCompletion) {
+        let url = movieQueryURL(with: options)
         performRequest(with: url, completion: completion)
     }
 
-    private func movieQueryURL(with option: FetchMovieOptionQuery) -> URL? {
-        let urlString = baseURLString + option.queryString
+    func fetchMovie(with option: FetchMovieOptionQuery, completion: @escaping MovieNetworkingCompletion) {
+        let url = movieQueryURL(with: [option])
+        performRequest(with: url, completion: completion)
+    }
+
+    private func movieQueryURL(with options: [FetchMovieOptionQuery]) -> URL? {
+
+        let urlString = options.reduce("\(baseURLString)?") { partialResult, option in
+            "\(partialResult)&\(option.queryString)"
+        }
+//        let urlString = "\(baseURLString)?\()" + option.queryString
         return URL(string: urlString)
     }
 
