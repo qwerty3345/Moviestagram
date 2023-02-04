@@ -9,13 +9,15 @@ import Foundation
 
 final class MovieRepository {
 
+    typealias MovieNetworkingCompletion = (Result<[Movie], NetworkError>) -> Void
+
+    // MARK: - Properties
     static let shared = MovieRepository()
-    let baseURLString = "https://yts.mx/api/v2/list_movies.json"
+    private let baseURLString = "https://yts.mx/api/v2/list_movies.json"
 
     private init() { }
 
-    typealias MovieNetworkingCompletion = (Result<[Movie], NetworkError>) -> Void
-
+    // MARK: - Helpers
     // TODO: 페이지 별로 로딩해서 띄우게도 구현...!
     func fetchMovie(with option: FetchMovieOptionQuery, completion: @escaping MovieNetworkingCompletion) {
         let url = movieQueryURL(with: option)

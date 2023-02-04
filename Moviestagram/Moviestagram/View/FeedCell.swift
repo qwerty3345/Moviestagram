@@ -13,7 +13,6 @@ protocol FeedCellDelegate: AnyObject {
 }
 
 final class FeedCell: UITableViewCell {
-
     // MARK: - Properties
     var movie: Movie? {
         didSet { configureData() }
@@ -28,7 +27,6 @@ final class FeedCell: UITableViewCell {
         iv.isUserInteractionEnabled = true
         iv.backgroundColor = appColor
         let tap = UITapGestureRecognizer(target: self, action: #selector(showMovieDetail))
-        iv.isUserInteractionEnabled = true
         iv.addGestureRecognizer(tap)
         return iv
     }()
@@ -36,8 +34,7 @@ final class FeedCell: UITableViewCell {
     private lazy var movieTitleButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitleColor(.black, for: .normal)
-        button.setTitle("---", for: .normal)
-        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+        button.titleLabel?.font = .boldSystemFont(ofSize: 14)
         button.addTarget(self, action: #selector(showMovieDetail), for: .touchUpInside)
         return button
     }()
@@ -60,9 +57,9 @@ final class FeedCell: UITableViewCell {
 
     private let summaryLabel: UILabel = {
         let label = UILabel()
-        label.text = "---\n---\n---"
+        label.text = ".\n \n "
         label.numberOfLines = 3
-        label.font = .preferredFont(forTextStyle: .caption1)
+        label.font = .systemFont(ofSize: 14)
         return label
     }()
 
@@ -97,16 +94,8 @@ final class FeedCell: UITableViewCell {
         movieProfileImageView.setImage(with: movie.backgroundImage)
         posterImageView.setImage(with: movie.mediumCoverImage)
         summaryLabel.text = movie.summary
-        ratingLabel.attributedText = ratingAttributedText(with: movie.rating ?? 0.0)
+        ratingLabel.attributedText = Util.ratingAttributedText(with: movie.rating ?? 0.0)
         yearLabel.text = "\(movie.year ?? 0)년"
-    }
-
-    private func ratingAttributedText(with rating: Double) -> NSMutableAttributedString {
-        let attributedString = NSMutableAttributedString()
-        attributedString.append(NSAttributedString(string: "평균: "))
-        attributedString.append(NSAttributedString(string: "★", attributes: [.foregroundColor: appColor]))
-        attributedString.append(NSAttributedString(string: "\(rating / 2)"))
-        return attributedString
     }
 
     private func configureLayout() {

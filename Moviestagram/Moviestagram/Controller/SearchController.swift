@@ -43,8 +43,17 @@ final class SearchController: UITableViewController {
         tableView.registerCell(cellClass: SearchCell.self)
         tableView.dataSource = self
         tableView.rowHeight = 80
+        
+        setTableViewRowHeight()
     }
 
+    private func setTableViewRowHeight() {
+        var rowHeight: CGFloat = 120
+        rowHeight += 16
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = rowHeight
+    }
+    
     private func configureSearchController() {
         searchController.hidesNavigationBarDuringPresentation = false
 
@@ -70,6 +79,11 @@ extension SearchController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(cellClass: SearchCell.self, for: indexPath)
+
+        if let movie = searchedMovies[safe: indexPath.row] {
+            cell.movie = movie
+        }
+
         return cell
     }
 }

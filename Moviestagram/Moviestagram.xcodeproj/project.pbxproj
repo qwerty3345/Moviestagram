@@ -33,6 +33,7 @@
 		B47B9AD2298E602F00025D0C /* SearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47B9AD1298E602F00025D0C /* SearchCell.swift */; };
 		B47B9AD4298E7AF400025D0C /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47B9AD3298E7AF400025D0C /* UIViewController+.swift */; };
 		B47B9AD6298E8BFF00025D0C /* FetchMovieOptionQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47B9AD5298E8BFF00025D0C /* FetchMovieOptionQuery.swift */; };
+		B47B9AD8298E93BA00025D0C /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47B9AD7298E93BA00025D0C /* Util.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,6 +75,7 @@
 		B47B9AD1298E602F00025D0C /* SearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCell.swift; sourceTree = "<group>"; };
 		B47B9AD3298E7AF400025D0C /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
 		B47B9AD5298E8BFF00025D0C /* FetchMovieOptionQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchMovieOptionQuery.swift; sourceTree = "<group>"; };
+		B47B9AD7298E93BA00025D0C /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -179,6 +181,7 @@
 		B4563905298DF35600C42861 /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				B47B9AD7298E93BA00025D0C /* Util.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -337,6 +340,7 @@
 				B4563914298DFE1900C42861 /* MovieResponse.swift in Sources */,
 				B47B9AC4298E563700025D0C /* MainTabController.swift in Sources */,
 				B4563922298E1A8E00C42861 /* UIImageView+.swift in Sources */,
+				B47B9AD8298E93BA00025D0C /* Util.swift in Sources */,
 				B456391A298E08D300C42861 /* Movie.swift in Sources */,
 				B47B9AC6298E582D00025D0C /* ProfileController.swift in Sources */,
 				B456390A298DF4F400C42861 /* UITableViewCell+.swift in Sources */,
