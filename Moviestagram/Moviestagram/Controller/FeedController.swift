@@ -9,7 +9,7 @@ import UIKit
 
 class FeedController: UIViewController {
     // MARK: - Properties
-    private let feedDataSource = FeedDataSource()
+    private var movies: [Movie] = []
 
     // MARK: - UI Properties
     private let feedTableView: UITableView = {
@@ -44,7 +44,7 @@ class FeedController: UIViewController {
     // MARK: - Helpers
     private func configureTableView() {
         feedTableView.registerCell(cellClass: FeedCell.self)
-        feedTableView.dataSource = feedDataSource
+        feedTableView.dataSource = self
 
         view.addSubview(feedTableView)
         feedTableView.fillSuperview()
@@ -61,10 +61,34 @@ class FeedController: UIViewController {
     }
 
     private func updateFeed(with movies: [Movie]) {
-        feedDataSource.movies = movies
         DispatchQueue.main.async {
-            self.feedTableView.reloadData(with: .transitionCrossDissolve)
+            self.movies = movies
             self.feedTableView.reloadData(with: .transitionCrossDissolve)
         }
+    }
+}
+
+// MARK: - UITableViewDataSource
+extension FeedController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return movies.isEmpty ? 2 : movies.count
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(cellClass: FeedCell.self, for: indexPath)
+        cell.delegate = self
+
+        if let movie = movies[safe: indexPath.row] {
+            cell.movie = movie
+        }
+
+        return cell
+    }
+}
+
+// MARK: - FeedCellDelegate
+extension FeedController: FeedCellDelegate {
+    func cell(_ cell: FeedCell, wantsToShowMovieDetailFor movie: Movie) {
+        
     }
 }

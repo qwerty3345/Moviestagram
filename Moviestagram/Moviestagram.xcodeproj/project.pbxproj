@@ -18,7 +18,6 @@
 		B456390C298DF50000C42861 /* UITableView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = B456390B298DF50000C42861 /* UITableView+.swift */; };
 		B456390E298DF56A00C42861 /* Array+.swift in Sources */ = {isa = PBXBuildFile; fileRef = B456390D298DF56A00C42861 /* Array+.swift */; };
 		B4563910298DF66B00C42861 /* FeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B456390F298DF66B00C42861 /* FeedCell.swift */; };
-		B4563912298DFCFD00C42861 /* FeedDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4563911298DFCFD00C42861 /* FeedDataSource.swift */; };
 		B4563914298DFE1900C42861 /* MovieResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4563913298DFE1900C42861 /* MovieResponse.swift */; };
 		B4563918298DFEA300C42861 /* MovieRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4563917298DFEA300C42861 /* MovieRepository.swift */; };
 		B456391A298E08D300C42861 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4563919298E08D300C42861 /* Movie.swift */; };
@@ -52,7 +51,6 @@
 		B456390B298DF50000C42861 /* UITableView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+.swift"; sourceTree = "<group>"; };
 		B456390D298DF56A00C42861 /* Array+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+.swift"; sourceTree = "<group>"; };
 		B456390F298DF66B00C42861 /* FeedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCell.swift; sourceTree = "<group>"; };
-		B4563911298DFCFD00C42861 /* FeedDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedDataSource.swift; sourceTree = "<group>"; };
 		B4563913298DFE1900C42861 /* MovieResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieResponse.swift; sourceTree = "<group>"; };
 		B4563917298DFEA300C42861 /* MovieRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieRepository.swift; sourceTree = "<group>"; };
 		B4563919298E08D300C42861 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
@@ -145,7 +143,6 @@
 			isa = PBXGroup;
 			children = (
 				B45638D3298DF02D00C42861 /* FeedController.swift */,
-				B4563911298DFCFD00C42861 /* FeedDataSource.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -168,11 +165,11 @@
 		B4563906298DF35F00C42861 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
-				B4563907298DF46000C42861 /* UIView+.swift */,
 				B4563909298DF4F400C42861 /* UITableViewCell+.swift */,
 				B456390B298DF50000C42861 /* UITableView+.swift */,
 				B456390D298DF56A00C42861 /* Array+.swift */,
 				B4563921298E1A8E00C42861 /* UIImageView+.swift */,
+				B4563907298DF46000C42861 /* UIView+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -296,7 +293,6 @@
 				B4563922298E1A8E00C42861 /* UIImageView+.swift in Sources */,
 				B456391A298E08D300C42861 /* Movie.swift in Sources */,
 				B456390A298DF4F400C42861 /* UITableViewCell+.swift in Sources */,
-				B4563912298DFCFD00C42861 /* FeedDataSource.swift in Sources */,
 				B45638D0298DF02D00C42861 /* AppDelegate.swift in Sources */,
 				B4563908298DF46000C42861 /* UIView+.swift in Sources */,
 				B456390E298DF56A00C42861 /* Array+.swift in Sources */,

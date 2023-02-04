@@ -8,7 +8,17 @@
 import UIKit
 import Kingfisher
 
+protocol FeedCellDelegate: AnyObject {
+    func cell(_ cell: FeedCell, wantsToShowMovieDetailFor movie: Movie)
+}
+
 final class FeedCell: UITableViewCell {
+
+    // MARK: - Properties
+    var movie: Movie? {
+        didSet { configureData() }
+    }
+    weak var delegate: FeedCellDelegate?
 
     // MARK: - UI Properties
     private lazy var movieProfileImageView: UIImageView = {
@@ -50,18 +60,10 @@ final class FeedCell: UITableViewCell {
 
     private let summaryLabel: UILabel = {
         let label = UILabel()
-        label.text = "---"
+        label.text = "---\n---\n---"
         label.numberOfLines = 3
         label.font = .preferredFont(forTextStyle: .caption1)
         return label
-    }()
-
-    private lazy var summaryViewMoreButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setTitleColor(.gray, for: .normal)
-        button.setTitle("더 보기", for: .normal)
-        button.titleLabel?.font = .preferredFont(forTextStyle: .caption1)
-        button.addTarget(self, action: #selector(viewMoreSummary), for: .touchUpInside)
     }()
 
     private let yearLabel: UILabel = {
@@ -84,15 +86,13 @@ final class FeedCell: UITableViewCell {
 
     // MARK: - Actions
     @objc private func showMovieDetail() {
-
-    }
-
-    @objc private func viewMoreSummary() {
-        summaryLabel.numberOfLines = 0
+        guard let movie else { return }
+        delegate?.cell(self, wantsToShowMovieDetailFor: movie)
     }
 
     // MARK: - Helpers
-    func configure(with movie: Movie) {
+    private func configureData() {
+        guard let movie else { return }
         movieTitleButton.setTitle(movie.title, for: .normal)
         movieProfileImageView.setImage(with: movie.backgroundImage)
         posterImageView.setImage(with: movie.mediumCoverImage)
@@ -102,7 +102,7 @@ final class FeedCell: UITableViewCell {
     }
 
     private func ratingAttributedText(with rating: Double) -> NSMutableAttributedString {
-        var attributedString = NSMutableAttributedString()
+        let attributedString = NSMutableAttributedString()
         attributedString.append(NSAttributedString(string: "평균: "))
         attributedString.append(NSAttributedString(string: "★", attributes: [.foregroundColor: appColor]))
         attributedString.append(NSAttributedString(string: "\(rating / 2)"))
