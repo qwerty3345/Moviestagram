@@ -148,6 +148,7 @@ final class FeedCell: UITableViewCell {
         movieTitleButton.setTitle(movie.title, for: .normal)
         profileImageView.setImage(with: movie.backgroundImage)
         postImageView.setImage(with: movie.mediumCoverImage)
+        captionLabel.text = movie.summary
     }
 
     private func congifureActionButtons() {

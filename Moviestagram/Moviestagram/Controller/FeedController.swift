@@ -10,14 +10,6 @@ import UIKit
 class FeedController: UIViewController {
     // MARK: - Properties
     private let feedDataSource = FeedDataSource()
-    private var movies: [Movie] = [] {
-        didSet {
-            feedDataSource.movies = movies
-            DispatchQueue.main.async {
-                self.feedTableView.reloadData()
-            }
-        }
-    }
 
     // MARK: - UI Properties
     private let feedTableView: UITableView = {
@@ -35,7 +27,7 @@ class FeedController: UIViewController {
         MovieRepository.shared.fetchMovie { result in
             switch result {
             case .success(let movies):
-                self.movies = movies
+                self.updateFeed(with: movies)
                 print(movies.first)
             case .failure(let error):
                 print(error.localizedDescription)
@@ -64,5 +56,13 @@ class FeedController: UIViewController {
         rowHeight += 50
         rowHeight += 60
         feedTableView.rowHeight = rowHeight
+    }
+
+    private func updateFeed(with movies: [Movie]) {
+        feedDataSource.movies = movies
+        DispatchQueue.main.async {
+            self.feedTableView.reloadData(with: .transitionCrossDissolve)
+            self.feedTableView.reloadData(with: .transitionCrossDissolve)
+        }
     }
 }
