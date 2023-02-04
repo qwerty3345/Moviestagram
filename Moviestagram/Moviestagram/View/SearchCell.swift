@@ -74,8 +74,7 @@ final class SearchCell: UITableViewCell {
                                bottom: bottomAnchor,
                                paddingTop: 8,
                                paddingLeft: 8,
-                               paddingBottom: 8,
-                               paddingRight: 8)
+                               paddingBottom: 8)
 
         let stack = UIStackView(arrangedSubviews: [titleLabel, ratingLabel, yearLabel])
         stack.axis = .vertical

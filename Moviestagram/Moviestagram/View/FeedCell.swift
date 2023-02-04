@@ -8,26 +8,18 @@
 import UIKit
 import Kingfisher
 
-protocol FeedCellDelegate: AnyObject {
-    func cell(_ cell: FeedCell, wantsToShowMovieDetailFor movie: Movie)
-}
-
 final class FeedCell: UITableViewCell {
     // MARK: - Properties
     var movie: Movie? {
         didSet { configureData() }
     }
-    weak var delegate: FeedCellDelegate?
 
     // MARK: - UI Properties
     private lazy var movieProfileImageView: UIImageView = {
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFill
         iv.clipsToBounds = true
-        iv.isUserInteractionEnabled = true
         iv.backgroundColor = appColor
-        let tap = UITapGestureRecognizer(target: self, action: #selector(showMovieDetail))
-        iv.addGestureRecognizer(tap)
         return iv
     }()
 
@@ -35,7 +27,6 @@ final class FeedCell: UITableViewCell {
         let button = UIButton(type: .system)
         button.setTitleColor(.black, for: .normal)
         button.titleLabel?.font = .boldSystemFont(ofSize: 14)
-        button.addTarget(self, action: #selector(showMovieDetail), for: .touchUpInside)
         return button
     }()
 
@@ -43,7 +34,6 @@ final class FeedCell: UITableViewCell {
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFit
         iv.clipsToBounds = true
-        iv.isUserInteractionEnabled = true
         iv.backgroundColor = .white
         return iv
     }()
@@ -81,12 +71,6 @@ final class FeedCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
-    // MARK: - Actions
-    @objc private func showMovieDetail() {
-        guard let movie else { return }
-        delegate?.cell(self, wantsToShowMovieDetailFor: movie)
-    }
-
     // MARK: - Helpers
     private func configureData() {
         guard let movie else { return }
@@ -112,11 +96,11 @@ final class FeedCell: UITableViewCell {
                                  leftAnchor: movieProfileImageView.rightAnchor, paddingLeft: 8)
 
         addSubview(posterImageView)
-        posterImageView.anchor(top: movieProfileImageView.bottomAnchor,
-                               left: leftAnchor,
-                               right: rightAnchor,
-                               paddingTop: 8)
-        posterImageView.heightAnchor.constraint(equalTo: widthAnchor, multiplier: 1).isActive = true
+        posterImageView.centerX(inView: self,
+                                topAnchor: movieProfileImageView.bottomAnchor,
+                                paddingTop: 8)
+        let baseSize: CGFloat = 100
+        posterImageView.setDimensions(height: baseSize * 3, width: baseSize * 2)
 
         addSubview(ratingLabel)
         ratingLabel.anchor(top: posterImageView.bottomAnchor,

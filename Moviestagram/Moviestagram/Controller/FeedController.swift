@@ -35,10 +35,7 @@ final class FeedController: UITableViewController {
     // MARK: - Helpers
     private func configureTableView() {
         tableView.registerCell(cellClass: FeedCell.self)
-
         tableView.separatorStyle = .none
-        tableView.allowsSelection = false
-
         setTableViewRowHeight()
     }
 
@@ -70,7 +67,6 @@ extension FeedController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(cellClass: FeedCell.self, for: indexPath)
-        cell.delegate = self
 
         if let movie = movies[safe: indexPath.row] {
             cell.movie = movie
@@ -80,9 +76,11 @@ extension FeedController {
     }
 }
 
-// MARK: - FeedCellDelegate
-extension FeedController: FeedCellDelegate {
-    func cell(_ cell: FeedCell, wantsToShowMovieDetailFor movie: Movie) {
-        moveToDetailController(with: movie)
+// MARK: - UITableViewDelegate
+extension FeedController {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let movie = movies[safe: indexPath.row] else { return }
+        let detailVC = DetailController(movie: movie)
+        navigationController?.pushViewController(detailVC, animated: true)
     }
 }
