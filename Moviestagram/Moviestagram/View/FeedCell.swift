@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 final class FeedCell: UITableViewCell {
 
@@ -33,7 +34,7 @@ final class FeedCell: UITableViewCell {
 
     private let postImageView: UIImageView = {
         let iv = UIImageView()
-        iv.contentMode = .scaleAspectFill
+        iv.contentMode = .scaleAspectFit
         iv.clipsToBounds = true
         iv.isUserInteractionEnabled = true
         iv.backgroundColor = .lightGray
@@ -145,6 +146,8 @@ final class FeedCell: UITableViewCell {
 
     func configure(with movie: Movie) {
         movieTitleButton.setTitle(movie.title, for: .normal)
+        profileImageView.setImage(with: movie.backgroundImage)
+        postImageView.setImage(with: movie.mediumCoverImage)
     }
 
     private func congifureActionButtons() {
