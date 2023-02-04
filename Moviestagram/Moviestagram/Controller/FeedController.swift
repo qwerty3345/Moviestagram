@@ -24,6 +24,12 @@ class FeedController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .systemPink
 
+        configureTableView()
+        fetchMovie()
+    }
+
+    // MARK: - API
+    func fetchMovie() {
         MovieRepository.shared.fetchMovie { result in
             switch result {
             case .success(let movies):
@@ -33,12 +39,7 @@ class FeedController: UIViewController {
                 print(error.localizedDescription)
             }
         }
-
-        configureTableView()
     }
-
-    // MARK: - Actions
-
 
     // MARK: - Helpers
     private func configureTableView() {
