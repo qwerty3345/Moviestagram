@@ -9,7 +9,7 @@ import UIKit
 
 class FeedController: UIViewController {
     // MARK: - Properties
-    private let feedDataSource = FeedDataSource()
+    var movies: [Movie] = []
 
     // MARK: - UI Properties
     private let feedTableView: UITableView = {
@@ -43,7 +43,7 @@ class FeedController: UIViewController {
     // MARK: - Helpers
     private func configureTableView() {
         feedTableView.registerCell(cellClass: FeedCell.self)
-        feedTableView.dataSource = feedDataSource
+        feedTableView.dataSource = self
 
         view.addSubview(feedTableView)
         feedTableView.fillSuperview()
@@ -60,10 +60,35 @@ class FeedController: UIViewController {
     }
 
     private func updateFeed(with movies: [Movie]) {
-        feedDataSource.movies = movies
+        self.movies = movies
         DispatchQueue.main.async {
             self.feedTableView.reloadData(with: .transitionCrossDissolve)
             self.feedTableView.reloadData(with: .transitionCrossDissolve)
+        }
+    }
+}
+
+// MARK: - FeedController
+extension FeedController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return movies.isEmpty ? 2 : movies.count
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(cellClass: FeedCell.self, for: indexPath)
+
+        if let movie = movies[safe: indexPath.row] {
+            cell.configure(with: movie)
+        }
+
+        return cell
+    }
+}
+
+extension FeedController: FeedCellDelegate {
+    func didExpandCell(_ cell: FeedCell) {
+        DispatchQueue.main.async {
+            self.feedTableView.reloadData()
         }
     }
 }

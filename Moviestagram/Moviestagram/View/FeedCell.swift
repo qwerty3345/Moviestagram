@@ -8,7 +8,15 @@
 import UIKit
 import Kingfisher
 
+protocol FeedCellDelegate: AnyObject {
+    func didExpandCell(_ cell: FeedCell)
+}
+
 final class FeedCell: UITableViewCell {
+
+    // MARK: - Properties
+    var isExpanded = false
+    weak var delegate: FeedCellDelegate?
 
     // MARK: - UI Properties
     private lazy var movieProfileImageView: UIImageView = {
@@ -50,18 +58,21 @@ final class FeedCell: UITableViewCell {
 
     private let summaryLabel: UILabel = {
         let label = UILabel()
-        label.text = "---"
-        label.numberOfLines = 3
+        label.numberOfLines = 1
+        label.text = ""
         label.font = .preferredFont(forTextStyle: .caption1)
         return label
     }()
 
-    private lazy var summaryViewMoreButton: UIButton = {
+    private lazy var summaryExpandButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitleColor(.gray, for: .normal)
-        button.setTitle("더 보기", for: .normal)
+        button.setTitle("...더 보기", for: .normal)
+        button.backgroundColor = .white
+        button.layer.borderWidth = 1
         button.titleLabel?.font = .preferredFont(forTextStyle: .caption1)
-        button.addTarget(self, action: #selector(viewMoreSummary), for: .touchUpInside)
+        button.addTarget(self, action: #selector(expandSummary), for: .touchUpInside)
+        return button
     }()
 
     private let yearLabel: UILabel = {
@@ -78,6 +89,11 @@ final class FeedCell: UITableViewCell {
         configureLayout()
     }
 
+    override func prepareForReuse() {
+        summaryLabel.numberOfLines = isExpanded ? 0 : 3
+        summaryExpandButton.isHidden = isExpanded ? true : false
+    }
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -87,8 +103,17 @@ final class FeedCell: UITableViewCell {
 
     }
 
-    @objc private func viewMoreSummary() {
-        summaryLabel.numberOfLines = 0
+    @objc private func expandSummary() {
+        isExpanded.toggle()
+//        UIView.transition(with: summaryLabel, duration: 0.5, options: .transitionCrossDissolve, animations: {
+//            self.summaryLabel.numberOfLines = self.isExpanded ? 0 : 3
+//          })
+//        summaryExpandButton.isHidden = isExpanded ? true : false
+        summaryLabel.numberOfLines = isExpanded ? 0 : 3
+        summaryExpandButton.isHidden = isExpanded ? true : false
+//
+        layoutIfNeeded()
+        delegate?.didExpandCell(self)
     }
 
     // MARK: - Helpers
@@ -99,14 +124,22 @@ final class FeedCell: UITableViewCell {
         summaryLabel.text = movie.summary
         ratingLabel.attributedText = ratingAttributedText(with: movie.rating ?? 0.0)
         yearLabel.text = "\(movie.year ?? 0)년"
+        configureShowMoreButton()
     }
 
     private func ratingAttributedText(with rating: Double) -> NSMutableAttributedString {
-        var attributedString = NSMutableAttributedString()
+        let attributedString = NSMutableAttributedString()
         attributedString.append(NSAttributedString(string: "평균: "))
         attributedString.append(NSAttributedString(string: "★", attributes: [.foregroundColor: appColor]))
         attributedString.append(NSAttributedString(string: "\(rating / 2)"))
         return attributedString
+    }
+
+    private func configureShowMoreButton() {
+        addSubview(summaryExpandButton)
+        summaryExpandButton.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        summaryExpandButton.anchor(bottom: summaryLabel.bottomAnchor,
+                                     right: summaryLabel.rightAnchor)
     }
 
     private func configureLayout() {
