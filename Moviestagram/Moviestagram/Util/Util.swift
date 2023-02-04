@@ -15,4 +15,10 @@ enum Util {
         attributedString.append(NSAttributedString(string: "\(rating / 2)"))
         return attributedString
     }
+
+    static func runtimeToHourMinute(runtime: Int) -> String {
+        let hour = runtime / 60
+        let minute = runtime % 60
+        return "\(hour)hour \(minute)min"
+    }
 }

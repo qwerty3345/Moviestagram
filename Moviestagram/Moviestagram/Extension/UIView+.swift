@@ -13,6 +13,13 @@ extension UIView {
         return Bundle.main.path(forResource: nibName, ofType: "nib") != nil
     }
 
+    static func lineView() -> UIView {
+        let view = UIView()
+        view.backgroundColor = .lightGray
+        view.setHeight(0.5)
+        return view
+    }
+
     // MARK: - AutoLayout Constraints Helpers
     func anchor(top: NSLayoutYAxisAnchor? = nil,
         left: NSLayoutXAxisAnchor? = nil,

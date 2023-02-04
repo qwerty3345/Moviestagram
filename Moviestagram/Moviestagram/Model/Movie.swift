@@ -15,6 +15,7 @@ struct Movie: Codable {
     let summary: String?
     let backgroundImage: String?
     let mediumCoverImage: String?
+    let runtime: Int?
     let rating: Double?
     let year: Int?
 
@@ -23,6 +24,7 @@ struct Movie: Codable {
         case titleLong = "title_long"
         case backgroundImage = "background_image"
         case mediumCoverImage = "medium_cover_image"
+        case runtime
         case rating
         case year
     }
