@@ -9,6 +9,8 @@ import UIKit
 
 class FeedController: UIViewController {
     // MARK: - Properties
+    private let feedDataSource = FeedDataSource()
+
     private let movieTableView: UITableView = {
         let tableView = UITableView()
         tableView.separatorStyle = .none
@@ -30,7 +32,7 @@ class FeedController: UIViewController {
     // MARK: - Helpers
     private func configureTableView() {
         movieTableView.registerCell(cellClass: FeedCell.self)
-        movieTableView.dataSource = self
+        movieTableView.dataSource = feedDataSource
 
         view.addSubview(movieTableView)
         movieTableView.fillSuperview()
@@ -43,16 +45,5 @@ class FeedController: UIViewController {
         rowHeight += 50
         rowHeight += 60
         movieTableView.rowHeight = rowHeight
-    }
-}
-
-extension FeedController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
-    }
-
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(cellClass: FeedCell.self, for: indexPath)
-        return cell
     }
 }

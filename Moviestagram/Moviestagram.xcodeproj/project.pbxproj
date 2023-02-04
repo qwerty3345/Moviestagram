@@ -18,6 +18,7 @@
 		B456390C298DF50000C42861 /* UITableView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = B456390B298DF50000C42861 /* UITableView+.swift */; };
 		B456390E298DF56A00C42861 /* Array+.swift in Sources */ = {isa = PBXBuildFile; fileRef = B456390D298DF56A00C42861 /* Array+.swift */; };
 		B4563910298DF66B00C42861 /* FeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B456390F298DF66B00C42861 /* FeedCell.swift */; };
+		B4563912298DFCFD00C42861 /* FeedDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4563911298DFCFD00C42861 /* FeedDataSource.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +46,7 @@
 		B456390B298DF50000C42861 /* UITableView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+.swift"; sourceTree = "<group>"; };
 		B456390D298DF56A00C42861 /* Array+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+.swift"; sourceTree = "<group>"; };
 		B456390F298DF66B00C42861 /* FeedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCell.swift; sourceTree = "<group>"; };
+		B4563911298DFCFD00C42861 /* FeedDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedDataSource.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,6 +130,7 @@
 			isa = PBXGroup;
 			children = (
 				B45638D3298DF02D00C42861 /* FeedController.swift */,
+				B4563911298DFCFD00C42861 /* FeedDataSource.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -259,6 +262,7 @@
 			files = (
 				B45638D4298DF02D00C42861 /* FeedController.swift in Sources */,
 				B456390A298DF4F400C42861 /* UITableViewCell+.swift in Sources */,
+				B4563912298DFCFD00C42861 /* FeedDataSource.swift in Sources */,
 				B45638D0298DF02D00C42861 /* AppDelegate.swift in Sources */,
 				B4563908298DF46000C42861 /* UIView+.swift in Sources */,
 				B456390E298DF56A00C42861 /* Array+.swift in Sources */,
