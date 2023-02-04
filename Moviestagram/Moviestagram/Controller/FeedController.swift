@@ -8,6 +8,7 @@
 import UIKit
 
 final class FeedController: UITableViewController {
+
     // MARK: - Properties
     private var movies: [Movie] = []
 
@@ -52,10 +53,6 @@ final class FeedController: UITableViewController {
             self.movies = movies
             self.tableView.reloadData(with: .transitionCrossDissolve)
         }
-    }
-
-    private func moveToDetailController(with movie: Movie) {
-        // TODO: 자세한 영화 소개 화면으로 이동
     }
 }
 

@@ -9,17 +9,11 @@ import UIKit
 
 final class MainTabController: UITabBarController {
 
-    // MARK: - Properties
-
-
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         configureViewControllers()
     }
-
-    // MARK: - Actions
-
 
     // MARK: - Helpers
     private func configureViewControllers() {
@@ -36,7 +30,6 @@ final class MainTabController: UITabBarController {
                                                      viewController: ProfileController(collectionViewLayout: layout))
 
         viewControllers = [feedNavigation, searchNavigation, profileNavigation]
-
     }
 
     private func navigationController(unselected: UIImage?, selected: UIImage?,

@@ -30,11 +30,9 @@ final class MovieRepository {
     }
 
     private func movieQueryURL(with options: [FetchMovieOptionQuery]) -> URL? {
-
         let urlString = options.reduce("\(baseURLString)?") { partialResult, option in
             "\(partialResult)&\(option.queryString)"
         }
-//        let urlString = "\(baseURLString)?\()" + option.queryString
         return URL(string: urlString)
     }
 

@@ -8,6 +8,7 @@
 import UIKit
 
 final class DetailController: UIViewController {
+
     // MARK: - Properties
     private let movie: Movie
     private let scrollView = UIScrollView()
@@ -106,7 +107,8 @@ final class DetailController: UIViewController {
                           right: summaryLabel.rightAnchor,
                           paddingTop: 8)
 
-        let recommendImageView1 = generateRecommendImageView(with: <#T##String#>)
+        // TODO: 스크린샷 스크롤뷰로 3개 띄우기
+//        let screenshot1 = screenShotImageView(with: <#T##String#>)
     }
 
     private func configureData() {
@@ -116,7 +118,7 @@ final class DetailController: UIViewController {
         yearLabel.text = "\(movie.year ?? 0)년 개봉"
     }
 
-    private func generateRecommendImageView(with imageURL: String) -> UIImageView {
+    private func screenShotImageView(with imageURL: String) -> UIImageView {
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFit
         iv.clipsToBounds = true

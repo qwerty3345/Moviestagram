@@ -19,10 +19,6 @@ final class SearchController: UITableViewController {
 
         configureTableView()
         configureSearchController()
-    }
-
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
         configureNavigationBarTitle(with: "Search")
     }
 
