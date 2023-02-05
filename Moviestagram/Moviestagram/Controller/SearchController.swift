@@ -13,6 +13,7 @@ final class SearchController: UITableViewController {
     private var searchedMovies: [Movie] = []
     private let searchController = UISearchController(searchResultsController: nil)
 
+
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,6 +30,7 @@ final class SearchController: UITableViewController {
             case .success(let movies):
                 self.updateTableView(with: movies)
             case .failure(let error):
+                self.showCannotSearchAlert()
                 print(error.localizedDescription)
             }
         }
@@ -64,6 +66,20 @@ final class SearchController: UITableViewController {
             self.tableView.reloadData(with: .transitionCrossDissolve)
         }
     }
+
+    let semaphore = DispatchSemaphore(value: 1)
+    private func showCannotSearchAlert() {
+        semaphore.wait()
+        DispatchQueue.main.async {
+            let alert = UIAlertController(title: "검색에 실패했습니다.", message: "다른키워드로 검색 해 주세요", preferredStyle: .actionSheet)
+            let action = UIAlertAction(title: "OK", style: .default) { _ in
+                self.semaphore.signal()
+            }
+            alert.addAction(action)
+
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
 }
 
 // MARK: - UITableViewDataSource
@@ -93,7 +109,7 @@ extension SearchController {
 }
 
 // MARK: - UISearchBarDelegate
-extension SearchController:  UISearchBarDelegate {
+extension SearchController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let searchText = searchController.searchBar.text?.lowercased() else { return }
         searchMovie(with: searchText)

@@ -19,7 +19,7 @@ enum NetworkError: LocalizedError {
         case .dataError:
             return "데이터를 가져오는데 실패했습니다."
         case .parseError:
-            return "데이터를 파싱하는데 실패했습니다."
+            return "데이터를 파싱하는데 실패했습니다. 빈 데이터일 가능성이 있습니다."
         }
     }
 }
