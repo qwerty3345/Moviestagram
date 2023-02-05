@@ -1,5 +1,5 @@
 //
-//  ProfileCell.swift
+//  ProfileRatingCell.swift
 //  Moviestagram
 //
 //  Created by Mason Kim on 2023/02/05.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class ProfileCell: UICollectionViewCell {
+final class ProfileRatingCell: UICollectionViewCell {
 
     // MARK: - UI Properties
     private let postImageView: UIImageView = {

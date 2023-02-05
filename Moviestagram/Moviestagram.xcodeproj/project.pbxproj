@@ -10,6 +10,7 @@
 		B448D390298F53140042C0BF /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = B448D38F298F53140042C0BF /* SnapKit */; };
 		B448D394298F61540042C0BF /* RatingSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B448D393298F61540042C0BF /* RatingSlider.swift */; };
 		B448D398298F77590042C0BF /* MovieLocalRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B448D397298F77590042C0BF /* MovieLocalRepository.swift */; };
+		B448D39A298F92540042C0BF /* ProfileBookmarkCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B448D399298F92540042C0BF /* ProfileBookmarkCell.swift */; };
 		B45638D0298DF02D00C42861 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45638CF298DF02D00C42861 /* AppDelegate.swift */; };
 		B45638D2298DF02D00C42861 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45638D1298DF02D00C42861 /* SceneDelegate.swift */; };
 		B45638D4298DF02D00C42861 /* FeedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45638D3298DF02D00C42861 /* FeedController.swift */; };
@@ -38,7 +39,7 @@
 		B47B9AD6298E8BFF00025D0C /* FetchMovieOptionQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47B9AD5298E8BFF00025D0C /* FetchMovieOptionQuery.swift */; };
 		B47B9AD8298E93BA00025D0C /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47B9AD7298E93BA00025D0C /* Util.swift */; };
 		B47B9ADA298E9BE900025D0C /* DetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47B9AD9298E9BE900025D0C /* DetailController.swift */; };
-		B4A4BD81298EBFA3006FC77B /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A4BD80298EBFA3006FC77B /* ProfileCell.swift */; };
+		B4A4BD81298EBFA3006FC77B /* ProfileRatingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A4BD80298EBFA3006FC77B /* ProfileRatingCell.swift */; };
 		B4A4BD83298EBFBB006FC77B /* ProfileHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A4BD82298EBFBB006FC77B /* ProfileHeader.swift */; };
 		B4A4BD85298EC0C2006FC77B /* UICollectionView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A4BD84298EC0C2006FC77B /* UICollectionView+.swift */; };
 /* End PBXBuildFile section */
@@ -56,6 +57,7 @@
 /* Begin PBXFileReference section */
 		B448D393298F61540042C0BF /* RatingSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingSlider.swift; sourceTree = "<group>"; };
 		B448D397298F77590042C0BF /* MovieLocalRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieLocalRepository.swift; sourceTree = "<group>"; };
+		B448D399298F92540042C0BF /* ProfileBookmarkCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileBookmarkCell.swift; sourceTree = "<group>"; };
 		B45638CC298DF02D00C42861 /* Moviestagram.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Moviestagram.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B45638CF298DF02D00C42861 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B45638D1298DF02D00C42861 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -86,7 +88,7 @@
 		B47B9AD5298E8BFF00025D0C /* FetchMovieOptionQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchMovieOptionQuery.swift; sourceTree = "<group>"; };
 		B47B9AD7298E93BA00025D0C /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 		B47B9AD9298E9BE900025D0C /* DetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailController.swift; sourceTree = "<group>"; };
-		B4A4BD80298EBFA3006FC77B /* ProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCell.swift; sourceTree = "<group>"; };
+		B4A4BD80298EBFA3006FC77B /* ProfileRatingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRatingCell.swift; sourceTree = "<group>"; };
 		B4A4BD82298EBFBB006FC77B /* ProfileHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeader.swift; sourceTree = "<group>"; };
 		B4A4BD84298EC0C2006FC77B /* UICollectionView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -111,6 +113,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B448D39B298F92560042C0BF /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				B4A4BD82298EBFBB006FC77B /* ProfileHeader.swift */,
+				B4A4BD80298EBFA3006FC77B /* ProfileRatingCell.swift */,
+				B448D399298F92540042C0BF /* ProfileBookmarkCell.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
 		B45638C3298DF02D00C42861 = {
 			isa = PBXGroup;
 			children = (
@@ -167,10 +179,9 @@
 		B4563900298DF32000C42861 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				B448D39B298F92560042C0BF /* Profile */,
 				B456390F298DF66B00C42861 /* FeedCell.swift */,
 				B47B9AD1298E602F00025D0C /* SearchCell.swift */,
-				B4A4BD80298EBFA3006FC77B /* ProfileCell.swift */,
-				B4A4BD82298EBFBB006FC77B /* ProfileHeader.swift */,
 				B448D393298F61540042C0BF /* RatingSlider.swift */,
 			);
 			path = View;
@@ -361,7 +372,7 @@
 				B45638D4298DF02D00C42861 /* FeedController.swift in Sources */,
 				B4563914298DFE1900C42861 /* MovieResponse.swift in Sources */,
 				B47B9ADA298E9BE900025D0C /* DetailController.swift in Sources */,
-				B4A4BD81298EBFA3006FC77B /* ProfileCell.swift in Sources */,
+				B4A4BD81298EBFA3006FC77B /* ProfileRatingCell.swift in Sources */,
 				B47B9AC4298E563700025D0C /* MainTabController.swift in Sources */,
 				B4563922298E1A8E00C42861 /* UIImageView+.swift in Sources */,
 				B47B9AD8298E93BA00025D0C /* Util.swift in Sources */,
@@ -369,6 +380,7 @@
 				B456391A298E08D300C42861 /* Movie.swift in Sources */,
 				B4A4BD85298EC0C2006FC77B /* UICollectionView+.swift in Sources */,
 				B47B9AC6298E582D00025D0C /* ProfileController.swift in Sources */,
+				B448D39A298F92540042C0BF /* ProfileBookmarkCell.swift in Sources */,
 				B448D398298F77590042C0BF /* MovieLocalRepository.swift in Sources */,
 				B448D394298F61540042C0BF /* RatingSlider.swift in Sources */,
 				B456390A298DF4F400C42861 /* ReusableView.swift in Sources */,

@@ -8,7 +8,15 @@
 import UIKit
 import SnapKit
 
+protocol ProfileHeaderDelegate: AnyObject {
+    func didChangeToRatingView()
+    func didChangeToBookmarkView()
+}
+
 final class ProfileHeader: UICollectionReusableView {
+
+    // MARK: - Properties
+    weak var delegate: ProfileHeaderDelegate?
 
     // MARK: - UI Properties
     private let profileImageView: UIImageView = {
@@ -59,17 +67,19 @@ final class ProfileHeader: UICollectionReusableView {
         return stack
     }()
 
-    private let ratingButton: UIButton = {
+    private lazy var ratingButton: UIButton = {
         let button = UIButton(type: .system)
         button.setImage(UIImage(systemName: "star.fill"), for: .normal)
         button.tintColor = appColor
+        button.addTarget(self, action: #selector(tappedRatingButton), for: .touchUpInside)
         return button
     }()
 
-    private let bookmarkButton: UIButton = {
+    private lazy var bookmarkButton: UIButton = {
         let button = UIButton(type: .system)
         button.setImage(UIImage(systemName: "bookmark"), for: .normal)
-        button.tintColor = .darkGray
+        button.tintColor = appColor
+        button.addTarget(self, action: #selector(tappedBookmarkButton), for: .touchUpInside)
         return button
     }()
 
@@ -80,8 +90,6 @@ final class ProfileHeader: UICollectionReusableView {
         return stack
     }()
 
-
-
     // MARK: - Lifecycle
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -90,6 +98,19 @@ final class ProfileHeader: UICollectionReusableView {
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    // MARK: - Actions
+    @objc func tappedRatingButton() {
+        ratingButton.setImage(UIImage(systemName: "star.fill"), for: .normal)
+        bookmarkButton.setImage(UIImage(systemName: "bookmark"), for: .normal)
+        delegate?.didChangeToRatingView()
+    }
+
+    @objc func tappedBookmarkButton() {
+        ratingButton.setImage(UIImage(systemName: "star"), for: .normal)
+        bookmarkButton.setImage(UIImage(systemName: "bookmark.fill"), for: .normal)
+        delegate?.didChangeToBookmarkView()
     }
 
     // MARK: - Helpers

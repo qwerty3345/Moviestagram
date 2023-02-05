@@ -10,12 +10,14 @@ import UIKit
 final class ProfileController: UICollectionViewController {
 
     // MARK: - Properties
-    private var bookmarkedMovies: [Movie] = []
-    private var ratedMovies: [Movie] = [] {
-        didSet {
-            collectionView.reloadData()
-        }
+    private var bookmarkedMovies: [Movie] = [] {
+        didSet { collectionView.reloadData() }
     }
+    private var ratedMovies: [Movie] = [] {
+        didSet { collectionView.reloadData() }
+    }
+
+    private var isRatingListMode = true
 
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -34,7 +36,7 @@ final class ProfileController: UICollectionViewController {
 
     // MARK: - Helpers
     private func configureCollectionView() {
-        collectionView.registerCell(cellClass: ProfileCell.self)
+        collectionView.registerCell(cellClass: ProfileRatingCell.self)
         collectionView.register(ProfileHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader)
     }
 }
@@ -46,7 +48,7 @@ extension ProfileController {
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(cellClass: ProfileCell.self, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(cellClass: ProfileRatingCell.self, for: indexPath)
 
         if let movie = ratedMovies[safe: indexPath.row] {
             cell.configure(with: movie)
@@ -58,6 +60,7 @@ extension ProfileController {
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, cellClass: ProfileHeader.self , for: indexPath)
         header.configure(ratings: ratedMovies.count, bookMarks: bookmarkedMovies.count)
+        header.delegate = self
         return header
     }
 }
@@ -88,5 +91,18 @@ extension ProfileController: UICollectionViewDelegateFlowLayout {
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         return CGSize(width: view.frame.width, height: 200)
+    }
+}
+
+// MARK: - ProfileHeaderDelegate
+extension ProfileController: ProfileHeaderDelegate {
+    func didChangeToRatingView() {
+        isRatingListMode = true
+        collectionView.reloadData()
+    }
+
+    func didChangeToBookmarkView() {
+        isRatingListMode = false
+        collectionView.reloadData()
     }
 }
