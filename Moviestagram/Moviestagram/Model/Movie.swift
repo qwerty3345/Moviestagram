@@ -28,5 +28,6 @@ struct Movie: Codable {
         case runtime
         case rating
         case year
+        case myRating
     }
 }

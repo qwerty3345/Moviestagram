@@ -22,8 +22,11 @@ final class ProfileController: UICollectionViewController {
         super.viewDidLoad()
         configureCollectionView()
         setNavigationBarTitle(with: "Mason Kim")
+    }
 
-        self.ratedMovies = MovieLocalRepository.shared.loadRatingMovies()
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.ratedMovies = MovieLocalRepository.shared.ratedMovies
     }
 
     // MARK: - Actions

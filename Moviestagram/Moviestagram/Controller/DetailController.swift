@@ -12,6 +12,13 @@ final class DetailController: UIViewController {
 
     // MARK: - Properties
     private var movie: Movie
+    private lazy var rating: Float = movie.myRating ?? 0 {
+        didSet {
+            if oldValue != rating {
+                saveRatingMovie(with: rating)
+            }
+        }
+    }
     private let scrollView = UIScrollView()
     private let contentView = UIView()
 
@@ -97,11 +104,29 @@ final class DetailController: UIViewController {
         configureLayout()
         configureData()
         setNavigationBarTitle(with: movie.title ?? "")
+        checkIfUserRatedMovie()
         view.backgroundColor = .white
     }
 
-    // MARK: - API
+
+    // MARK: - Repository
     // TODO: 스크린샷 디테일 정보 받아와서, 화면에 띄워주기 (스크롤뷰로)
+
+    private func checkIfUserRatedMovie() {
+        if let ratedMovie = MovieLocalRepository.shared.ratedMovies.first(where: { $0.id == movie.id }) {
+            self.movie = ratedMovie
+            updateRatingLabel()
+        }
+    }
+
+    private func updateRatingLabel() {
+        setStarImages(withRating: movie.myRating ?? 0)
+    }
+
+    private func saveRatingMovie(with rating: Float) {
+        movie.myRating = rating
+        MovieLocalRepository.shared.save(ratingMovie: movie)
+    }
 
     // MARK: - Helpers
     private func configureLayout() {
@@ -165,11 +190,34 @@ final class DetailController: UIViewController {
         //        let screenshot1 = screenShotImageView(with: <#T##String#>)
     }
 
+    private func configureData() {
+        posterImageView.setImage(with: movie.mediumCoverImage)
+        summaryLabel.text = movie.summary
+        ratingLabel.attributedText = Util.ratingAttributedText(with: movie.rating ?? 0.0)
+        yearLabel.text = "\(movie.year ?? 0)년 개봉"
+    }
+
+    private func screenShotImageView(with imageURL: String) -> UIImageView {
+        let iv = UIImageView()
+        iv.contentMode = .scaleAspectFit
+        iv.clipsToBounds = true
+        iv.layer.cornerRadius = 8
+        iv.backgroundColor = appColor
+        iv.setImage(with: imageURL)
+        return iv
+    }
+
+}
+
+// MARK: - Rating Slider
+extension DetailController {
     @objc private func sliderValueChanged(_ sender: UISlider) {
         setStarImages(sliderValue: sender.value)
-        let rating = floor(sender.value) / 2
-        movie.myRating = rating
-        MovieLocalRepository.shared.save(ratingMovie: movie)
+        rating = floor(sender.value) / 2
+    }
+
+    private func setStarImages(withRating rating: Float) {
+        setStarImages(sliderValue: rating * 2)
     }
 
     private func setStarImages(sliderValue: Float) {
@@ -189,22 +237,4 @@ final class DetailController: UIViewController {
             }
         }
     }
-
-    private func configureData() {
-        posterImageView.setImage(with: movie.mediumCoverImage)
-        summaryLabel.text = movie.summary
-        ratingLabel.attributedText = Util.ratingAttributedText(with: movie.rating ?? 0.0)
-        yearLabel.text = "\(movie.year ?? 0)년 개봉"
-    }
-
-    private func screenShotImageView(with imageURL: String) -> UIImageView {
-        let iv = UIImageView()
-        iv.contentMode = .scaleAspectFit
-        iv.clipsToBounds = true
-        iv.layer.cornerRadius = 8
-        iv.backgroundColor = appColor
-        iv.setImage(with: imageURL)
-        return iv
-    }
-
 }
