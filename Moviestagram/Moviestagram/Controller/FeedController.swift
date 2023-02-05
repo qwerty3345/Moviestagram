@@ -11,26 +11,38 @@ final class FeedController: UITableViewController {
 
     // MARK: - Properties
     private var movies: [Movie] = []
+    private var searchOption: FetchMovieOptionQuery = .sortByLike {
+        didSet { fetchMovie(by: searchOption) }
+    }
 
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
         configureTableView()
+        configureRefreshControl()
+        configureNavigationMenu()
         setNavigationBarTitle(with: "Movies")
-        fetchMovie()
+        fetchMovie(by: .sortByLike)
     }
 
     // MARK: - API
-    func fetchMovie() {
-        MovieRemoteRepository.shared.fetchMovie(with: .sortByLike) { result in
+    func fetchMovie(by option: FetchMovieOptionQuery) {
+        MovieRemoteRepository.shared.fetchMovie(with: option) { result in
             switch result {
             case .success(let movies):
                 self.updateTableView(with: movies)
             case .failure(let error):
                 print(error.localizedDescription)
             }
+
+            self.endRefreshing()
         }
+    }
+
+    // MARK: - Actions
+    @objc func refreshFeed() {
+        fetchMovie(by: searchOption)
     }
 
     // MARK: - Helpers
@@ -52,6 +64,33 @@ final class FeedController: UITableViewController {
         DispatchQueue.main.async {
             self.movies = movies
             self.tableView.reloadData(with: .transitionCrossDissolve)
+        }
+    }
+
+    private func configureNavigationMenu() {
+        let menuItems: [UIAction] = [
+            UIAction(title: "인기순 정렬",
+                     image: UIImage(systemName: "heart"),
+                     handler: { _ in self.searchOption = .sortByLike }),
+            UIAction(title: "평점순 정렬",
+                     image: UIImage(systemName: "star"),
+                     handler: { _ in self.searchOption = .sortByRating })]
+
+        let menu = UIMenu(image: UIImage(systemName: "ellipsis.circle"), children: menuItems)
+        let menuBarButton = UIBarButtonItem(image: UIImage(systemName: "ellipsis.circle"), menu: menu)
+
+        navigationItem.rightBarButtonItem = menuBarButton
+    }
+
+    private func configureRefreshControl() {
+        let refresher = UIRefreshControl()
+        refresher.addTarget(self, action: #selector(refreshFeed), for: .valueChanged)
+        tableView.refreshControl = refresher
+    }
+
+    private func endRefreshing() {
+        DispatchQueue.main.async {
+            self.tableView.refreshControl?.endRefreshing()
         }
     }
 }
