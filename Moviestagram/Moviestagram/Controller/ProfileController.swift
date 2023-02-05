@@ -10,14 +10,20 @@ import UIKit
 final class ProfileController: UICollectionViewController {
 
     // MARK: - Properties
-    private var ratedMovies: [Movie] = []
-    private var bookmarkMovies: [Movie] = []
+    private var bookmarkedMovies: [Movie] = []
+    private var ratedMovies: [Movie] = [] {
+        didSet {
+            collectionView.reloadData()
+        }
+    }
 
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         configureCollectionView()
         setNavigationBarTitle(with: "Mason Kim")
+
+        self.ratedMovies = MovieLocalRepository.shared.loadRatingMovies()
     }
 
     // MARK: - Actions
@@ -33,8 +39,7 @@ final class ProfileController: UICollectionViewController {
 // MARK: - UICollectionViewDataSource
 extension ProfileController {
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 9
-//        return ratedMovies.count
+        return ratedMovies.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

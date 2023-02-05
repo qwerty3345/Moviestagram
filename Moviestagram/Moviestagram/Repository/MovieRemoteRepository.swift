@@ -7,12 +7,12 @@
 
 import Foundation
 
-final class MovieRepository {
+final class MovieRemoteRepository {
 
     typealias MovieNetworkingCompletion = (Result<[Movie], NetworkError>) -> Void
 
     // MARK: - Properties
-    static let shared = MovieRepository()
+    static let shared = MovieRemoteRepository()
     private let baseURLString = "https://yts.mx/api/v2/list_movies.json"
 
     private init() { }

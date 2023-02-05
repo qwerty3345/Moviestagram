@@ -23,7 +23,7 @@ final class FeedController: UITableViewController {
 
     // MARK: - API
     func fetchMovie() {
-        MovieRepository.shared.fetchMovie(with: .sortByLike) { result in
+        MovieRemoteRepository.shared.fetchMovie(with: .sortByLike) { result in
             switch result {
             case .success(let movies):
                 self.updateTableView(with: movies)

@@ -18,6 +18,7 @@ struct Movie: Codable {
     let runtime: Int?
     let rating: Double?
     let year: Int?
+    var myRating: Float?
 
     enum CodingKeys: String, CodingKey {
         case id, url, title, summary

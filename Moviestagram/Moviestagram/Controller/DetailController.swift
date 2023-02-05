@@ -11,7 +11,7 @@ import SnapKit
 final class DetailController: UIViewController {
 
     // MARK: - Properties
-    private let movie: Movie
+    private var movie: Movie
     private let scrollView = UIScrollView()
     private let contentView = UIView()
 
@@ -79,7 +79,7 @@ final class DetailController: UIViewController {
         slider.maximumValue = 10
         return slider
     }()
-    
+
 
 
     // MARK: - Lifecycle
@@ -168,7 +168,8 @@ final class DetailController: UIViewController {
     @objc private func sliderValueChanged(_ sender: UISlider) {
         setStarImages(sliderValue: sender.value)
         let rating = floor(sender.value) / 2
-
+        movie.myRating = rating
+        MovieLocalRepository.shared.save(ratingMovie: movie)
     }
 
     private func setStarImages(sliderValue: Float) {
@@ -176,7 +177,6 @@ final class DetailController: UIViewController {
         let intValue = Int(floor(sliderValue))
 
         for index in 0..<5 {
-            print("intValue: \(intValue), index: \(index), float: \(floatValue)")
             guard let starImage = ratingStarImageViews[safe: index] else { continue }
             if (index + 1) <= intValue / 2 {
                 starImage.image = UIImage(systemName: "star.fill")

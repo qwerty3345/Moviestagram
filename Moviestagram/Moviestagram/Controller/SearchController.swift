@@ -24,7 +24,7 @@ final class SearchController: UITableViewController {
 
     // MARK: - API
     private func searchMovie(with keyword: String) {
-        MovieRepository.shared.fetchMovie(with: [.search(keyword), .sortByLike]) { result in
+        MovieRemoteRepository.shared.fetchMovie(with: [.search(keyword), .sortByLike]) { result in
             switch result {
             case .success(let movies):
                 self.updateTableView(with: movies)
