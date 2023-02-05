@@ -32,8 +32,8 @@ final class ProfileCell: UICollectionViewCell {
 
     // MARK: - Helpers
 
-    func configure(with imageURL: String) {
-        postImageView.setImage(with: imageURL)
+    func configure(with movie: Movie) {
+        postImageView.setImage(with: movie.mediumCoverImage)
     }
 
 }

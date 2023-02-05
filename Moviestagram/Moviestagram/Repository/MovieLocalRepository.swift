@@ -30,6 +30,13 @@ final class MovieLocalRepository {
         save(ratingMovies: ratedMovies)
     }
 
+    func remove(ratingMovie: Movie) {
+        if let index = ratedMovies.firstIndex(where: { $0.id == ratingMovie.id}) {
+            ratedMovies.remove(at: index)
+            save(ratingMovies: ratedMovies)
+        }
+    }
+
     private func save(ratingMovies: [Movie]) {
         let value = try? PropertyListEncoder().encode(ratingMovies)
         UserDefaults.standard.setValue(value, forKey: ratingKey)

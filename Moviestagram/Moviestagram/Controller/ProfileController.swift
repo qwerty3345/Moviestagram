@@ -47,17 +47,28 @@ extension ProfileController {
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(cellClass: ProfileCell.self, for: indexPath)
+
+        if let movie = ratedMovies[safe: indexPath.row] {
+            cell.configure(with: movie)
+        }
+
         return cell
     }
 
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: ProfileHeader.reuseIdentifier, for: indexPath)
+        let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, cellClass: ProfileHeader.self , for: indexPath)
+        header.configure(ratings: ratedMovies.count, bookMarks: bookmarkedMovies.count)
         return header
     }
 }
 
 // MARK: - UICollectionViewDelegate
 extension ProfileController {
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let movie = ratedMovies[safe: indexPath.row] else { return }
+        let detailVC = DetailController(movie: movie)
+        navigationController?.pushViewController(detailVC, animated: true)
+    }
 }
 
 // MARK: - UICollectionViewDelegateFlowLayout

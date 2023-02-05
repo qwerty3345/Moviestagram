@@ -1,5 +1,5 @@
 //
-//  ProfileHeaderView.swift
+//  ProfileHeader.swift
 //  Moviestagram
 //
 //  Created by Mason Kim on 2023/02/05.
@@ -93,6 +93,11 @@ final class ProfileHeader: UICollectionReusableView {
     }
 
     // MARK: - Helpers
+    func configure(ratings: Int, bookMarks: Int) {
+        ratingsLabel.text = "\(ratings)\n평가"
+        bookmarkLabel.text = "\(bookMarks)\n보고싶어요"
+    }
+
     private func configureLayout() {
         profileImageView.snp.makeConstraints { make in
             make.height.width.equalTo(80)

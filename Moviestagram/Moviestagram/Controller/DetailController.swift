@@ -125,6 +125,12 @@ final class DetailController: UIViewController {
 
     private func saveRatingMovie(with rating: Float) {
         movie.myRating = rating
+
+        guard rating != 0 else {
+            MovieLocalRepository.shared.remove(ratingMovie: movie)
+            return
+        }
+
         MovieLocalRepository.shared.save(ratingMovie: movie)
     }
 
