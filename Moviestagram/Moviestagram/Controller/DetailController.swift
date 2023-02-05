@@ -152,9 +152,11 @@ final class DetailController: UIViewController {
         if !isBookmarked {
             MovieLocalRepository.shared.save(bookmarkMovie: movie)
             bookmarkButton.image = UIImage(systemName: "bookmark.fill")
+            isBookmarked = true
         } else {
             MovieLocalRepository.shared.remove(bookmarkMovie: movie)
             bookmarkButton.image = UIImage(systemName: "bookmark")
+            isBookmarked = false
         }
     }
 
