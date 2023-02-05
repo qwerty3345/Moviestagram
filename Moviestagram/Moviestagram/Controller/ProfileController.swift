@@ -24,6 +24,7 @@ final class ProfileController: UICollectionViewController {
     // MARK: - Helpers
     private func configureCollectionView() {
         collectionView.registerCell(cellClass: ProfileCell.self)
+        collectionView.register(ProfileHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader)
     }
 }
 
