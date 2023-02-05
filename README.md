@@ -1,51 +1,81 @@
-# Prography 8th iOS Quest
+# Prography 8th iOS Quest 
+## Moviestagram
+<img src = "https://user-images.githubusercontent.com/59835351/216823743-883e892f-ef9c-4017-b558-31b7d87bc2aa.png" width="60%" height="60%">
 
-### 1. 개요
-프로그라피는 짧은 기간동안 멋진 서비스를 뚝딱 만들어내기 때문에 클라이언트 개발 능력이 굉장히 중요합니다. 프로그라피 활동 진행 중 팀원들과 원활한 협업 및 프로젝트를 진행하기 위함과 운영진이 지원자에 따른 적합한 방향성 파악을 위함입니다. 사전 과제를 완벽히 완료하여야만 합격이 가능한 것이 아니므로 할 수 있는 만큼 보여주시면 됩니다. :)
+> 🏃🏻🏃🏻‍♂️💨 **프로젝트 기간:** `23.02.05` ~ `23.02.06`
 
-더 궁금한 것이 있으시면 해당 프로젝트 이슈로 남겨주세요! 늦어도 당일 이내에 답변을 남기도록 하겠습니다.
-
-### 2. 과제
-아래 설명을 읽고, 앱을 구현해주시기 바랍니다.
-
-해당 Repository를 fork하여 진행합니다.
-
-a. 주제
-- 제공되는 API를 활용하여 영화 목록을 받아와 보여주는 인스타그램 UI의 영화정보 제공 App을 만들어주세요. 
-
-b. 요구사항
-- 영화목록을 볼 수 있는 화면과 최소 한페이지 이상의 다른 화면을 구현해주세요. `예) 디테일 화면, 검색 화면, 프로필 화면 등..`
-- 작업내용을 문서화해주세요. (문서내용: 화면 설명 및 구현된 앱을 설명할 수 있는 내용)
-- 예시와 구성화면이 일치하지 않아도 됩니다.
-- 너무 많은 시간을 과제에 할애하지 않게 하기 위해, 예시 화면에 여러 버튼 및 탭바 구현은 자유입니다. `예) 하단 탭바, 상단 버튼, 기타 액션, 다른 화면 전환 등..`
-
-c. 평가방법
-- 기본적으로 앱이 실행되어야 합니다. (실행이 불가할 경우, 면접에서 확인을 요청드릴 수 있습니다)
-- 짧은 기한 안에, 서비스를 완성시키기 위해서 앱의 완성도를 봅니다.
-- 구현된 화면의 동작이 자연스러운지 확인합니다.
-- 같은 파트의 팀원과 원활한 소통을 위해 코드의 가독성을 고려합니다.
+## 📝 프로젝트 구조
 
 
-API 정보
+> UIKit (Code base) + MVC Pattern
+> 
+- 빠른 구현을 위해 가장 단순한 MVC 구조를 사용하였습니다.
+    
+    <img width="277" alt="스크린샷 2023-02-05 오후 10 05 30" src="https://user-images.githubusercontent.com/59835351/216823807-94dc78c5-989a-405e-8d96-f835a7b47b01.png">
+    
+## 📱 동작 화면
+### 1. 앱 초기 화면
+![1  앱 초기 화면](https://user-images.githubusercontent.com/59835351/216824101-21d0e42e-2a7e-4cbe-b476-c67795d6e31a.gif)
 
-영화 정보 API 사용방법: https://yts.lt/api#list_movies
+### 2. 메인 피드 (무한 스크롤, 새로고침)
+![2  메인 피드 (무한 스크롤, 새로고침)](https://user-images.githubusercontent.com/59835351/216824183-9fa05a08-4445-4517-a59b-67476bdda8bd.gif)
 
-영화 정보 API base URL: https://yts.lt/api/v2/list_movies.json
+### 3. 메인 피드 (인기순, 평점순 정렬)
+![3  메인 피드 (인기순, 평점순 정렬)](https://user-images.githubusercontent.com/59835351/216824242-736274d4-a79d-4a83-a196-b6161693c478.gif)
 
-### 3. 제출방법
-이 레포지토리를 fork 하여 본인의 깃헙에서 진행해주시면 됩니다. 마감일 기준 23:59:59 까지 기록된 커밋만 인정합니다.
+### 4. 상세 페이지
+![4  상세 페이지](https://user-images.githubusercontent.com/59835351/216824270-5e889475-06e2-41fb-95c0-a4c88b15317e.gif)
 
-### 인스타그램 예시 
-**(안에 내용이 영화정보로 변경되면 됩니다. UI가 동일하지 않아도 됩니다)**
-<div>
-  <img src="https://user-images.githubusercontent.com/13533884/215339992-6b4638b3-caa7-48fd-a079-dccc7ac596b2.PNG" width="400" />
-</div>
+### 5. 사용자 별점 기능
+![5  사용자 별점 기능](https://user-images.githubusercontent.com/59835351/216824285-8ccd92a4-627f-4c83-985a-f60851329c4d.gif)
+
+### 6. 사용자 북마크 저장 기능
+![6  사용자 북마크 저장 기능](https://user-images.githubusercontent.com/59835351/216824292-c23709e0-70c8-442f-9c92-c35f00a2ece1.gif)
+
+### 7. 영화 검색 기능
+![7  영화 검색 기능](https://user-images.githubusercontent.com/59835351/216824305-0830ef1a-4805-4dc6-b413-133007e742e8.gif)
+
+### 8. 영화 검색 - 결과 없음 사용자 알림
+![8  영화 검색 - 결과 없음 사용자 알림](https://user-images.githubusercontent.com/59835351/216824313-d1853446-6c7d-485a-810e-799973ac7a3d.gif)
+
+### 9. 유저 프로필
+![9  유저 프로필](https://user-images.githubusercontent.com/59835351/216824325-04e6ca18-ef0b-445a-a410-f0b7669273c3.gif)
 
 
-### 과제 관련 Q&A
-- 기본적으로 과제 구현과 관련된 질문은 받지 않습니다. 명시되지 않은 부분에 대해서는 자유롭게 구현해주시면 됩니다.
-- 추가적인 문의 및 질문 사항은 해당 Repository Issues로 등록부탁드립니다.
-- 다만, issues에 대한 답변은 실시간으로 이루어지지 않을 수 있습니다.
+## 🔨 사용 라이브러리 목록
 
-❗︎ 기존 오픈카톡방 담당자는 ios 운영진이 아니어서 과제 관련 문의에 답변을 드릴수 없습니다. 관련 문의는 꼭 Issues를 이용해 주세요
+### 🎣 Kingfisher
 
+- 프로젝트 특성상 영화 API 에서 포스터 이미지를 불러오는 작업을 자주 하기에, 캐싱 작업을 위해 사용하였습니다.
+
+### 🫰 SnapKit
+
+- 처음엔 UIView의 extension으로 anchore를 쉽게 잡게 해 주는 Helper function 을 생성하여 작업하였으나, 
+프로젝트 중간부터 스냅킷의 활용을 학습 하여 프로젝트에 적용하였습니다.
+- 모든 프로젝트를 Code UI 로 작성하였기에 사용하였습니다.
+- Storyboard 로 작업할 수도 있었지만, 차후 협업을 위해서는 Code base UI 가 더 적절하다 판단하였습니다.
+
+## 🎞️ API - 영화 정보
+
+> 프로젝트 요구사항이었던 yts의 API 사용
+> 
+- API 관련 정보: [https://yts.lt/api#list_movies](https://yts.lt/api#list_movies)
+- API base URL: [https://yts.lt/api/v2/list_movies.json](https://yts.lt/api/v2/list_movies.json)
+
+## ✅ 차후 작업 사항
+
+- [ ]  MVVM, Clean Architecture 구조로 리팩터링
+    
+    > MVVM, Clean Architecture 를 학습 후 적용 할 예정.
+    > 
+    - [ ]  Controller와 Repository 간의 종속성 분리
+    - [ ]  Cell과 같은 View들이 Model에 대해 모르게끔 구현
+    - [ ]  현재 Movie는 Usecase + Model 형태인데, 이를 분리 할 예정
+- [ ]  유닛 테스트 구현
+    > 시간 관계로 유닛 테스트는 구현하지 못하였고, 
+    트러블 슈팅은 lldb, log를 활용한 디버깅을 하며 작업하였는데 한 문제에서 막혔을 때 시간이 지연되는 부분이 있었던 것이 아쉬움
+    > 
+- [ ]  Auto Layout - SnapKit 으로 마저 리팩터링
+- [ ]  현재는 User가 저장한 데이터를 UserDefaults로 Local에 저장하는데, 
+이를 Firebase를 활용하여 Server 에 저장하도록 구현 예정
+    - [ ]  (미정) 각 영화별로 댓글을 달 수 있고, 평점을 공유할 수 있는 SNS 기능
