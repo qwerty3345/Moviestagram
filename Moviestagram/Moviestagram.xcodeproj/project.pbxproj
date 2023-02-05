@@ -11,6 +11,7 @@
 		B448D394298F61540042C0BF /* RatingSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B448D393298F61540042C0BF /* RatingSlider.swift */; };
 		B448D398298F77590042C0BF /* MovieLocalRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B448D397298F77590042C0BF /* MovieLocalRepository.swift */; };
 		B448D39A298F92540042C0BF /* ProfileBookmarkCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B448D399298F92540042C0BF /* ProfileBookmarkCell.swift */; };
+		B448D39E298F9BAC0042C0BF /* ProfileHeaderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B448D39D298F9BAC0042C0BF /* ProfileHeaderViewModel.swift */; };
 		B45638D0298DF02D00C42861 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45638CF298DF02D00C42861 /* AppDelegate.swift */; };
 		B45638D2298DF02D00C42861 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45638D1298DF02D00C42861 /* SceneDelegate.swift */; };
 		B45638D4298DF02D00C42861 /* FeedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45638D3298DF02D00C42861 /* FeedController.swift */; };
@@ -58,6 +59,7 @@
 		B448D393298F61540042C0BF /* RatingSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingSlider.swift; sourceTree = "<group>"; };
 		B448D397298F77590042C0BF /* MovieLocalRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieLocalRepository.swift; sourceTree = "<group>"; };
 		B448D399298F92540042C0BF /* ProfileBookmarkCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileBookmarkCell.swift; sourceTree = "<group>"; };
+		B448D39D298F9BAC0042C0BF /* ProfileHeaderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderViewModel.swift; sourceTree = "<group>"; };
 		B45638CC298DF02D00C42861 /* Moviestagram.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Moviestagram.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B45638CF298DF02D00C42861 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B45638D1298DF02D00C42861 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -123,6 +125,14 @@
 			path = Profile;
 			sourceTree = "<group>";
 		};
+		B448D39C298F9B940042C0BF /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				B448D39D298F9BAC0042C0BF /* ProfileHeaderViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		B45638C3298DF02D00C42861 = {
 			isa = PBXGroup;
 			children = (
@@ -148,6 +158,7 @@
 				B45638D1298DF02D00C42861 /* SceneDelegate.swift */,
 				B45638FF298DF31C00C42861 /* Model */,
 				B4563900298DF32000C42861 /* View */,
+				B448D39C298F9B940042C0BF /* ViewModel */,
 				B4563901298DF32300C42861 /* Controller */,
 				B4563902298DF32700C42861 /* Repository */,
 				B4563906298DF35F00C42861 /* Extension */,
@@ -373,6 +384,7 @@
 				B4563914298DFE1900C42861 /* MovieResponse.swift in Sources */,
 				B47B9ADA298E9BE900025D0C /* DetailController.swift in Sources */,
 				B4A4BD81298EBFA3006FC77B /* ProfileRatingCell.swift in Sources */,
+				B448D39E298F9BAC0042C0BF /* ProfileHeaderViewModel.swift in Sources */,
 				B47B9AC4298E563700025D0C /* MainTabController.swift in Sources */,
 				B4563922298E1A8E00C42861 /* UIImageView+.swift in Sources */,
 				B47B9AD8298E93BA00025D0C /* Util.swift in Sources */,

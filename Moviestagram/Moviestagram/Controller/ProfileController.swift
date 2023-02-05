@@ -17,6 +17,12 @@ final class ProfileController: UICollectionViewController {
         didSet { collectionView.reloadData() }
     }
 
+    private var ratings: [Float] {
+        ratedMovies
+            .map { $0.myRating ?? 0 }
+            .sorted()
+    }
+
     private var isRatingListMode = true
 
     // MARK: - Lifecycle
@@ -66,7 +72,7 @@ extension ProfileController {
 
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, cellClass: ProfileHeader.self , for: indexPath)
-        header.configure(ratings: ratedMovies.count, bookMarks: bookmarkedMovies.count)
+        header.viewModel = ProfileHeaderViewModel(bookmarkedMovies: bookmarkedMovies, ratedMovies: ratedMovies)
         header.delegate = self
         return header
     }

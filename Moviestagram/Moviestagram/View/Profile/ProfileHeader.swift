@@ -16,6 +16,9 @@ protocol ProfileHeaderDelegate: AnyObject {
 final class ProfileHeader: UICollectionReusableView {
 
     // MARK: - Properties
+    var viewModel: ProfileHeaderViewModel? {
+        didSet { configure() }
+    }
     weak var delegate: ProfileHeaderDelegate?
 
     // MARK: - UI Properties
@@ -48,7 +51,7 @@ final class ProfileHeader: UICollectionReusableView {
         let label = UILabel()
         label.numberOfLines = 2
         label.textAlignment = .center
-        label.text = "0\n평가"
+        label.text = "0\nRating"
         return label
     }()
 
@@ -56,7 +59,7 @@ final class ProfileHeader: UICollectionReusableView {
         let label = UILabel()
         label.numberOfLines = 2
         label.textAlignment = .center
-        label.text = "0\n보고싶어요"
+        label.text = "0\nBookmark"
         return label
     }()
 
@@ -133,9 +136,12 @@ final class ProfileHeader: UICollectionReusableView {
     }
 
     // MARK: - Helpers
-    func configure(ratings: Int, bookMarks: Int) {
-        ratingsLabel.text = "\(ratings)\n평가"
-        bookmarkLabel.text = "\(bookMarks)\n보고싶어요"
+    func configure() {
+        guard let viewModel else { return }
+        ratingsLabel.text = viewModel.ratingsLabelText
+        bookmarkLabel.text = viewModel.bookmarkLabelText
+
+        print(viewModel.ratingData)
     }
 
     private func configureLayout() {
