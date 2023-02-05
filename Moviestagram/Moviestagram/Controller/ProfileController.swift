@@ -17,12 +17,6 @@ final class ProfileController: UICollectionViewController {
         didSet { collectionView.reloadData() }
     }
 
-    private var ratings: [Float] {
-        ratedMovies
-            .map { $0.myRating ?? 0 }
-            .sorted()
-    }
-
     private var isRatingListMode = true
 
     // MARK: - Lifecycle
@@ -34,11 +28,14 @@ final class ProfileController: UICollectionViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.ratedMovies = MovieLocalRepository.shared.ratedMovies
+        fetchLocalSaveData()
     }
 
     // MARK: - Actions
-
+    private func fetchLocalSaveData() {
+        self.ratedMovies = MovieLocalRepository.shared.ratedMovies
+        self.bookmarkedMovies = MovieLocalRepository.shared.bookmarkedMovies
+    }
 
     // MARK: - Helpers
     private func configureCollectionView() {
