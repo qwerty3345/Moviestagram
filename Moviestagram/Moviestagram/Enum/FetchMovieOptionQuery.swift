@@ -12,6 +12,7 @@ enum FetchMovieOptionQuery {
     case sortByLike
     case sortByRecent
     case search(String)
+    case page(Int)
 
     var queryString: String {
         switch self {
@@ -23,6 +24,8 @@ enum FetchMovieOptionQuery {
             return "sort_by=date_added"
         case .search(let keyword):
             return "query_term=\(keyword)"
+        case .page(let page):
+            return "page=\(page)"
         }
     }
 }

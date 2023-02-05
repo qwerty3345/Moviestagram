@@ -10,10 +10,32 @@ import UIKit
 final class FeedController: UITableViewController {
 
     // MARK: - Properties
-    private var movies: [Movie] = []
+    private var currentPage: Int {
+        movies.count / 20
+    }
+    private var movies: [Movie] = [] {
+        didSet {
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
+    }
     private var searchOption: FetchMovieOptionQuery = .sortByLike {
         didSet { fetchMovie(by: searchOption) }
     }
+
+    private lazy var spinnerFooter: UIView = {
+        let footerView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 100))
+
+        let spinner = UIActivityIndicatorView()
+        footerView.addSubview(spinner)
+        spinner.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        spinner.startAnimating()
+
+        return footerView
+    }()
 
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -24,14 +46,31 @@ final class FeedController: UITableViewController {
         configureNavigationMenu()
         setNavigationBarTitle(with: "Movies")
         fetchMovie(by: .sortByLike)
+        tableView.tableFooterView = spinnerFooter
     }
 
     // MARK: - API
-    func fetchMovie(by option: FetchMovieOptionQuery) {
+    private func fetchMovie(by option: FetchMovieOptionQuery) {
         MovieRemoteRepository.shared.fetchMovie(with: option) { result in
             switch result {
             case .success(let movies):
-                self.updateTableView(with: movies)
+                self.movies = movies
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+
+            self.endRefreshing()
+        }
+    }
+
+    private func loadMoreMovieData(by option: FetchMovieOptionQuery) {
+        print("movies - \(movies.count)")
+        print("movies - \(movies.count / 20 + 1)")
+        print("load more - \(currentPage + 1)")
+        MovieRemoteRepository.shared.fetchMovie(with: [option, .page(currentPage + 1)]) { result in
+            switch result {
+            case .success(let movies):
+                self.movies += movies
             case .failure(let error):
                 print(error.localizedDescription)
             }
@@ -58,13 +97,6 @@ final class FeedController: UITableViewController {
         rowHeight += 60
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = rowHeight
-    }
-
-    private func updateTableView(with movies: [Movie]) {
-        DispatchQueue.main.async {
-            self.movies = movies
-            self.tableView.reloadData(with: .transitionCrossDissolve)
-        }
     }
 
     private func configureNavigationMenu() {
@@ -118,5 +150,12 @@ extension FeedController {
         guard let movie = movies[safe: indexPath.row] else { return }
         let detailVC = DetailController(movie: movie)
         navigationController?.pushViewController(detailVC, animated: true)
+    }
+
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if indexPath.row == movies.count - 1 {
+            print("load more!")
+            loadMoreMovieData(by: searchOption)
+        }
     }
 }
