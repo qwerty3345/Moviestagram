@@ -8,7 +8,7 @@
 import UIKit
 
 extension UIViewController {
-    func configureNavigationBarTitle(with title: String) {
+    func setNavigationBarTitle(with title: String) {
         navigationItem.title = title
         navigationController?.navigationBar.titleTextAttributes = [
             .font: UIFont.customFont(name: .rachel, size: 24)

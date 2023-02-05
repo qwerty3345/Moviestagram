@@ -11,11 +11,13 @@ final class ProfileController: UICollectionViewController {
 
     // MARK: - Properties
     private var ratedMovies: [Movie] = []
+    private var bookmarkMovies: [Movie] = []
 
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         configureCollectionView()
+        setNavigationBarTitle(with: "Mason Kim")
     }
 
     // MARK: - Actions
@@ -29,7 +31,6 @@ final class ProfileController: UICollectionViewController {
 }
 
 // MARK: - UICollectionViewDataSource
-
 extension ProfileController {
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 9
@@ -41,7 +42,6 @@ extension ProfileController {
         return cell
     }
 
-    // TODO: 헤더 설정 (viewForSupplementaryElementOfKind)
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: ProfileHeader.reuseIdentifier, for: indexPath)
         return header

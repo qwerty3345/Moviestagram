@@ -6,13 +6,15 @@
 //
 
 import UIKit
+import SnapKit
 
 final class ProfileHeader: UICollectionReusableView {
 
     // MARK: - UI Properties
     private let profileImageView: UIImageView = {
         let iv = UIImageView()
-        iv.backgroundColor = .lightGray
+        iv.tintColor = appColor
+        iv.image = UIImage(systemName: "seal")
         iv.contentMode = .scaleAspectFill
         iv.clipsToBounds = true
         return iv
@@ -22,33 +24,100 @@ final class ProfileHeader: UICollectionReusableView {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 14)
         label.textColor = .black
+        label.textAlignment = .center
+        label.text = "Mason Kim"
         return label
+    }()
+
+    private lazy var profileStack: UIStackView = {
+        let stack = UIStackView(arrangedSubviews: [profileImageView, usernameLabel])
+        stack.axis = .vertical
+        stack.spacing = 8
+        return stack
     }()
 
     private let ratingsLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 2
         label.textAlignment = .center
+        label.text = "0\n평가"
         return label
     }()
 
-    private let wishlistLabel: UILabel = {
+    private let bookmarkLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 2
         label.textAlignment = .center
+        label.text = "0\n보고싶어요"
         return label
     }()
 
+    private lazy var statusStack: UIStackView = {
+        let stack = UIStackView(arrangedSubviews: [ratingsLabel, bookmarkLabel])
+        stack.axis = .horizontal
+        stack.distribution = .fillEqually
+        return stack
+    }()
+
+    private let ratingButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setImage(UIImage(systemName: "star.fill"), for: .normal)
+        button.tintColor = appColor
+        return button
+    }()
+
+    private let bookmarkButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setImage(UIImage(systemName: "bookmark"), for: .normal)
+        button.tintColor = .darkGray
+        return button
+    }()
+
+    private lazy var buttonStack: UIStackView = {
+        let stack = UIStackView(arrangedSubviews: [ratingButton, bookmarkButton])
+        stack.axis = .horizontal
+        stack.distribution = .fillEqually
+        return stack
+    }()
 
 
 
     // MARK: - Lifecycle
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .systemBlue
+        configureLayout()
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    // MARK: - Helpers
+    private func configureLayout() {
+        profileImageView.snp.makeConstraints { make in
+            make.height.width.equalTo(80)
+        }
+        profileImageView.layer.cornerRadius = 80 / 2
+
+        addSubview(profileStack)
+        profileStack.snp.makeConstraints { make in
+            make.top.left.equalToSuperview()
+                .inset(16)
+        }
+
+
+        addSubview(statusStack)
+        statusStack.snp.makeConstraints { make in
+            make.top.right.equalToSuperview().inset(16)
+            make.left.equalTo(profileStack.snp.right).offset(16)
+            make.bottom.equalTo(profileStack)
+        }
+
+        addSubview(buttonStack)
+        buttonStack.snp.makeConstraints { make in
+            make.top.equalTo(profileStack.snp.bottom).offset(16)
+            make.height.equalTo(50)
+            make.left.right.bottom.equalToSuperview()
+        }
     }
 }

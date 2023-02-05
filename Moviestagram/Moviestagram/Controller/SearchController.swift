@@ -19,7 +19,7 @@ final class SearchController: UITableViewController {
 
         configureTableView()
         configureSearchController()
-        configureNavigationBarTitle(with: "Search")
+        setNavigationBarTitle(with: "Search")
     }
 
     // MARK: - API

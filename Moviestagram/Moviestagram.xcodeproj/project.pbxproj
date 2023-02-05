@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B448D390298F53140042C0BF /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = B448D38F298F53140042C0BF /* SnapKit */; };
 		B45638D0298DF02D00C42861 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45638CF298DF02D00C42861 /* AppDelegate.swift */; };
 		B45638D2298DF02D00C42861 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45638D1298DF02D00C42861 /* SceneDelegate.swift */; };
 		B45638D4298DF02D00C42861 /* FeedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45638D3298DF02D00C42861 /* FeedController.swift */; };
@@ -92,6 +93,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B4563920298E19A500C42861 /* Kingfisher in Frameworks */,
+				B448D390298F53140042C0BF /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -258,6 +260,7 @@
 			name = Moviestagram;
 			packageProductDependencies = (
 				B456391F298E19A500C42861 /* Kingfisher */,
+				B448D38F298F53140042C0BF /* SnapKit */,
 			);
 			productName = Moviestagram;
 			productReference = B45638CC298DF02D00C42861 /* Moviestagram.app */;
@@ -311,6 +314,7 @@
 			mainGroup = B45638C3298DF02D00C42861;
 			packageReferences = (
 				B456391E298E19A500C42861 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				B448D38E298F53130042C0BF /* XCRemoteSwiftPackageReference "SnapKit" */,
 			);
 			productRefGroup = B45638CD298DF02D00C42861 /* Products */;
 			projectDirPath = "";
@@ -663,6 +667,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		B448D38E298F53130042C0BF /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
 		B456391E298E19A500C42861 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/onevcat/Kingfisher";
@@ -674,6 +686,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		B448D38F298F53140042C0BF /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B448D38E298F53130042C0BF /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
 		B456391F298E19A500C42861 /* Kingfisher */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = B456391E298E19A500C42861 /* XCRemoteSwiftPackageReference "Kingfisher" */;

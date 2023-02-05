@@ -17,7 +17,7 @@ final class FeedController: UITableViewController {
         super.viewDidLoad()
 
         configureTableView()
-        configureNavigationBarTitle(with: "Movies")
+        setNavigationBarTitle(with: "Movies")
         fetchMovie()
     }
 

@@ -61,7 +61,7 @@ final class DetailController: UIViewController {
         super.viewDidLoad()
         configureLayout()
         configureData()
-        configureNavigationBarTitle(with: movie.title ?? "")
+        setNavigationBarTitle(with: movie.title ?? "")
         view.backgroundColor = .white
     }
 
