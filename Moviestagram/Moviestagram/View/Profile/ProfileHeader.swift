@@ -90,6 +90,19 @@ final class ProfileHeader: UICollectionReusableView {
         return stack
     }()
 
+    private let ratingUnderLineView: UIView = {
+        let line = UIView()
+        line.backgroundColor = appColor
+        return line
+    }()
+
+    private let bookmarkUnderLineView: UIView = {
+        let line = UIView()
+        line.backgroundColor = appColor
+        line.isHidden = true
+        return line
+    }()
+
     // MARK: - Lifecycle
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -104,12 +117,18 @@ final class ProfileHeader: UICollectionReusableView {
     @objc func tappedRatingButton() {
         ratingButton.setImage(UIImage(systemName: "star.fill"), for: .normal)
         bookmarkButton.setImage(UIImage(systemName: "bookmark"), for: .normal)
+        ratingUnderLineView.isHidden = false
+        bookmarkUnderLineView.isHidden = true
+
         delegate?.didChangeToRatingView()
     }
 
     @objc func tappedBookmarkButton() {
         ratingButton.setImage(UIImage(systemName: "star"), for: .normal)
         bookmarkButton.setImage(UIImage(systemName: "bookmark.fill"), for: .normal)
+        ratingUnderLineView.isHidden = true
+        bookmarkUnderLineView.isHidden = false
+
         delegate?.didChangeToBookmarkView()
     }
 
@@ -144,6 +163,20 @@ final class ProfileHeader: UICollectionReusableView {
             make.top.equalTo(profileStack.snp.bottom).offset(16)
             make.height.equalTo(50)
             make.left.right.bottom.equalToSuperview()
+        }
+
+        addSubview(ratingUnderLineView)
+        ratingUnderLineView.snp.makeConstraints { make in
+            make.top.equalTo(ratingButton.snp.bottom).inset(4)
+            make.left.right.equalTo(ratingButton)
+            make.height.equalTo(4)
+        }
+
+        addSubview(bookmarkUnderLineView)
+        bookmarkUnderLineView.snp.makeConstraints { make in
+            make.top.equalTo(bookmarkButton.snp.bottom).inset(4)
+            make.left.right.equalTo(bookmarkButton)
+            make.height.equalTo(4)
         }
     }
 }

@@ -37,6 +37,7 @@ final class ProfileController: UICollectionViewController {
     // MARK: - Helpers
     private func configureCollectionView() {
         collectionView.registerCell(cellClass: ProfileRatingCell.self)
+        collectionView.registerCell(cellClass: ProfileBookmarkCell.self)
         collectionView.register(ProfileHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader)
     }
 }
@@ -44,17 +45,23 @@ final class ProfileController: UICollectionViewController {
 // MARK: - UICollectionViewDataSource
 extension ProfileController {
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return ratedMovies.count
+        return isRatingListMode ? ratedMovies.count : bookmarkedMovies.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(cellClass: ProfileRatingCell.self, for: indexPath)
-
-        if let movie = ratedMovies[safe: indexPath.row] {
-            cell.configure(with: movie)
+        if isRatingListMode {
+            let cell = collectionView.dequeueReusableCell(cellClass: ProfileRatingCell.self, for: indexPath)
+            if let movie = ratedMovies[safe: indexPath.row] {
+                cell.configure(with: movie)
+            }
+            return cell
+        } else {
+            let cell = collectionView.dequeueReusableCell(cellClass: ProfileBookmarkCell.self, for: indexPath)
+            if let movie = bookmarkedMovies[safe: indexPath.row] {
+                cell.configure(with: movie)
+            }
+            return cell
         }
-
-        return cell
     }
 
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
@@ -68,7 +75,10 @@ extension ProfileController {
 // MARK: - UICollectionViewDelegate
 extension ProfileController {
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let movie = ratedMovies[safe: indexPath.row] else { return }
+        guard let movie = isRatingListMode
+                ? ratedMovies[safe: indexPath.row]
+                : bookmarkedMovies[safe: indexPath.row] else { return }
+
         let detailVC = DetailController(movie: movie)
         navigationController?.pushViewController(detailVC, animated: true)
     }
