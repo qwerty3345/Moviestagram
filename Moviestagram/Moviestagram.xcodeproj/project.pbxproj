@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		B448D390298F53140042C0BF /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = B448D38F298F53140042C0BF /* SnapKit */; };
+		B448D394298F61540042C0BF /* RatingSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B448D393298F61540042C0BF /* RatingSlider.swift */; };
 		B45638D0298DF02D00C42861 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45638CF298DF02D00C42861 /* AppDelegate.swift */; };
 		B45638D2298DF02D00C42861 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45638D1298DF02D00C42861 /* SceneDelegate.swift */; };
 		B45638D4298DF02D00C42861 /* FeedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45638D3298DF02D00C42861 /* FeedController.swift */; };
@@ -52,6 +53,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B448D393298F61540042C0BF /* RatingSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingSlider.swift; sourceTree = "<group>"; };
 		B45638CC298DF02D00C42861 /* Moviestagram.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Moviestagram.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B45638CF298DF02D00C42861 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B45638D1298DF02D00C42861 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -167,6 +169,7 @@
 				B47B9AD1298E602F00025D0C /* SearchCell.swift */,
 				B4A4BD80298EBFA3006FC77B /* ProfileCell.swift */,
 				B4A4BD82298EBFBB006FC77B /* ProfileHeaderView.swift */,
+				B448D393298F61540042C0BF /* RatingSlider.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -363,6 +366,7 @@
 				B456391A298E08D300C42861 /* Movie.swift in Sources */,
 				B4A4BD85298EC0C2006FC77B /* UICollectionView+.swift in Sources */,
 				B47B9AC6298E582D00025D0C /* ProfileController.swift in Sources */,
+				B448D394298F61540042C0BF /* RatingSlider.swift in Sources */,
 				B456390A298DF4F400C42861 /* ReusableView.swift in Sources */,
 				B45638D0298DF02D00C42861 /* AppDelegate.swift in Sources */,
 				B4563908298DF46000C42861 /* UIView+.swift in Sources */,

@@ -49,6 +49,39 @@ final class DetailController: UIViewController {
         return label
     }()
 
+    private let ratingStarImageViews: [UIImageView] = {
+        var imageViews: [UIImageView] = []
+        for _ in 0..<5 {
+            let starImageView = UIImageView(image: UIImage(systemName: "star"))
+            starImageView.tintColor = appColor
+            starImageView.snp.makeConstraints { make in
+                make.height.width.equalTo(40)
+            }
+            imageViews.append(starImageView)
+        }
+        return imageViews
+    }()
+
+    private lazy var ratingStarStack: UIStackView = {
+        let stack = UIStackView(arrangedSubviews: ratingStarImageViews)
+        stack.axis = .horizontal
+        stack.distribution = .equalSpacing
+        return stack
+    }()
+
+    private lazy var ratingSlider: RatingSlider = {
+        let slider = RatingSlider()
+        slider.addTarget(self, action: #selector(sliderValueChanged), for: .valueChanged)
+        slider.minimumTrackTintColor = .clear
+        slider.maximumTrackTintColor = .clear
+        slider.thumbTintColor = .clear
+        slider.minimumValue = 0
+        slider.maximumValue = 10
+        return slider
+    }()
+    
+
+
     // MARK: - Lifecycle
     init(movie: Movie) {
         self.movie = movie
@@ -92,31 +125,69 @@ final class DetailController: UIViewController {
             make.top.equalToSuperview().inset(8)
         }
 
-        let stack = UIStackView(arrangedSubviews: [yearLabel, ratingLabel])
-        stack.axis = .horizontal
-        stack.distribution = .fillEqually
-        stack.spacing = 24
-        contentView.addSubview(stack)
-        stack.snp.makeConstraints { make in
+        let infoStack = UIStackView(arrangedSubviews: [yearLabel, ratingLabel])
+        infoStack.axis = .horizontal
+        infoStack.distribution = .fillEqually
+        infoStack.spacing = 24
+        contentView.addSubview(infoStack)
+        infoStack.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.top.equalTo(posterImageView.snp.bottom).offset(8)
         }
 
+        contentView.addSubview(ratingStarStack)
+        ratingStarStack.snp.makeConstraints { make in
+            make.top.equalTo(infoStack.snp.bottom)
+            make.left.right.equalTo(posterImageView)
+        }
+
+        contentView.addSubview(ratingSlider)
+        ratingSlider.snp.makeConstraints { make in
+            make.top.left.right.bottom.equalTo(ratingStarStack)
+        }
+
+
         contentView.addSubview(summaryLabel)
         summaryLabel.snp.makeConstraints { make in
-            make.top.equalTo(stack.snp.bottom).offset(16)
-            make.left.bottom.right.equalToSuperview().inset(16)
+            make.top.equalTo(ratingStarStack.snp.bottom).offset(16)
+            make.left.right.bottom.equalToSuperview().inset(16)
         }
 
         let divierView = UIView.lineView()
         contentView.addSubview(divierView)
         divierView.snp.makeConstraints { make in
-            make.top.equalTo(stack.snp.bottom).offset(8)
+            make.top.equalTo(ratingStarStack.snp.bottom).offset(8)
             make.left.right.equalTo(summaryLabel)
         }
-        
+
+
         // TODO: 스크린샷 스크롤뷰로 3개 띄우기
-//        let screenshot1 = screenShotImageView(with: <#T##String#>)
+        //        let screenshot1 = screenShotImageView(with: <#T##String#>)
+    }
+
+    @objc private func sliderValueChanged(_ sender: UISlider) {
+        setStarImages(sliderValue: sender.value)
+        let rating = floor(sender.value) / 2
+
+    }
+
+    private func setStarImages(sliderValue: Float) {
+        let floatValue = floor(sliderValue * 10) / 10
+        let intValue = Int(floor(sliderValue))
+
+        for index in 0..<5 {
+            print("intValue: \(intValue), index: \(index), float: \(floatValue)")
+            guard let starImage = ratingStarImageViews[safe: index] else { continue }
+            if (index + 1) <= intValue / 2 {
+                starImage.image = UIImage(systemName: "star.fill")
+            } else {
+                if (2 * (index + 1) - intValue) <= 1 {
+                    starImage.image = UIImage(systemName: "star.leadinghalf.filled")
+                } else {
+                    starImage.image = UIImage(systemName: "star")
+                }
+            }
+        }
     }
 
     private func configureData() {
