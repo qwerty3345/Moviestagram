@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 
 final class DetailController: UIViewController {
 
@@ -28,6 +29,7 @@ final class DetailController: UIViewController {
         let label = UILabel()
         label.text = "★"
         label.font = .systemFont(ofSize: 18)
+        label.textAlignment = .center
         return label
     }()
 
@@ -71,42 +73,48 @@ final class DetailController: UIViewController {
     // MARK: - Helpers
     private func configureLayout() {
         view.addSubview(scrollView)
-        scrollView.fillSuperview()
+        scrollView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+
         scrollView.addSubview(contentView)
-        contentView.fillSuperview()
-        contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
+        contentView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+            make.width.equalTo(scrollView)
+        }
 
         contentView.addSubview(posterImageView)
-        let baseSize: CGFloat = 120
-        posterImageView.setDimensions(height: baseSize * 3, width: baseSize * 2)
-        posterImageView.centerX(inView: contentView,
-                                topAnchor: contentView.topAnchor,
-                                paddingTop: 8)
+        posterImageView.snp.makeConstraints { make in
+            let baseSize: CGFloat = 120
+            make.width.equalTo(baseSize * 2)
+            make.height.equalTo(baseSize * 3)
+            make.centerX.equalToSuperview()
+            make.top.equalToSuperview().inset(8)
+        }
 
         let stack = UIStackView(arrangedSubviews: [yearLabel, ratingLabel])
-        stack.axis = .vertical
-        stack.spacing = 8
+        stack.axis = .horizontal
+        stack.distribution = .fillEqually
+        stack.spacing = 24
         contentView.addSubview(stack)
-        stack.centerX(inView: contentView,
-                      topAnchor: posterImageView.bottomAnchor,
-                      paddingTop: 8)
+        stack.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(posterImageView.snp.bottom).offset(8)
+        }
 
         contentView.addSubview(summaryLabel)
-        summaryLabel.anchor(top: stack.bottomAnchor,
-                            left: contentView.leftAnchor,
-                            bottom: contentView.bottomAnchor,
-                            right: contentView.rightAnchor,
-                            paddingTop: 16,
-                            paddingLeft: 16,
-                            paddingRight: 16)
+        summaryLabel.snp.makeConstraints { make in
+            make.top.equalTo(stack.snp.bottom).offset(16)
+            make.left.bottom.right.equalToSuperview().inset(16)
+        }
 
         let divierView = UIView.lineView()
         contentView.addSubview(divierView)
-        divierView.anchor(top: stack.bottomAnchor,
-                          left: summaryLabel.leftAnchor,
-                          right: summaryLabel.rightAnchor,
-                          paddingTop: 8)
-
+        divierView.snp.makeConstraints { make in
+            make.top.equalTo(stack.snp.bottom).offset(8)
+            make.left.right.equalTo(summaryLabel)
+        }
+        
         // TODO: 스크린샷 스크롤뷰로 3개 띄우기
 //        let screenshot1 = screenShotImageView(with: <#T##String#>)
     }
