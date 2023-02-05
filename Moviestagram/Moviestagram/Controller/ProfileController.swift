@@ -23,6 +23,7 @@ final class ProfileController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureCollectionView()
+        configureRefreshControl()
         setNavigationBarTitle(with: "Mason Kim")
     }
 
@@ -35,6 +36,11 @@ final class ProfileController: UICollectionViewController {
     private func fetchLocalSaveData() {
         self.ratedMovies = MovieLocalRepository.shared.ratedMovies
         self.bookmarkedMovies = MovieLocalRepository.shared.bookmarkedMovies
+        self.collectionView.refreshControl?.endRefreshing()
+    }
+
+    @objc func refreshProfile() {
+        fetchLocalSaveData()
     }
 
     // MARK: - Helpers
@@ -42,6 +48,12 @@ final class ProfileController: UICollectionViewController {
         collectionView.registerCell(cellClass: ProfileRatingCell.self)
         collectionView.registerCell(cellClass: ProfileBookmarkCell.self)
         collectionView.register(ProfileHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader)
+    }
+
+    private func configureRefreshControl() {
+        let refresher = UIRefreshControl()
+        refresher.addTarget(self, action: #selector(refreshProfile), for: .valueChanged)
+        collectionView.refreshControl = refresher
     }
 }
 
