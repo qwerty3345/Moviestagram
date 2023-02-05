@@ -19,13 +19,14 @@ final class FeedCell: UITableViewCell {
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFill
         iv.clipsToBounds = true
-        iv.backgroundColor = appColor
+        iv.backgroundColor = .lightGray
         return iv
     }()
 
     private lazy var movieTitleButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitleColor(.black, for: .normal)
+        button.setTitle("-", for: .normal)
         button.titleLabel?.font = .boldSystemFont(ofSize: 14)
         return button
     }()
@@ -34,20 +35,20 @@ final class FeedCell: UITableViewCell {
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFit
         iv.clipsToBounds = true
-        iv.backgroundColor = .white
+        iv.backgroundColor = .lightGray
         return iv
     }()
 
     private let ratingLabel: UILabel = {
         let label = UILabel()
-        label.text = "평균: ★"
+        label.text = "-"
         label.font = .preferredFont(forTextStyle: .caption1)
         return label
     }()
 
     private let summaryLabel: UILabel = {
         let label = UILabel()
-        label.text = ".\n \n "
+        label.text = ".\n. \n. "
         label.numberOfLines = 3
         label.font = .systemFont(ofSize: 14)
         return label
