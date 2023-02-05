@@ -60,6 +60,9 @@ extension MainTabController: UITabBarControllerDelegate {
         }
 
         let navigationVC = viewController as? UINavigationController
+        if navigationVC?.viewControllers.last is DetailController {
+            return true
+        }
         let rootVC = navigationVC?.viewControllers.last
 
         if let vc = rootVC as? UITableViewController {

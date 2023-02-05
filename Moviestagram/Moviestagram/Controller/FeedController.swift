@@ -59,14 +59,12 @@ final class FeedController: UITableViewController {
                 print(error.localizedDescription)
             }
 
+            self.scrollToTop(animate: false)
             self.endRefreshing()
         }
     }
 
     private func loadMoreMovieData(by option: FetchMovieOptionQuery) {
-        print("movies - \(movies.count)")
-        print("movies - \(movies.count / 20 + 1)")
-        print("load more - \(currentPage + 1)")
         MovieRemoteRepository.shared.fetchMovie(with: [option, .page(currentPage + 1)]) { result in
             switch result {
             case .success(let movies):
@@ -123,6 +121,12 @@ final class FeedController: UITableViewController {
     private func endRefreshing() {
         DispatchQueue.main.async {
             self.tableView.refreshControl?.endRefreshing()
+        }
+    }
+
+    private func scrollToTop(animate: Bool) {
+        DispatchQueue.main.async {
+            self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: animate)
         }
     }
 }
