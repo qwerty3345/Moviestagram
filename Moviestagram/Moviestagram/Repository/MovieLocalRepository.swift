@@ -52,11 +52,18 @@ final class MovieLocalRepository {
     func save(bookmarkMovie: Movie) {
         guard bookmarkedMovies.contains(where: { $0.id == bookmarkMovie.id }) == false else { return }
         bookmarkedMovies.append(bookmarkMovie)
-        save(bookmarkMovie: bookmarkMovie)
+        save(bookmarkMovies: bookmarkedMovies)
     }
 
-    private func save(bookmarkMovie: [Movie]) {
-        let value = try? PropertyListEncoder().encode(bookmarkMovie)
+    func remove(bookmarkMovie: Movie) {
+        if let index = bookmarkedMovies.firstIndex(where: { $0.id == bookmarkMovie.id}) {
+            bookmarkedMovies.remove(at: index)
+            save(bookmarkMovies: bookmarkedMovies)
+        }
+    }
+
+    private func save(bookmarkMovies: [Movie]) {
+        let value = try? PropertyListEncoder().encode(bookmarkMovies)
         UserDefaults.standard.setValue(value, forKey: bookmarkKey)
     }
 

@@ -12,6 +12,7 @@ final class DetailController: UIViewController {
 
     // MARK: - Properties
     private var movie: Movie
+    private var isBookmarked = false
     private lazy var rating: Float = movie.myRating ?? 0 {
         didSet {
             if oldValue != rating {
@@ -87,6 +88,11 @@ final class DetailController: UIViewController {
         return slider
     }()
 
+    private lazy var bookmarkButton: UIBarButtonItem = {
+        let button = UIBarButtonItem(image: UIImage(systemName: "bookmark"), style: .plain, target: self, action: #selector(tappedBookmarkButton))
+        button.tintColor = appColor
+        return button
+    }()
 
 
     // MARK: - Lifecycle
@@ -103,8 +109,9 @@ final class DetailController: UIViewController {
         super.viewDidLoad()
         configureLayout()
         configureData()
-        setNavigationBarTitle(with: movie.title ?? "")
+        configureNavigationBar()
         checkIfUserRatedMovie()
+        checkIfUserBookmarkedMovie()
         view.backgroundColor = .white
     }
 
@@ -116,6 +123,13 @@ final class DetailController: UIViewController {
         if let ratedMovie = MovieLocalRepository.shared.ratedMovies.first(where: { $0.id == movie.id }) {
             self.movie = ratedMovie
             updateRatingLabel()
+        }
+    }
+
+    private func checkIfUserBookmarkedMovie() {
+        if MovieLocalRepository.shared.bookmarkedMovies.first(where: { $0.id == movie.id }) != nil {
+            isBookmarked = true
+            bookmarkButton.image = UIImage(systemName: "bookmark.fill")
         }
     }
 
@@ -134,7 +148,42 @@ final class DetailController: UIViewController {
         MovieLocalRepository.shared.save(ratingMovie: movie)
     }
 
+    @objc private func tappedBookmarkButton() {
+        if !isBookmarked {
+            MovieLocalRepository.shared.save(bookmarkMovie: movie)
+            bookmarkButton.image = UIImage(systemName: "bookmark.fill")
+        } else {
+            MovieLocalRepository.shared.remove(bookmarkMovie: movie)
+            bookmarkButton.image = UIImage(systemName: "bookmark")
+        }
+    }
+
     // MARK: - Helpers
+    private func configureNavigationBar() {
+        navigationItem.rightBarButtonItem = bookmarkButton
+        setNavigationBarTitle(with: movie.title ?? "")
+    }
+
+    private func configureData() {
+        posterImageView.setImage(with: movie.mediumCoverImage)
+        summaryLabel.text = movie.summary
+        ratingLabel.attributedText = Util.ratingAttributedText(with: movie.rating ?? 0.0)
+        yearLabel.text = "\(movie.year ?? 0)년 개봉"
+    }
+
+    private func screenShotImageView(with imageURL: String) -> UIImageView {
+        let iv = UIImageView()
+        iv.contentMode = .scaleAspectFit
+        iv.clipsToBounds = true
+        iv.layer.cornerRadius = 8
+        iv.backgroundColor = appColor
+        iv.setImage(with: imageURL)
+        return iv
+    }
+}
+
+// MARK: - Layout
+extension DetailController {
     private func configureLayout() {
         view.addSubview(scrollView)
         scrollView.snp.makeConstraints { make in
@@ -195,25 +244,8 @@ final class DetailController: UIViewController {
         // TODO: 스크린샷 스크롤뷰로 3개 띄우기
         //        let screenshot1 = screenShotImageView(with: <#T##String#>)
     }
-
-    private func configureData() {
-        posterImageView.setImage(with: movie.mediumCoverImage)
-        summaryLabel.text = movie.summary
-        ratingLabel.attributedText = Util.ratingAttributedText(with: movie.rating ?? 0.0)
-        yearLabel.text = "\(movie.year ?? 0)년 개봉"
-    }
-
-    private func screenShotImageView(with imageURL: String) -> UIImageView {
-        let iv = UIImageView()
-        iv.contentMode = .scaleAspectFit
-        iv.clipsToBounds = true
-        iv.layer.cornerRadius = 8
-        iv.backgroundColor = appColor
-        iv.setImage(with: imageURL)
-        return iv
-    }
-
 }
+
 
 // MARK: - Rating Slider
 extension DetailController {
