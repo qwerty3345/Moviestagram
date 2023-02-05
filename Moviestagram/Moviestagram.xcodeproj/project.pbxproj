@@ -14,7 +14,7 @@
 		B45638DC298DF02F00C42861 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B45638DA298DF02F00C42861 /* LaunchScreen.storyboard */; };
 		B45638E7298DF02F00C42861 /* MoviestagramTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45638E6298DF02F00C42861 /* MoviestagramTests.swift */; };
 		B4563908298DF46000C42861 /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4563907298DF46000C42861 /* UIView+.swift */; };
-		B456390A298DF4F400C42861 /* UITableViewCell+.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4563909298DF4F400C42861 /* UITableViewCell+.swift */; };
+		B456390A298DF4F400C42861 /* ReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4563909298DF4F400C42861 /* ReusableView.swift */; };
 		B456390C298DF50000C42861 /* UITableView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = B456390B298DF50000C42861 /* UITableView+.swift */; };
 		B456390E298DF56A00C42861 /* Array+.swift in Sources */ = {isa = PBXBuildFile; fileRef = B456390D298DF56A00C42861 /* Array+.swift */; };
 		B4563910298DF66B00C42861 /* FeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B456390F298DF66B00C42861 /* FeedCell.swift */; };
@@ -61,7 +61,7 @@
 		B45638E2298DF02F00C42861 /* MoviestagramTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MoviestagramTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B45638E6298DF02F00C42861 /* MoviestagramTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviestagramTests.swift; sourceTree = "<group>"; };
 		B4563907298DF46000C42861 /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
-		B4563909298DF4F400C42861 /* UITableViewCell+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewCell+.swift"; sourceTree = "<group>"; };
+		B4563909298DF4F400C42861 /* ReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableView.swift; sourceTree = "<group>"; };
 		B456390B298DF50000C42861 /* UITableView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+.swift"; sourceTree = "<group>"; };
 		B456390D298DF56A00C42861 /* Array+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+.swift"; sourceTree = "<group>"; };
 		B456390F298DF66B00C42861 /* FeedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCell.swift; sourceTree = "<group>"; };
@@ -193,6 +193,7 @@
 			isa = PBXGroup;
 			children = (
 				B47B9AD7298E93BA00025D0C /* Util.swift */,
+				B4563909298DF4F400C42861 /* ReusableView.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -200,7 +201,6 @@
 		B4563906298DF35F00C42861 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
-				B4563909298DF4F400C42861 /* UITableViewCell+.swift */,
 				B456390B298DF50000C42861 /* UITableView+.swift */,
 				B4A4BD84298EC0C2006FC77B /* UICollectionView+.swift */,
 				B456390D298DF56A00C42861 /* Array+.swift */,
@@ -359,7 +359,7 @@
 				B456391A298E08D300C42861 /* Movie.swift in Sources */,
 				B4A4BD85298EC0C2006FC77B /* UICollectionView+.swift in Sources */,
 				B47B9AC6298E582D00025D0C /* ProfileController.swift in Sources */,
-				B456390A298DF4F400C42861 /* UITableViewCell+.swift in Sources */,
+				B456390A298DF4F400C42861 /* ReusableView.swift in Sources */,
 				B45638D0298DF02D00C42861 /* AppDelegate.swift in Sources */,
 				B4563908298DF46000C42861 /* UIView+.swift in Sources */,
 				B456390E298DF56A00C42861 /* Array+.swift in Sources */,

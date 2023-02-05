@@ -7,15 +7,16 @@
 
 import UIKit
 
+extension UITableViewCell: ReusableView { }
+
 extension UITableView {
     func registerCell<T: UITableViewCell>(cellClass: T.Type) {
-        let identifier = String(describing: T.self)
-        let nib = UINib(nibName: identifier, bundle: nil)
+        let nib = UINib(nibName: T.reuseIdentifier, bundle: nil)
 
         if cellClass.hasNibFile {
-            self.register(nib, forCellReuseIdentifier: identifier)
+            self.register(nib, forCellReuseIdentifier: T.reuseIdentifier)
         } else {
-            self.register(cellClass, forCellReuseIdentifier: identifier)
+            self.register(cellClass, forCellReuseIdentifier: T.reuseIdentifier)
         }
     }
 

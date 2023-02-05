@@ -1,5 +1,5 @@
 //
-//  UITableViewCell+.swift
+//  ReusableView.swift
 //  Moviestagram
 //
 //  Created by Mason Kim on 2023/02/04.
@@ -17,5 +17,4 @@ extension ReusableView {
     }
 }
 
-extension UITableViewCell: ReusableView { }
-extension UICollectionViewCell: ReusableView { }
+

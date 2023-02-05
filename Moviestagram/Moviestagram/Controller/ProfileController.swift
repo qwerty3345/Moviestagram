@@ -41,6 +41,10 @@ extension ProfileController {
     }
 
     // TODO: 헤더 설정 (viewForSupplementaryElementOfKind)
+    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: ProfileHeader.reuseIdentifier, for: indexPath)
+        return header
+    }
 }
 
 // MARK: - UICollectionViewDelegate
@@ -53,7 +57,6 @@ extension ProfileController: UICollectionViewDelegateFlowLayout {
         return 1
     }
 
-    // collectionView 셀 사이의 최소 간격
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 1
     }
