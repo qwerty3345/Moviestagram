@@ -40,6 +40,8 @@
 		B47B9AD6298E8BFF00025D0C /* FetchMovieOptionQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47B9AD5298E8BFF00025D0C /* FetchMovieOptionQuery.swift */; };
 		B47B9AD8298E93BA00025D0C /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47B9AD7298E93BA00025D0C /* Util.swift */; };
 		B47B9ADA298E9BE900025D0C /* DetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47B9AD9298E9BE900025D0C /* DetailController.swift */; };
+		B486627C2990FC7F002B4ACB /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B486627B2990FC7F002B4ACB /* Observable.swift */; };
+		B486627E2990FD0A002B4ACB /* FeedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B486627D2990FD0A002B4ACB /* FeedViewModel.swift */; };
 		B4A4BD81298EBFA3006FC77B /* ProfileRatingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A4BD80298EBFA3006FC77B /* ProfileRatingCell.swift */; };
 		B4A4BD83298EBFBB006FC77B /* ProfileHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A4BD82298EBFBB006FC77B /* ProfileHeader.swift */; };
 		B4A4BD85298EC0C2006FC77B /* UICollectionView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A4BD84298EC0C2006FC77B /* UICollectionView+.swift */; };
@@ -90,6 +92,8 @@
 		B47B9AD5298E8BFF00025D0C /* FetchMovieOptionQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchMovieOptionQuery.swift; sourceTree = "<group>"; };
 		B47B9AD7298E93BA00025D0C /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 		B47B9AD9298E9BE900025D0C /* DetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailController.swift; sourceTree = "<group>"; };
+		B486627B2990FC7F002B4ACB /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
+		B486627D2990FD0A002B4ACB /* FeedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewModel.swift; sourceTree = "<group>"; };
 		B4A4BD80298EBFA3006FC77B /* ProfileRatingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRatingCell.swift; sourceTree = "<group>"; };
 		B4A4BD82298EBFBB006FC77B /* ProfileHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeader.swift; sourceTree = "<group>"; };
 		B4A4BD84298EC0C2006FC77B /* UICollectionView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+.swift"; sourceTree = "<group>"; };
@@ -129,6 +133,7 @@
 			isa = PBXGroup;
 			children = (
 				B448D39D298F9BAC0042C0BF /* ProfileHeaderViewModel.swift */,
+				B486627D2990FD0A002B4ACB /* FeedViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -224,6 +229,7 @@
 			children = (
 				B47B9AD7298E93BA00025D0C /* Util.swift */,
 				B4563909298DF4F400C42861 /* ReusableView.swift */,
+				B486627B2990FC7F002B4ACB /* Observable.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -387,6 +393,7 @@
 				B448D39E298F9BAC0042C0BF /* ProfileHeaderViewModel.swift in Sources */,
 				B47B9AC4298E563700025D0C /* MainTabController.swift in Sources */,
 				B4563922298E1A8E00C42861 /* UIImageView+.swift in Sources */,
+				B486627E2990FD0A002B4ACB /* FeedViewModel.swift in Sources */,
 				B47B9AD8298E93BA00025D0C /* Util.swift in Sources */,
 				B4A4BD83298EBFBB006FC77B /* ProfileHeader.swift in Sources */,
 				B456391A298E08D300C42861 /* Movie.swift in Sources */,
@@ -396,6 +403,7 @@
 				B448D398298F77590042C0BF /* MovieLocalRepository.swift in Sources */,
 				B448D394298F61540042C0BF /* RatingSlider.swift in Sources */,
 				B456390A298DF4F400C42861 /* ReusableView.swift in Sources */,
+				B486627C2990FC7F002B4ACB /* Observable.swift in Sources */,
 				B45638D0298DF02D00C42861 /* AppDelegate.swift in Sources */,
 				B4563908298DF46000C42861 /* UIView+.swift in Sources */,
 				B456390E298DF56A00C42861 /* Array+.swift in Sources */,

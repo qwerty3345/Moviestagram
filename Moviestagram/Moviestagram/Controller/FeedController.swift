@@ -10,19 +10,7 @@ import UIKit
 final class FeedController: UITableViewController {
 
     // MARK: - Properties
-    private var currentPage: Int {
-        movies.count / 20
-    }
-    private var movies: [Movie] = [] {
-        didSet {
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }
-        }
-    }
-    private var searchOption: FetchMovieOptionQuery = .sortByLike {
-        didSet { fetchMovie(by: searchOption) }
-    }
+    private let viewModel = FeedViewModel()
 
     private lazy var spinnerFooter: UIView = {
         let footerView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 100))
@@ -45,41 +33,20 @@ final class FeedController: UITableViewController {
         configureRefreshControl()
         configureNavigationMenu()
         setNavigationBarTitle(with: "Movies")
-        fetchMovie(by: .sortByLike)
+
+        viewModel.fetchMovie()
+        viewModel.movies.bind { [weak self] _ in
+            DispatchQueue.main.async {
+                self?.tableView.reloadData()
+            }
+        }
+
         tableView.tableFooterView = spinnerFooter
-    }
-
-    // MARK: - API
-    private func fetchMovie(by option: FetchMovieOptionQuery) {
-        MovieRemoteRepository.shared.fetchMovie(with: option) { result in
-            switch result {
-            case .success(let movies):
-                self.movies = movies
-            case .failure(let error):
-                print(error.localizedDescription)
-            }
-
-            self.scrollToTop(animate: false)
-            self.endRefreshing()
-        }
-    }
-
-    private func loadMoreMovieData(by option: FetchMovieOptionQuery) {
-        MovieRemoteRepository.shared.fetchMovie(with: [option, .page(currentPage + 1)]) { result in
-            switch result {
-            case .success(let movies):
-                self.movies += movies
-            case .failure(let error):
-                print(error.localizedDescription)
-            }
-
-            self.endRefreshing()
-        }
     }
 
     // MARK: - Actions
     @objc func refreshFeed() {
-        fetchMovie(by: searchOption)
+        viewModel.fetchMovie()
     }
 
     // MARK: - Helpers
@@ -101,10 +68,10 @@ final class FeedController: UITableViewController {
         let menuItems: [UIAction] = [
             UIAction(title: "인기순 정렬",
                      image: UIImage(systemName: "heart"),
-                     handler: { _ in self.searchOption = .sortByLike }),
+                     handler: { _ in self.viewModel.searchOption = .sortByLike }),
             UIAction(title: "평점순 정렬",
                      image: UIImage(systemName: "star"),
-                     handler: { _ in self.searchOption = .sortByRating })]
+                     handler: { _ in self.viewModel.searchOption = .sortByRating })]
 
         let menu = UIMenu(image: UIImage(systemName: "ellipsis.circle"), children: menuItems)
         let menuBarButton = UIBarButtonItem(image: UIImage(systemName: "ellipsis.circle"), menu: menu)
@@ -133,14 +100,16 @@ final class FeedController: UITableViewController {
 
 // MARK: - UITableViewDataSource
 extension FeedController {
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return movies.isEmpty ? 2 : movies.count
+    override func tableView(_ tableView: UITableView,
+                            numberOfRowsInSection section: Int) -> Int {
+        return viewModel.movies.value.isEmpty ? 2 : viewModel.movies.value.count
     }
 
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView,
+                            cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(cellClass: FeedCell.self, for: indexPath)
 
-        if let movie = movies[safe: indexPath.row] {
+        if let movie = viewModel.movies.value[safe: indexPath.row] {
             cell.movie = movie
         }
 
@@ -150,16 +119,19 @@ extension FeedController {
 
 // MARK: - UITableViewDelegate
 extension FeedController {
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let movie = movies[safe: indexPath.row] else { return }
+    override func tableView(_ tableView: UITableView,
+                            didSelectRowAt indexPath: IndexPath) {
+        guard let movie = viewModel.movies.value[safe: indexPath.row] else { return }
         let detailVC = DetailController(movie: movie)
         navigationController?.pushViewController(detailVC, animated: true)
     }
 
-    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if indexPath.row == movies.count - 1 {
+    override func tableView(_ tableView: UITableView,
+                            willDisplay cell: UITableViewCell,
+                            forRowAt indexPath: IndexPath) {
+        if indexPath.row == viewModel.movies.value.count - 1 {
             print("load more!")
-            loadMoreMovieData(by: searchOption)
+            viewModel.loadMoreMovieData()
         }
     }
 }
