@@ -54,10 +54,8 @@ final class SearchController: UITableViewController {
     
     private func configureSearchController() {
         searchController.hidesNavigationBarDuringPresentation = false
-
         searchController.searchBar.placeholder = "영화 검색"
         navigationItem.searchController = searchController
-
         searchController.searchBar.delegate = self
     }
 
@@ -79,13 +77,13 @@ final class SearchController: UITableViewController {
 // MARK: - UITableViewDataSource
 extension SearchController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.searchedMovies.value.count
+        return viewModel.numberOfMovies
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(cellClass: SearchCell.self, for: indexPath)
 
-        if let movie = viewModel.searchedMovies.value[safe: indexPath.row] {
+        if let movie = viewModel.movieForCell(at: indexPath) {
             cell.movie = movie
         }
 

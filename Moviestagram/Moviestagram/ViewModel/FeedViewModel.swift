@@ -8,13 +8,21 @@
 import Foundation
 
 final class FeedViewModel {
+    // MARK: - Properties
     private(set) var movies: Observable<[Movie]> = Observable([])
+    var numberOfMovies: Int { movies.value.count }
     private var currentPage: Int { movies.value.count / 20 }
 
     var searchOption: FetchMovieOptionQuery = .sortByLike {
         didSet { fetchMovie() }
     }
 
+    // MARK: - Helpers
+    func movieForCell(at indexPath: IndexPath) -> Movie? {
+        return movies.value[safe: indexPath.row]
+    }
+
+    // MARK: - API
     func fetchMovie() {
         MovieRemoteRepository.shared.fetchMovie(with: searchOption) { result in
             switch result {
@@ -36,5 +44,4 @@ final class FeedViewModel {
             }
         }
     }
-
 }

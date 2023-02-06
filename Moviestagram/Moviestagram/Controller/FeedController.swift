@@ -105,14 +105,14 @@ final class FeedController: UITableViewController {
 extension FeedController {
     override func tableView(_ tableView: UITableView,
                             numberOfRowsInSection section: Int) -> Int {
-        return viewModel.movies.value.isEmpty ? 2 : viewModel.movies.value.count
+        return viewModel.numberOfMovies == 0 ? 2 : viewModel.numberOfMovies
     }
 
     override func tableView(_ tableView: UITableView,
                             cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(cellClass: FeedCell.self, for: indexPath)
 
-        if let movie = viewModel.movies.value[safe: indexPath.row] {
+        if let movie = viewModel.movieForCell(at: indexPath) {
             cell.movie = movie
         }
 
@@ -124,7 +124,7 @@ extension FeedController {
 extension FeedController {
     override func tableView(_ tableView: UITableView,
                             didSelectRowAt indexPath: IndexPath) {
-        guard let movie = viewModel.movies.value[safe: indexPath.row] else { return }
+        guard let movie = viewModel.movieForCell(at: indexPath) else { return }
         let detailVC = DetailController(movie: movie)
         navigationController?.pushViewController(detailVC, animated: true)
     }
@@ -132,7 +132,7 @@ extension FeedController {
     override func tableView(_ tableView: UITableView,
                             willDisplay cell: UITableViewCell,
                             forRowAt indexPath: IndexPath) {
-        if indexPath.row == viewModel.movies.value.count - 1 {
+        if indexPath.row == viewModel.numberOfMovies - 1 {
             print("load more!")
             viewModel.loadMoreMovieData()
         }

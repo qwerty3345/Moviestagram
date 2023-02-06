@@ -70,8 +70,9 @@ final class ProfileController: UICollectionViewController {
 // MARK: - UICollectionViewDataSource
 extension ProfileController {
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel.isRatingListMode.value ?
-        viewModel.ratedMovies.value.count : viewModel.bookmarkedMovies.value.count
+        return viewModel.isRatingListMode.value
+        ? viewModel.numberOfRatedMovies
+        : viewModel.numberOfBookmarkedMovies
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
