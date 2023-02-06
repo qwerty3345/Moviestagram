@@ -265,11 +265,13 @@ extension DetailController {
         for (index, starImage) in ratingStarImageViews.enumerated() {
             if index < value / 2 {
                 starImage.image = UIImage(systemName: "star.fill")
-            } else if value % 2 != 0 && index == value / 2 {
-                starImage.image = UIImage(systemName: "star.leadinghalf.filled")
-            } else {
-                starImage.image = UIImage(systemName: "star")
+                continue
             }
+            if value % 2 != 0 && index == value / 2 {
+                starImage.image = UIImage(systemName: "star.leadinghalf.filled")
+                continue
+            }
+            starImage.image = UIImage(systemName: "star")
         }
     }
 }
