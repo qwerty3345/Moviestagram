@@ -10,7 +10,7 @@ import UIKit
 final class SearchController: UITableViewController {
 
     // MARK: - Properties
-    private let viewModel = SearchViewModel()
+    private let searchViewModel = SearchViewModel()
     private let searchController = UISearchController(searchResultsController: nil)
 
     // MARK: - Lifecycle
@@ -21,12 +21,12 @@ final class SearchController: UITableViewController {
         configureSearchController()
         setNavigationBarTitle(with: "Search")
 
-        bind(to: viewModel)
+        bind(to: searchViewModel)
     }
 
     // MARK: - Helpers
     private func bind(to viewModel: SearchViewModel) {
-        viewModel.searchedMovies.bind { [weak self] _ in
+        viewModel.movies.bind { [weak self] _ in
             DispatchQueue.main.async {
                 self?.tableView.reloadData()
             }
@@ -77,13 +77,13 @@ final class SearchController: UITableViewController {
 // MARK: - UITableViewDataSource
 extension SearchController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.numberOfMovies
+        return searchViewModel.numberOfMovies
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(cellClass: SearchCell.self, for: indexPath)
 
-        if let movie = viewModel.movieForCell(at: indexPath) {
+        if let movie = searchViewModel.movieForCell(at: indexPath) {
             cell.movie = movie
         }
 
@@ -94,7 +94,7 @@ extension SearchController {
 // MARK: - UITableViewDelegate
 extension SearchController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let movie = viewModel.searchedMovies.value[safe: indexPath.row] else { return }
+        guard let movie = searchViewModel.movieForCell(at: indexPath) else { return }
         let detailVC = DetailController(movie: movie)
         navigationController?.pushViewController(detailVC, animated: true)
     }
@@ -104,6 +104,6 @@ extension SearchController {
 extension SearchController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let searchText = searchController.searchBar.text?.lowercased() else { return }
-        viewModel.searchMovie(with: searchText)
+        searchViewModel.searchMovie(with: searchText)
     }
 }

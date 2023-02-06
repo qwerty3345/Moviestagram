@@ -15,9 +15,7 @@ final class DetailViewModel {
     lazy var rating: Float = movie.value.myRating ?? 0 {
         didSet {
             guard oldValue != rating else { return }
-//            if oldValue != rating {
                 saveRatingMovie(with: rating)
-//            }
         }
     }
 
@@ -33,14 +31,13 @@ final class DetailViewModel {
         self.movie = Observable(movie)
     }
 
-
     func checkIfUserRatedMovie() {
         if let ratedMovie = MovieLocalRepository.shared.ratedMovies.first(where: { $0.id == movie.value.id }) {
             self.movie.value = ratedMovie
-
         }
     }
 
+    // MARK: - Repository
     func checkIfUserBookmarkedMovie() {
         if MovieLocalRepository.shared.bookmarkedMovies.first(where: { $0.id == movie.value.id }) != nil {
             isBookmarked.value = true
@@ -49,12 +46,10 @@ final class DetailViewModel {
 
     func saveRatingMovie(with rating: Float) {
         movie.value.myRating = rating
-
         guard rating != 0 else {
             MovieLocalRepository.shared.remove(ratingMovie: movie.value)
             return
         }
-
         MovieLocalRepository.shared.save(ratingMovie: movie.value)
     }
 

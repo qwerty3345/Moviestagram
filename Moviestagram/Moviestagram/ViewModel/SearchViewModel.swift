@@ -7,23 +7,17 @@
 
 import Foundation
 
-final class SearchViewModel {
+final class SearchViewModel: MovieListViewModelProtocol {
     // MARK: - Properties
-    private(set) var searchedMovies: Observable<[Movie]> = Observable([])
-    var numberOfMovies: Int { searchedMovies.value.count }
+    var movies: Observable<[Movie]> = Observable([])
     var networkError: Observable<NetworkError?> = Observable(nil)
-
-    // MARK: - Helpers
-    func movieForCell(at indexPath: IndexPath) -> Movie? {
-        return searchedMovies.value[safe: indexPath.row]
-    }
 
     // MARK: - API
     func searchMovie(with keyword: String) {
         MovieRemoteRepository.shared.fetchMovie(with: [.search(keyword), .sortByLike]) { result in
             switch result {
             case .success(let movies):
-                self.searchedMovies.value = movies
+                self.movies.value = movies
             case .failure(let error):
                 self.networkError.value = error
             }

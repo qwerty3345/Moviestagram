@@ -10,7 +10,7 @@ import UIKit
 final class ProfileController: UICollectionViewController {
 
     // MARK: - Properties
-    private let viewModel = ProfileViewModel()
+    private let profileViewModel = ProfileViewModel()
 
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -18,17 +18,17 @@ final class ProfileController: UICollectionViewController {
         configureCollectionView()
         configureRefreshControl()
         setNavigationBarTitle(with: "Mason Kim")
-        bind(to: viewModel)
+        bind(to: profileViewModel)
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        viewModel.fetchLocalSaveData()
+        profileViewModel.fetchLocalSaveData()
     }
 
     // MARK: - Actions
     @objc func refreshProfile() {
-        viewModel.fetchLocalSaveData()
+        profileViewModel.fetchLocalSaveData()
     }
 
     // MARK: - Helpers
@@ -70,17 +70,17 @@ final class ProfileController: UICollectionViewController {
 // MARK: - UICollectionViewDataSource
 extension ProfileController {
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel.isRatingListMode.value
-        ? viewModel.numberOfRatedMovies
-        : viewModel.numberOfBookmarkedMovies
+        return profileViewModel.isRatingListMode.value
+        ? profileViewModel.numberOfRatedMovies
+        : profileViewModel.numberOfBookmarkedMovies
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = viewModel.isRatingListMode.value
+        let cell = profileViewModel.isRatingListMode.value
         ? collectionView.dequeueReusableCell(cellClass: ProfileRatingCell.self, for: indexPath)
         : collectionView.dequeueReusableCell(cellClass: ProfileBookmarkCell.self, for: indexPath)
 
-        if let movie = viewModel.movieForCell(at: indexPath),
+        if let movie = profileViewModel.movieForCell(at: indexPath),
            let cell = cell as? ProfileCell {
             cell.configure(with: movie)
         }
@@ -90,7 +90,7 @@ extension ProfileController {
 
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, cellClass: ProfileHeader.self , for: indexPath)
-        header.viewModel = viewModel
+        header.viewModel = profileViewModel
         return header
     }
 }
@@ -98,7 +98,7 @@ extension ProfileController {
 // MARK: - UICollectionViewDelegate
 extension ProfileController {
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let movie = viewModel.movieForCell(at: indexPath) else { return }
+        guard let movie = profileViewModel.movieForCell(at: indexPath) else { return }
 
         let detailVC = DetailController(movie: movie)
         navigationController?.pushViewController(detailVC, animated: true)

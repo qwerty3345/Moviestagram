@@ -11,7 +11,7 @@ import SnapKit
 final class DetailController: UIViewController {
 
     // MARK: - Properties
-    private let viewModel: DetailViewModel
+    private let detailViewModel: DetailViewModel
 
     // MARK: - UI Properties
     private let scrollView = UIScrollView()
@@ -90,7 +90,7 @@ final class DetailController: UIViewController {
 
     // MARK: - Lifecycle
     init(movie: Movie) {
-        self.viewModel = DetailViewModel(movie: movie)
+        self.detailViewModel = DetailViewModel(movie: movie)
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -105,12 +105,12 @@ final class DetailController: UIViewController {
         configureNavigationBar()
         view.backgroundColor = .white
 
-        bind(to: viewModel)
+        bind(to: detailViewModel)
     }
 
 
     @objc private func tappedBookmarkButton() {
-        viewModel.tappedBookmark()
+        detailViewModel.tappedBookmark()
     }
 
     // MARK: - Helpers
@@ -126,14 +126,14 @@ final class DetailController: UIViewController {
 
     private func configureNavigationBar() {
         navigationItem.rightBarButtonItem = bookmarkButton
-        setNavigationBarTitle(with: viewModel.movie.value.title ?? "")
+        setNavigationBarTitle(with: detailViewModel.movie.value.title ?? "")
     }
 
     private func configureData() {
-        posterImageView.setImage(with: viewModel.posterImageURLString)
-        summaryLabel.text = viewModel.summaryLabelText
-        ratingLabel.attributedText = viewModel.ratingLabelAttributedString
-        yearLabel.text = viewModel.yearLabelText
+        posterImageView.setImage(with: detailViewModel.posterImageURLString)
+        summaryLabel.text = detailViewModel.summaryLabelText
+        ratingLabel.attributedText = detailViewModel.ratingLabelAttributedString
+        yearLabel.text = detailViewModel.yearLabelText
     }
 
     private func screenShotImageView(with imageURL: String) -> UIImageView {
@@ -218,7 +218,7 @@ extension DetailController {
 extension DetailController {
     @objc private func sliderValueChanged(_ sender: UISlider) {
         setStarImages(sliderValue: sender.value)
-        viewModel.rating = floor(sender.value) / 2
+        detailViewModel.rating = floor(sender.value) / 2
     }
 
     private func setStarImages(withRating rating: Float) {
