@@ -235,9 +235,11 @@ extension DetailController {
             make.left.right.bottom.equalToSuperview().inset(16)
         }
 
-        let divierView = UIView.lineView()
+        let divierView = UIView()
+        divierView.backgroundColor = .lightGray
         contentView.addSubview(divierView)
         divierView.snp.makeConstraints { make in
+            make.height.equalTo(0.5)
             make.top.equalTo(ratingStarStack.snp.bottom).offset(8)
             make.left.right.equalTo(summaryLabel)
         }

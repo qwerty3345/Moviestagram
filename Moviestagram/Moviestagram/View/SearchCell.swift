@@ -68,21 +68,20 @@ final class SearchCell: UITableViewCell {
     private func configureLayout() {
         addSubview(posterImageView)
         let baseSize: CGFloat = 40
-        posterImageView.setDimensions(height: baseSize * 3, width: baseSize * 2)
-        posterImageView.anchor(top: topAnchor,
-                               left: leftAnchor,
-                               bottom: bottomAnchor,
-                               paddingTop: 8,
-                               paddingLeft: 8,
-                               paddingBottom: 8)
+        posterImageView.snp.makeConstraints { make in
+            make.height.equalTo(baseSize * 3)
+            make.width.equalTo(baseSize * 2)
+            make.top.left.bottom.equalToSuperview().inset(8)
+        }
 
         let stack = UIStackView(arrangedSubviews: [titleLabel, ratingLabel, yearLabel])
         stack.axis = .vertical
         stack.spacing = 8
         addSubview(stack)
-        stack.centerY(inView: self,
-                      leftAnchor: posterImageView.rightAnchor,
-                      paddingLeft: 8)
-        stack.anchor(right: rightAnchor, paddingRight: 8)
+        stack.snp.makeConstraints { make in
+            make.centerY.equalToSuperview()
+            make.left.equalTo(posterImageView.snp.right).offset(8)
+            make.right.equalToSuperview().inset(8)
+        }
     }
 }

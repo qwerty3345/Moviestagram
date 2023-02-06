@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import SnapKit
 
 protocol ProfileHeaderDelegate: AnyObject {
     func didChangeToRatingView()
