@@ -10,9 +10,8 @@ import UIKit
 final class SearchController: UITableViewController {
 
     // MARK: - Properties
-    private var searchedMovies: [Movie] = []
+    private let viewModel = SearchViewModel()
     private let searchController = UISearchController(searchResultsController: nil)
-
 
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -21,22 +20,24 @@ final class SearchController: UITableViewController {
         configureTableView()
         configureSearchController()
         setNavigationBarTitle(with: "Search")
-    }
 
-    // MARK: - API
-    private func searchMovie(with keyword: String) {
-        MovieRemoteRepository.shared.fetchMovie(with: [.search(keyword), .sortByLike]) { result in
-            switch result {
-            case .success(let movies):
-                self.updateTableView(with: movies)
-            case .failure(let error):
-                self.showCannotSearchAlert()
-                print(error.localizedDescription)
-            }
-        }
+        bind(to: viewModel)
     }
 
     // MARK: - Helpers
+    private func bind(to viewModel: SearchViewModel) {
+        viewModel.searchedMovies.bind { [weak self] _ in
+            DispatchQueue.main.async {
+                self?.tableView.reloadData()
+            }
+        }
+
+        viewModel.networkError.bind { [weak self] error in
+            guard error != nil else { return }
+            self?.showCannotSearchAlert()
+        }
+    }
+
     private func configureTableView() {
         tableView.registerCell(cellClass: SearchCell.self)
         tableView.dataSource = self
@@ -60,13 +61,6 @@ final class SearchController: UITableViewController {
         searchController.searchBar.delegate = self
     }
 
-    private func updateTableView(with movies: [Movie]) {
-        DispatchQueue.main.async {
-            self.searchedMovies = movies
-            self.tableView.reloadData(with: .transitionCrossDissolve)
-        }
-    }
-
     let semaphore = DispatchSemaphore(value: 1)
     private func showCannotSearchAlert() {
         semaphore.wait()
@@ -85,13 +79,13 @@ final class SearchController: UITableViewController {
 // MARK: - UITableViewDataSource
 extension SearchController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return searchedMovies.count
+        return viewModel.searchedMovies.value.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(cellClass: SearchCell.self, for: indexPath)
 
-        if let movie = searchedMovies[safe: indexPath.row] {
+        if let movie = viewModel.searchedMovies.value[safe: indexPath.row] {
             cell.movie = movie
         }
 
@@ -102,7 +96,7 @@ extension SearchController {
 // MARK: - UITableViewDelegate
 extension SearchController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let movie = searchedMovies[safe: indexPath.row] else { return }
+        guard let movie = viewModel.searchedMovies.value[safe: indexPath.row] else { return }
         let detailVC = DetailController(movie: movie)
         navigationController?.pushViewController(detailVC, animated: true)
     }
@@ -112,6 +106,6 @@ extension SearchController {
 extension SearchController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let searchText = searchController.searchBar.text?.lowercased() else { return }
-        searchMovie(with: searchText)
+        viewModel.searchMovie(with: searchText)
     }
 }

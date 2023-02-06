@@ -42,6 +42,7 @@
 		B486627C2990FC7F002B4ACB /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B486627B2990FC7F002B4ACB /* Observable.swift */; };
 		B486627E2990FD0A002B4ACB /* FeedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B486627D2990FD0A002B4ACB /* FeedViewModel.swift */; };
 		B486628029910382002B4ACB /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B486627F29910382002B4ACB /* ProfileViewModel.swift */; };
+		B48662822991151F002B4ACB /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48662812991151F002B4ACB /* SearchViewModel.swift */; };
 		B4A4BD81298EBFA3006FC77B /* ProfileRatingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A4BD80298EBFA3006FC77B /* ProfileRatingCell.swift */; };
 		B4A4BD83298EBFBB006FC77B /* ProfileHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A4BD82298EBFBB006FC77B /* ProfileHeader.swift */; };
 		B4A4BD85298EC0C2006FC77B /* UICollectionView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A4BD84298EC0C2006FC77B /* UICollectionView+.swift */; };
@@ -94,6 +95,7 @@
 		B486627B2990FC7F002B4ACB /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		B486627D2990FD0A002B4ACB /* FeedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewModel.swift; sourceTree = "<group>"; };
 		B486627F29910382002B4ACB /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
+		B48662812991151F002B4ACB /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
 		B4A4BD80298EBFA3006FC77B /* ProfileRatingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRatingCell.swift; sourceTree = "<group>"; };
 		B4A4BD82298EBFBB006FC77B /* ProfileHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeader.swift; sourceTree = "<group>"; };
 		B4A4BD84298EC0C2006FC77B /* UICollectionView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+.swift"; sourceTree = "<group>"; };
@@ -134,6 +136,7 @@
 			children = (
 				B486627D2990FD0A002B4ACB /* FeedViewModel.swift */,
 				B486627F29910382002B4ACB /* ProfileViewModel.swift */,
+				B48662812991151F002B4ACB /* SearchViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -404,6 +407,7 @@
 				B448D394298F61540042C0BF /* RatingSlider.swift in Sources */,
 				B456390A298DF4F400C42861 /* ReusableView.swift in Sources */,
 				B486627C2990FC7F002B4ACB /* Observable.swift in Sources */,
+				B48662822991151F002B4ACB /* SearchViewModel.swift in Sources */,
 				B45638D0298DF02D00C42861 /* AppDelegate.swift in Sources */,
 				B4563908298DF46000C42861 /* UIView+.swift in Sources */,
 				B456390E298DF56A00C42861 /* Array+.swift in Sources */,

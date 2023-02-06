@@ -45,6 +45,14 @@ final class FeedController: UITableViewController {
     }
 
     // MARK: - Helpers
+    private func bind(to viewModel: FeedViewModel) {
+        viewModel.movies.bind { [weak self] _ in
+            DispatchQueue.main.async {
+                self?.tableView.reloadData()
+            }
+        }
+    }
+
     private func configureTableView() {
         tableView.registerCell(cellClass: FeedCell.self)
         tableView.separatorStyle = .none
@@ -57,14 +65,6 @@ final class FeedController: UITableViewController {
         rowHeight += 60
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = rowHeight
-    }
-
-    private func bind(to viewModel: FeedViewModel) {
-        viewModel.movies.bind { [weak self] _ in
-            DispatchQueue.main.async {
-                self?.tableView.reloadData()
-            }
-        }
     }
 
     private func configureNavigationMenu() {
