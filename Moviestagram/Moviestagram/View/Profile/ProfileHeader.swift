@@ -7,18 +7,12 @@
 
 import UIKit
 
-protocol ProfileHeaderDelegate: AnyObject {
-    func didChangeToRatingView()
-    func didChangeToBookmarkView()
-}
-
 final class ProfileHeader: UICollectionReusableView {
 
     // MARK: - Properties
-    var viewModel: ProfileHeaderViewModel? {
+    var viewModel: ProfileViewModel? {
         didSet { configure() }
     }
-    weak var delegate: ProfileHeaderDelegate?
 
     // MARK: - UI Properties
     private let profileImageView: UIImageView = {
@@ -122,7 +116,7 @@ final class ProfileHeader: UICollectionReusableView {
         ratingUnderLineView.isHidden = false
         bookmarkUnderLineView.isHidden = true
 
-        delegate?.didChangeToRatingView()
+        viewModel?.isRatingListMode.value = true
     }
 
     @objc func tappedBookmarkButton() {
@@ -131,7 +125,7 @@ final class ProfileHeader: UICollectionReusableView {
         ratingUnderLineView.isHidden = true
         bookmarkUnderLineView.isHidden = false
 
-        delegate?.didChangeToBookmarkView()
+        viewModel?.isRatingListMode.value = false
     }
 
     // MARK: - Helpers

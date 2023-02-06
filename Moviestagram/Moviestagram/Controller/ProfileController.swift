@@ -10,14 +10,7 @@ import UIKit
 final class ProfileController: UICollectionViewController {
 
     // MARK: - Properties
-    private var bookmarkedMovies: [Movie] = [] {
-        didSet { collectionView.reloadData() }
-    }
-    private var ratedMovies: [Movie] = [] {
-        didSet { collectionView.reloadData() }
-    }
-
-    private var isRatingListMode = true
+    private let viewModel = ProfileViewModel()
 
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -25,22 +18,17 @@ final class ProfileController: UICollectionViewController {
         configureCollectionView()
         configureRefreshControl()
         setNavigationBarTitle(with: "Mason Kim")
+        bind(to: viewModel)
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        fetchLocalSaveData()
+        viewModel.fetchLocalSaveData()
     }
 
     // MARK: - Actions
-    private func fetchLocalSaveData() {
-        self.ratedMovies = MovieLocalRepository.shared.ratedMovies
-        self.bookmarkedMovies = MovieLocalRepository.shared.bookmarkedMovies
-        self.collectionView.refreshControl?.endRefreshing()
-    }
-
     @objc func refreshProfile() {
-        fetchLocalSaveData()
+        viewModel.fetchLocalSaveData()
     }
 
     // MARK: - Helpers
@@ -55,34 +43,53 @@ final class ProfileController: UICollectionViewController {
         refresher.addTarget(self, action: #selector(refreshProfile), for: .valueChanged)
         collectionView.refreshControl = refresher
     }
+
+    private func bind(to viewModel: ProfileViewModel) {
+        viewModel.bookmarkedMovies.bind { [weak self] movies in
+            DispatchQueue.main.async {
+                self?.collectionView.reloadData()
+                self?.collectionView.refreshControl?.endRefreshing()
+            }
+        }
+
+        viewModel.ratedMovies.bind { [weak self] movies in
+            DispatchQueue.main.async {
+                self?.collectionView.reloadData()
+                self?.collectionView.refreshControl?.endRefreshing()
+            }
+        }
+
+        viewModel.isRatingListMode.bind { [weak self] _ in
+            DispatchQueue.main.async {
+                self?.collectionView.reloadData()
+            }
+        }
+    }
 }
 
 // MARK: - UICollectionViewDataSource
 extension ProfileController {
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return isRatingListMode ? ratedMovies.count : bookmarkedMovies.count
+        return viewModel.isRatingListMode.value ?
+        viewModel.ratedMovies.value.count : viewModel.bookmarkedMovies.value.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if isRatingListMode {
-            let cell = collectionView.dequeueReusableCell(cellClass: ProfileRatingCell.self, for: indexPath)
-            if let movie = ratedMovies[safe: indexPath.row] {
-                cell.configure(with: movie)
-            }
-            return cell
-        } else {
-            let cell = collectionView.dequeueReusableCell(cellClass: ProfileBookmarkCell.self, for: indexPath)
-            if let movie = bookmarkedMovies[safe: indexPath.row] {
-                cell.configure(with: movie)
-            }
-            return cell
+        let cell = viewModel.isRatingListMode.value
+        ? collectionView.dequeueReusableCell(cellClass: ProfileRatingCell.self, for: indexPath)
+        : collectionView.dequeueReusableCell(cellClass: ProfileBookmarkCell.self, for: indexPath)
+
+        if let movie = viewModel.movieForCell(at: indexPath),
+           let cell = cell as? ProfileCell {
+            cell.configure(with: movie)
         }
+
+        return cell
     }
 
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, cellClass: ProfileHeader.self , for: indexPath)
-        header.viewModel = ProfileHeaderViewModel(bookmarkedMovies: bookmarkedMovies, ratedMovies: ratedMovies)
-        header.delegate = self
+        header.viewModel = viewModel
         return header
     }
 }
@@ -90,9 +97,7 @@ extension ProfileController {
 // MARK: - UICollectionViewDelegate
 extension ProfileController {
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let movie = isRatingListMode
-                ? ratedMovies[safe: indexPath.row]
-                : bookmarkedMovies[safe: indexPath.row] else { return }
+        guard let movie = viewModel.movieForCell(at: indexPath) else { return }
 
         let detailVC = DetailController(movie: movie)
         navigationController?.pushViewController(detailVC, animated: true)
@@ -116,18 +121,5 @@ extension ProfileController: UICollectionViewDelegateFlowLayout {
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         return CGSize(width: view.frame.width, height: 200)
-    }
-}
-
-// MARK: - ProfileHeaderDelegate
-extension ProfileController: ProfileHeaderDelegate {
-    func didChangeToRatingView() {
-        isRatingListMode = true
-        collectionView.reloadData()
-    }
-
-    func didChangeToBookmarkView() {
-        isRatingListMode = false
-        collectionView.reloadData()
     }
 }

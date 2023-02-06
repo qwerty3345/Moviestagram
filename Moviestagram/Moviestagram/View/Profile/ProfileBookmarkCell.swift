@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class ProfileBookmarkCell: UICollectionViewCell {
+final class ProfileBookmarkCell: UICollectionViewCell, ProfileCell {
     // MARK: - UI Properties
     private let postImageView: UIImageView = {
         let iv = UIImageView()

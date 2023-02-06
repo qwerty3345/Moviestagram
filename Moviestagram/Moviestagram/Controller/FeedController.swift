@@ -33,15 +33,10 @@ final class FeedController: UITableViewController {
         configureRefreshControl()
         configureNavigationMenu()
         setNavigationBarTitle(with: "Movies")
+        tableView.tableFooterView = spinnerFooter
 
         viewModel.fetchMovie()
-        viewModel.movies.bind { [weak self] _ in
-            DispatchQueue.main.async {
-                self?.tableView.reloadData()
-            }
-        }
-
-        tableView.tableFooterView = spinnerFooter
+        bind(to: viewModel)
     }
 
     // MARK: - Actions
@@ -62,6 +57,14 @@ final class FeedController: UITableViewController {
         rowHeight += 60
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = rowHeight
+    }
+
+    private func bind(to viewModel: FeedViewModel) {
+        viewModel.movies.bind { [weak self] _ in
+            DispatchQueue.main.async {
+                self?.tableView.reloadData()
+            }
+        }
     }
 
     private func configureNavigationMenu() {

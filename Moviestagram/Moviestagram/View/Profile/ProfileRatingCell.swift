@@ -7,7 +7,11 @@
 
 import UIKit
 
-final class ProfileRatingCell: UICollectionViewCell {
+protocol ProfileCell: UICollectionViewCell {
+    func configure(with movie: Movie)
+}
+
+final class ProfileRatingCell: UICollectionViewCell, ProfileCell {
 
     // MARK: - UI Properties
     private let postImageView: UIImageView = {
