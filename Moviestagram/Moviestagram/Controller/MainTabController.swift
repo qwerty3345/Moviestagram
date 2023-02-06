@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 
 final class MainTabController: UITabBarController {
 
@@ -50,6 +51,7 @@ final class MainTabController: UITabBarController {
     }
 }
 
+// MARK: - UITabBarControllerDelegate
 extension MainTabController: UITabBarControllerDelegate {
     func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
         let navigationVC = viewController as? UINavigationController

@@ -7,10 +7,6 @@
 
 import UIKit
 
-protocol ProfileCell: UICollectionViewCell {
-    func configure(with movie: Movie)
-}
-
 final class ProfileRatingCell: UICollectionViewCell, ProfileCell {
 
     // MARK: - UI Properties
