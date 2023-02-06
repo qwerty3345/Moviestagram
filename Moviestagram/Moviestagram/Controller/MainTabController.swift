@@ -52,23 +52,17 @@ final class MainTabController: UITabBarController {
 
 extension MainTabController: UITabBarControllerDelegate {
     func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
-        let currentIndex = tabBarController.selectedIndex
-        let currentViewController = tabBarController.viewControllers?[currentIndex]
-
-        guard currentViewController == viewController else {
-            return true
-        }
-
         let navigationVC = viewController as? UINavigationController
-        if navigationVC?.viewControllers.last is DetailController {
-            return true
-        }
-        let rootVC = navigationVC?.viewControllers.last
+        let currentVC = navigationVC?.viewControllers.last
 
-        if let vc = rootVC as? UITableViewController {
-            vc.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+        if let vc = currentVC as? UITableViewController,
+           tabBarController.selectedViewController == viewController {
+
+            vc.tableView.scrollToRow(at: IndexPath(row: NSNotFound, section: 0), at: .top, animated: true)
+
+            return false
         }
 
-        return false
+        return true
     }
 }
