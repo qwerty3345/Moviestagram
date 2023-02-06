@@ -19,12 +19,14 @@ final class MovieRemoteRepository {
 
     // MARK: - Helpers
     // TODO: 페이지 별로 로딩해서 띄우게도 구현...!
-    func fetchMovie(with options: [FetchMovieOptionQuery], completion: @escaping MovieNetworkingCompletion) {
+    func fetchMovie(with options: [FetchMovieOptionQuery],
+                    completion: @escaping MovieNetworkingCompletion) {
         let url = movieQueryURL(with: options)
         performRequest(with: url, completion: completion)
     }
 
-    func fetchMovie(with option: FetchMovieOptionQuery, completion: @escaping MovieNetworkingCompletion) {
+    func fetchMovie(with option: FetchMovieOptionQuery,
+                    completion: @escaping MovieNetworkingCompletion) {
         let url = movieQueryURL(with: [option])
         performRequest(with: url, completion: completion)
     }
@@ -36,7 +38,8 @@ final class MovieRemoteRepository {
         return URL(string: urlString)
     }
 
-    private func performRequest(with url: URL?, completion: @escaping MovieNetworkingCompletion) {
+    private func performRequest(with url: URL?,
+                                completion: @escaping MovieNetworkingCompletion) {
         guard let url else { return }
         let session = URLSession(configuration: .default)
 

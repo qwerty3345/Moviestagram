@@ -64,7 +64,10 @@ final class SearchCell: UITableViewCell {
         ratingLabel.attributedText = Util.ratingAttributedText(with: movie.rating ?? 0.0)
         yearLabel.text = "\(movie.year ?? 0)년"
     }
+}
 
+// MARK: - Layout
+extension SearchCell {
     private func configureLayout() {
         addSubview(posterImageView)
         let baseSize: CGFloat = 40

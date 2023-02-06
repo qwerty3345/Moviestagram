@@ -81,7 +81,10 @@ final class FeedCell: UITableViewCell {
         ratingLabel.attributedText = Util.ratingAttributedText(with: movie.rating ?? 0.0)
         yearLabel.text = "\(movie.year ?? 0)년"
     }
+}
 
+// MARK: - Layout
+extension FeedCell {
     private func configureLayout() {
         addSubview(movieProfileImageView)
         movieProfileImageView.snp.makeConstraints { make in

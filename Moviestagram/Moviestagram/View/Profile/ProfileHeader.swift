@@ -142,7 +142,10 @@ final class ProfileHeader: UICollectionReusableView {
 
         print(viewModel.ratingData)
     }
+}
 
+// MARK: - Layout
+extension ProfileHeader {
     private func configureLayout() {
         profileImageView.snp.makeConstraints { make in
             make.height.width.equalTo(80)
