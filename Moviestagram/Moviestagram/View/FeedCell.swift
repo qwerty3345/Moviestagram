@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import Kingfisher
+import SnapKit
 
 final class FeedCell: UITableViewCell {
     // MARK: - Properties
@@ -85,44 +85,43 @@ final class FeedCell: UITableViewCell {
 
     private func configureLayout() {
         addSubview(movieProfileImageView)
-        movieProfileImageView.anchor(top: topAnchor,
-                                     left: leftAnchor,
-                                     paddingTop: 12,
-                                     paddingLeft: 12)
-        movieProfileImageView.setDimensions(height: 40, width: 40)
+        movieProfileImageView.snp.makeConstraints { make in
+            make.top.left.equalToSuperview().inset(12)
+            make.width.height.equalTo(40)
+        }
         movieProfileImageView.layer.cornerRadius = 40 / 2
 
         addSubview(movieTitleButton)
-        movieTitleButton.centerY(inView: movieProfileImageView,
-                                 leftAnchor: movieProfileImageView.rightAnchor, paddingLeft: 8)
+        movieTitleButton.snp.makeConstraints { make in
+            make.centerY.equalTo(movieProfileImageView)
+            make.left.equalTo(movieProfileImageView.snp.right).offset(8)
+        }
 
         addSubview(posterImageView)
-        posterImageView.centerX(inView: self,
-                                topAnchor: movieProfileImageView.bottomAnchor,
-                                paddingTop: 8)
-        let baseSize: CGFloat = 100
-        posterImageView.setDimensions(height: baseSize * 3, width: baseSize * 2)
+        posterImageView.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(movieProfileImageView.snp.bottom).offset(8)
+            let baseSize: CGFloat = 100
+            make.height.equalTo(baseSize * 3)
+            make.width.equalTo(baseSize * 2)
+        }
 
         addSubview(ratingLabel)
-        ratingLabel.anchor(top: posterImageView.bottomAnchor,
-                           left: leftAnchor,
-                           paddingTop: 8,
-                           paddingLeft: 8)
+        ratingLabel.snp.makeConstraints { make in
+            make.top.equalTo(posterImageView.snp.bottom).offset(8)
+            make.left.equalToSuperview().offset(8)
+        }
 
         addSubview(summaryLabel)
-        summaryLabel.anchor(top: ratingLabel.bottomAnchor,
-                            left: leftAnchor,
-                            right: rightAnchor,
-                            paddingTop: 8,
-                            paddingLeft: 8,
-                            paddingRight: 8)
+        summaryLabel.snp.makeConstraints { make in
+            make.top.equalTo(ratingLabel.snp.bottom).offset(8)
+            make.left.right.equalToSuperview().inset(8)
+        }
 
         addSubview(yearLabel)
-        yearLabel.anchor(top: summaryLabel.bottomAnchor,
-                         left: leftAnchor,
-                         bottom: bottomAnchor,
-                         paddingTop: 8,
-                         paddingLeft: 8,
-                         paddingBottom: 8)
+        yearLabel.snp.makeConstraints { make in
+            make.top.equalTo(summaryLabel.snp.bottom).offset(8)
+            make.left.bottom.equalToSuperview().inset(8)
+        }
     }
 }

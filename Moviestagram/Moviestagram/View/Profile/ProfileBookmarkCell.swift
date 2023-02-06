@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 
 final class ProfileBookmarkCell: UICollectionViewCell {
     // MARK: - UI Properties
@@ -22,7 +23,9 @@ final class ProfileBookmarkCell: UICollectionViewCell {
         backgroundColor = .lightGray
 
         addSubview(postImageView)
-        postImageView.fillSuperview()
+        postImageView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
     }
 
     required init?(coder: NSCoder) {
@@ -30,9 +33,7 @@ final class ProfileBookmarkCell: UICollectionViewCell {
     }
 
     // MARK: - Helpers
-
     func configure(with movie: Movie) {
         postImageView.setImage(with: movie.mediumCoverImage)
     }
-
 }
