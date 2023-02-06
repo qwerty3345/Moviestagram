@@ -261,19 +261,14 @@ extension DetailController {
     }
 
     private func setStarImages(sliderValue: Float) {
-        let floatValue = floor(sliderValue * 10) / 10
-        let intValue = Int(floor(sliderValue))
-
-        for index in 0..<5 {
-            guard let starImage = ratingStarImageViews[safe: index] else { continue }
-            if (index + 1) <= intValue / 2 {
+        let value = Int(sliderValue)
+        for (index, starImage) in ratingStarImageViews.enumerated() {
+            if index < value / 2 {
                 starImage.image = UIImage(systemName: "star.fill")
+            } else if value % 2 != 0 && index == value / 2 {
+                starImage.image = UIImage(systemName: "star.leadinghalf.filled")
             } else {
-                if (2 * (index + 1) - intValue) <= 1 {
-                    starImage.image = UIImage(systemName: "star.leadinghalf.filled")
-                } else {
-                    starImage.image = UIImage(systemName: "star")
-                }
+                starImage.image = UIImage(systemName: "star")
             }
         }
     }
