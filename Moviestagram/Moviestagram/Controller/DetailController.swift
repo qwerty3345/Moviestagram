@@ -11,19 +11,12 @@ import SnapKit
 final class DetailController: UIViewController {
 
     // MARK: - Properties
-    private var movie: Movie
-    private var isBookmarked = false
-    private lazy var rating: Float = movie.myRating ?? 0 {
-        didSet {
-            if oldValue != rating {
-                saveRatingMovie(with: rating)
-            }
-        }
-    }
+    private let viewModel: DetailViewModel
+
+    // MARK: - UI Properties
     private let scrollView = UIScrollView()
     private let contentView = UIView()
 
-    // MARK: - UI Properties
     private let posterImageView: UIImageView = {
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFit
@@ -97,7 +90,7 @@ final class DetailController: UIViewController {
 
     // MARK: - Lifecycle
     init(movie: Movie) {
-        self.movie = movie
+        self.viewModel = DetailViewModel(movie: movie)
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -110,67 +103,37 @@ final class DetailController: UIViewController {
         configureLayout()
         configureData()
         configureNavigationBar()
-        checkIfUserRatedMovie()
-        checkIfUserBookmarkedMovie()
         view.backgroundColor = .white
+
+        bind(to: viewModel)
     }
 
-
-    // MARK: - Repository
-    // TODO: 스크린샷 디테일 정보 받아와서, 화면에 띄워주기 (스크롤뷰로)
-
-    private func checkIfUserRatedMovie() {
-        if let ratedMovie = MovieLocalRepository.shared.ratedMovies.first(where: { $0.id == movie.id }) {
-            self.movie = ratedMovie
-            updateRatingLabel()
-        }
-    }
-
-    private func checkIfUserBookmarkedMovie() {
-        if MovieLocalRepository.shared.bookmarkedMovies.first(where: { $0.id == movie.id }) != nil {
-            isBookmarked = true
-            bookmarkButton.image = UIImage(systemName: "bookmark.fill")
-        }
-    }
-
-    private func updateRatingLabel() {
-        setStarImages(withRating: movie.myRating ?? 0)
-    }
-
-    private func saveRatingMovie(with rating: Float) {
-        movie.myRating = rating
-
-        guard rating != 0 else {
-            MovieLocalRepository.shared.remove(ratingMovie: movie)
-            return
-        }
-
-        MovieLocalRepository.shared.save(ratingMovie: movie)
-    }
 
     @objc private func tappedBookmarkButton() {
-        if !isBookmarked {
-            MovieLocalRepository.shared.save(bookmarkMovie: movie)
-            bookmarkButton.image = UIImage(systemName: "bookmark.fill")
-            isBookmarked = true
-        } else {
-            MovieLocalRepository.shared.remove(bookmarkMovie: movie)
-            bookmarkButton.image = UIImage(systemName: "bookmark")
-            isBookmarked = false
-        }
+        viewModel.tappedBookmark()
     }
 
     // MARK: - Helpers
+    private func bind(to viewModel: DetailViewModel) {
+        viewModel.movie.bind { [weak self] movie in
+            self?.setStarImages(withRating: movie.myRating ?? 0)
+        }
+        viewModel.isBookmarked.bind { [weak self] isBookmarked in
+            let bookmarkImageName = isBookmarked ? "bookmark" : "bookmark.fill"
+            self?.bookmarkButton.image = UIImage(systemName: bookmarkImageName)
+        }
+    }
+
     private func configureNavigationBar() {
         navigationItem.rightBarButtonItem = bookmarkButton
-        setNavigationBarTitle(with: movie.title ?? "")
+        setNavigationBarTitle(with: viewModel.movie.value.title ?? "")
     }
 
     private func configureData() {
-        posterImageView.setImage(with: movie.mediumCoverImage)
-        summaryLabel.text = movie.summary
-        ratingLabel.attributedText = Util.ratingAttributedText(with: movie.rating ?? 0.0)
-        yearLabel.text = "\(movie.year ?? 0)년 개봉"
+        posterImageView.setImage(with: viewModel.posterImageURLString)
+        summaryLabel.text = viewModel.summaryLabelText
+        ratingLabel.attributedText = viewModel.ratingLabelAttributedString
+        yearLabel.text = viewModel.yearLabelText
     }
 
     private func screenShotImageView(with imageURL: String) -> UIImageView {
@@ -255,7 +218,7 @@ extension DetailController {
 extension DetailController {
     @objc private func sliderValueChanged(_ sender: UISlider) {
         setStarImages(sliderValue: sender.value)
-        rating = floor(sender.value) / 2
+        viewModel.rating = floor(sender.value) / 2
     }
 
     private func setStarImages(withRating rating: Float) {
