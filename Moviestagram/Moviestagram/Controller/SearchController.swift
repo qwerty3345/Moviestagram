@@ -43,6 +43,7 @@ final class SearchController: UITableViewController {
         tableView.dataSource = self
         
         setTableViewRowHeight()
+        configureTapToHideSearchAction()
     }
 
     private func setTableViewRowHeight() {
@@ -59,14 +60,28 @@ final class SearchController: UITableViewController {
     }
 
     private func showCannotSearchAlert() {
-        DispatchQueue.main.async {
-            let alert = UIAlertController(title: "검색에 실패했습니다.", message: "다른키워드로 검색 해 주세요", preferredStyle: .actionSheet)
-            let action = UIAlertAction(title: "OK", style: .default) { _ in
-            }
-            alert.addAction(action)
+        let alert = UIAlertController(title: "검색에 실패했습니다.", message: "다른키워드로 검색 해 주세요", preferredStyle: .actionSheet)
+        let action = UIAlertAction(title: "OK", style: .default) { _ in
+        }
+        alert.addAction(action)
 
+        DispatchQueue.main.async {
             self.present(alert, animated: true, completion: nil)
         }
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            alert.dismiss(animated: true)
+        }
+    }
+
+    private func configureTapToHideSearchAction() {
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(hideSearchController))
+        view.addGestureRecognizer(gesture)
+    }
+
+    @objc private func hideSearchController() {
+        print("handle!")
+        searchController.isActive = false
     }
 }
 

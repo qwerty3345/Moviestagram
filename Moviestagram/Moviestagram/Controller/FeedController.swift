@@ -49,6 +49,7 @@ final class FeedController: UITableViewController {
         viewModel.movies.bind { [weak self] _ in
             DispatchQueue.main.async {
                 self?.tableView.reloadData()
+                self?.endRefreshing()
             }
         }
     }
