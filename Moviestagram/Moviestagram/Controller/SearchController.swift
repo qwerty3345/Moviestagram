@@ -59,13 +59,10 @@ final class SearchController: UITableViewController {
         searchController.searchBar.delegate = self
     }
 
-    let semaphore = DispatchSemaphore(value: 1)
     private func showCannotSearchAlert() {
-        semaphore.wait()
         DispatchQueue.main.async {
             let alert = UIAlertController(title: "검색에 실패했습니다.", message: "다른키워드로 검색 해 주세요", preferredStyle: .actionSheet)
             let action = UIAlertAction(title: "OK", style: .default) { _ in
-                self.semaphore.signal()
             }
             alert.addAction(action)
 
