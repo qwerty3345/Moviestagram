@@ -48,8 +48,7 @@ final class SearchController: UITableViewController {
     private func setTableViewRowHeight() {
         var rowHeight: CGFloat = 120
         rowHeight += 16
-        tableView.rowHeight = UITableView.automaticDimension
-        tableView.estimatedRowHeight = rowHeight
+        tableView.rowHeight = 136
     }
     
     private func configureSearchController() {

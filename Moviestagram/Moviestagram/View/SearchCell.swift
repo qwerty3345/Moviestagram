@@ -74,7 +74,8 @@ extension SearchCell {
         posterImageView.snp.makeConstraints { make in
             make.height.equalTo(baseSize * 3)
             make.width.equalTo(baseSize * 2)
-            make.top.left.bottom.equalToSuperview().inset(8)
+            make.left.equalToSuperview().inset(8)
+            make.centerY.equalToSuperview()
         }
 
         let stack = UIStackView(arrangedSubviews: [titleLabel, ratingLabel, yearLabel])
