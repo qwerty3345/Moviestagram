@@ -33,7 +33,6 @@ final class FeedController: UITableViewController {
         configureRefreshControl()
         configureNavigationMenu()
         setNavigationBarTitle(with: "Movies")
-        tableView.tableFooterView = spinnerFooter
 
         feedViewModel.fetchMovie()
         bind(to: feedViewModel)
@@ -48,7 +47,7 @@ final class FeedController: UITableViewController {
     private func bind(to viewModel: FeedViewModel) {
         viewModel.movies.bind { [weak self] _ in
             DispatchQueue.main.async {
-                self?.tableView.reloadData()
+                self?.tableView.reloadData(with: .curveEaseInOut)
                 self?.endRefreshing()
             }
         }
@@ -58,6 +57,8 @@ final class FeedController: UITableViewController {
         tableView.registerCell(cellClass: FeedCell.self)
         tableView.separatorStyle = .none
         setTableViewRowHeight()
+
+        tableView.tableFooterView = spinnerFooter
     }
 
     private func setTableViewRowHeight() {
@@ -69,13 +70,15 @@ final class FeedController: UITableViewController {
     }
 
     private func configureNavigationMenu() {
-        let menuItems: [UIAction] = [
-            UIAction(title: "인기순 정렬",
-                     image: UIImage(systemName: "heart"),
-                     handler: { _ in self.feedViewModel.searchOption = .sortByLike }),
-            UIAction(title: "평점순 정렬",
-                     image: UIImage(systemName: "star"),
-                     handler: { _ in self.feedViewModel.searchOption = .sortByRating })]
+        let sortByLikeAction = UIAction(title: "인기순 정렬",
+                 image: UIImage(systemName: "heart"),
+                 handler: { _ in self.feedViewModel.searchOption = .sortByLike })
+
+        let sortByRatingAction = UIAction(title: "평점순 정렬",
+                 image: UIImage(systemName: "star"),
+                 handler: { _ in self.feedViewModel.searchOption = .sortByRating })
+
+        let menuItems: [UIAction] = [sortByLikeAction, sortByRatingAction]
 
         let menu = UIMenu(image: UIImage(systemName: "ellipsis.circle"), children: menuItems)
         let menuBarButton = UIBarButtonItem(image: UIImage(systemName: "ellipsis.circle"), menu: menu)

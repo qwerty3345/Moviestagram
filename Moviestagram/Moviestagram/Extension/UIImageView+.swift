@@ -11,6 +11,13 @@ import Kingfisher
 extension UIImageView {
     func setImage(with imageUrl: String?) {
         guard let url = URL(string: imageUrl ?? "") else { return }
-        kf.setImage(with: url)
+        kf.indicatorType = .activity
+        kf.setImage(
+            with: url,
+            options: [
+                .transition(.fade(0.3)),
+                .forceTransition
+            ]
+        )
     }
 }

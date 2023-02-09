@@ -89,7 +89,7 @@ final class DetailController: UIViewController {
 
     // MARK: - Lifecycle
     init(movie: Movie) {
-        self.detailViewModel = DetailViewModel(movie: movie)
+        detailViewModel = DetailViewModel(movie: movie)
         super.init(nibName: nil, bundle: nil)
     }
 

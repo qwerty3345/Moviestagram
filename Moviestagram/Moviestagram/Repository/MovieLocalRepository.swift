@@ -15,8 +15,8 @@ final class MovieLocalRepository {
     private(set) var bookmarkedMovies: [Movie] = []
 
     private init() {
-        ratedMovies = loadRatingMovies()
-        bookmarkedMovies = loadBookmarkMovies()
+        ratedMovies = loadSavedMovies(forKey: ratingKey)
+        bookmarkedMovies = loadSavedMovies(forKey: bookmarkKey)
     }
 
     // MARK: - 영화 별점 평가
@@ -42,8 +42,8 @@ final class MovieLocalRepository {
         UserDefaults.standard.setValue(value, forKey: ratingKey)
     }
 
-    func loadRatingMovies() -> [Movie] {
-        guard let data = UserDefaults.standard.value(forKey: ratingKey) as? Data,
+    func loadSavedMovies(forKey key: String) -> [Movie] {
+        guard let data = UserDefaults.standard.value(forKey: key) as? Data,
               let loadedMovies = try? PropertyListDecoder().decode([Movie].self, from: data) else { return [] }
         return loadedMovies
     }
@@ -65,11 +65,5 @@ final class MovieLocalRepository {
     private func save(bookmarkMovies: [Movie]) {
         let value = try? PropertyListEncoder().encode(bookmarkMovies)
         UserDefaults.standard.setValue(value, forKey: bookmarkKey)
-    }
-
-    func loadBookmarkMovies() -> [Movie] {
-        guard let data = UserDefaults.standard.value(forKey: bookmarkKey) as? Data,
-              let loadedMovies = try? PropertyListDecoder().decode([Movie].self, from: data) else { return [] }
-        return loadedMovies
     }
 }

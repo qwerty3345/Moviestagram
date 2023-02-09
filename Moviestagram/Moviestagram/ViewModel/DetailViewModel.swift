@@ -58,7 +58,7 @@ final class DetailViewModel {
             MovieLocalRepository.shared.remove(bookmarkMovie: movie.value)
             isBookmarked.value = false
         } else {
-            MovieLocalRepository.shared.save(bookmarkMovie: movie.value)
+            MovieLocalRepository.shared.save(ratingMovie: movie.value)
             isBookmarked.value = true
         }
     }
