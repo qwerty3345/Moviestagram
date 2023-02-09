@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B4148AE62995182400CB1B20 /* ProfileListMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4148AE52995182400CB1B20 /* ProfileListMode.swift */; };
 		B448D390298F53140042C0BF /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = B448D38F298F53140042C0BF /* SnapKit */; };
 		B448D394298F61540042C0BF /* RatingSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B448D393298F61540042C0BF /* RatingSlider.swift */; };
 		B448D398298F77590042C0BF /* MovieLocalRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B448D397298F77590042C0BF /* MovieLocalRepository.swift */; };
@@ -62,6 +63,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B4148AE52995182400CB1B20 /* ProfileListMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileListMode.swift; sourceTree = "<group>"; };
 		B448D393298F61540042C0BF /* RatingSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingSlider.swift; sourceTree = "<group>"; };
 		B448D397298F77590042C0BF /* MovieLocalRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieLocalRepository.swift; sourceTree = "<group>"; };
 		B448D399298F92540042C0BF /* ProfileBookmarkCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileBookmarkCell.swift; sourceTree = "<group>"; };
@@ -263,6 +265,7 @@
 			children = (
 				B456391C298E09DE00C42861 /* NetworkError.swift */,
 				B47B9AD5298E8BFF00025D0C /* FetchMovieOptionQuery.swift */,
+				B4148AE52995182400CB1B20 /* ProfileListMode.swift */,
 			);
 			path = Enum;
 			sourceTree = "<group>";
@@ -408,6 +411,7 @@
 			files = (
 				B45638D4298DF02D00C42861 /* FeedController.swift in Sources */,
 				B4563914298DFE1900C42861 /* MovieResponse.swift in Sources */,
+				B4148AE62995182400CB1B20 /* ProfileListMode.swift in Sources */,
 				B47B9ADA298E9BE900025D0C /* DetailController.swift in Sources */,
 				B4A4BD81298EBFA3006FC77B /* ProfileRatingCell.swift in Sources */,
 				B47B9AC4298E563700025D0C /* MainTabController.swift in Sources */,

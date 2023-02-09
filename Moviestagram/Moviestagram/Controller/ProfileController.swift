@@ -59,7 +59,7 @@ final class ProfileController: UICollectionViewController {
             }
         }
 
-        viewModel.isRatingListMode.bind { [weak self] _ in
+        viewModel.listMode.bind { [weak self] _ in
             DispatchQueue.main.async {
                 self?.collectionView.reloadData()
             }
@@ -70,18 +70,27 @@ final class ProfileController: UICollectionViewController {
 // MARK: - UICollectionViewDataSource
 extension ProfileController {
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return profileViewModel.isRatingListMode.value
-        ? profileViewModel.numberOfRatedMovies
-        : profileViewModel.numberOfBookmarkedMovies
+        switch profileViewModel.listMode.value {
+        case .rating:
+            return profileViewModel.numberOfRatedMovies
+        case .bookmark:
+            return profileViewModel.numberOfBookmarkedMovies
+        }
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = profileViewModel.isRatingListMode.value
-        ? collectionView.dequeueReusableCell(cellClass: ProfileRatingCell.self, for: indexPath)
-        : collectionView.dequeueReusableCell(cellClass: ProfileBookmarkCell.self, for: indexPath)
+        let cell: ProfileCell = {
+            switch profileViewModel.listMode.value {
+            case .rating:
+                return collectionView.dequeueReusableCell(
+                    cellClass: ProfileRatingCell.self, for: indexPath)
+            case .bookmark:
+                return collectionView.dequeueReusableCell(
+                    cellClass: ProfileBookmarkCell.self, for: indexPath)
+            }
+        }()
 
-        if let movie = profileViewModel.movieForCell(at: indexPath),
-           let cell = cell as? ProfileCell {
+        if let movie = profileViewModel.movieForCell(at: indexPath) {
             cell.configure(with: movie)
         }
 

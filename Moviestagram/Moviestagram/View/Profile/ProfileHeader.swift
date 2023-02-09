@@ -116,7 +116,7 @@ final class ProfileHeader: UICollectionReusableView {
         ratingUnderLineView.isHidden = false
         bookmarkUnderLineView.isHidden = true
 
-        viewModel?.isRatingListMode.value = true
+        viewModel?.listMode.value = .rating
     }
 
     @objc func tappedBookmarkButton() {
@@ -125,7 +125,7 @@ final class ProfileHeader: UICollectionReusableView {
         ratingUnderLineView.isHidden = true
         bookmarkUnderLineView.isHidden = false
 
-        viewModel?.isRatingListMode.value = false
+        viewModel?.listMode.value = .bookmark
     }
 
     // MARK: - Helpers

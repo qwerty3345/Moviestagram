@@ -15,13 +15,14 @@ final class ProfileViewModel {
     var numberOfBookmarkedMovies: Int { bookmarkedMovies.value.count }
     var numberOfRatedMovies: Int { ratedMovies.value.count }
 
-    var isRatingListMode: Observable<Bool> = Observable(true)
+    var listMode: Observable<ProfileListMode> = Observable(.bookmark)
 
     // MARK: - Helpers
     func movieForCell(at indexPath: IndexPath) -> Movie? {
-        if isRatingListMode.value {
+        switch listMode.value {
+        case .rating:
             return ratedMovies.value[safe: indexPath.row]
-        } else {
+        case .bookmark:
             return bookmarkedMovies.value[safe: indexPath.row]
         }
     }
