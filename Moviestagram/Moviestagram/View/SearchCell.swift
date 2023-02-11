@@ -25,7 +25,7 @@ final class SearchCell: UITableViewCell {
 
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.text = ""
+        label.text = Constants.Design.skeletonDashText
         label.font = .preferredFont(forTextStyle: .caption1)
         label.numberOfLines = 0
         return label
@@ -33,14 +33,14 @@ final class SearchCell: UITableViewCell {
 
     private let ratingLabel: UILabel = {
         let label = UILabel()
-        label.text = "평균: ★"
+        label.text = Constants.Design.skeletonTextForRatingLabel
         label.font = .preferredFont(forTextStyle: .caption1)
         return label
     }()
 
     private let yearLabel: UILabel = {
         let label = UILabel()
-        label.text = "2000년"
+        label.text = Constants.Design.skeletonTextForYearLabel
         label.font = .preferredFont(forTextStyle: .caption1)
         label.textColor = .lightGray
         return label

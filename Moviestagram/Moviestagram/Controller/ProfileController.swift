@@ -17,18 +17,18 @@ final class ProfileController: UICollectionViewController {
         super.viewDidLoad()
         configureCollectionView()
         configureRefreshControl()
-        setNavigationBarTitle(with: "Mason Kim")
+        setNavigationBarTitle(with: Constants.Design.profileNavigationTitle)
         bind(to: profileViewModel)
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        profileViewModel.fetchLocalSaveData()
+        profileViewModel.fetchLocalSavedData()
     }
 
     // MARK: - Actions
     @objc func refreshProfile() {
-        profileViewModel.fetchLocalSaveData()
+        profileViewModel.fetchLocalSavedData()
     }
 
     // MARK: - Helpers

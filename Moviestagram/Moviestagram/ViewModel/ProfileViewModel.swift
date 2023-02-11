@@ -28,7 +28,7 @@ final class ProfileViewModel {
     }
 
     // MARK: - API
-    func fetchLocalSaveData() {
+    func fetchLocalSavedData() {
         ratedMovies.value = MovieLocalRepository.shared.ratedMovies
         bookmarkedMovies.value = MovieLocalRepository.shared.bookmarkedMovies
     }

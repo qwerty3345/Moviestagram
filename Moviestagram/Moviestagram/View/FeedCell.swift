@@ -25,7 +25,7 @@ final class FeedCell: UITableViewCell {
     private lazy var movieTitleButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitleColor(.black, for: .normal)
-        button.setTitle("-", for: .normal)
+        button.setTitle(Constants.Design.skeletonDashText, for: .normal)
         button.titleLabel?.font = .boldSystemFont(ofSize: 14)
         return button
     }()
@@ -40,14 +40,14 @@ final class FeedCell: UITableViewCell {
 
     private let ratingLabel: UILabel = {
         let label = UILabel()
-        label.text = "-"
+        label.text = Constants.Design.skeletonDashText
         label.font = .preferredFont(forTextStyle: .caption1)
         return label
     }()
 
     private let summaryLabel: UILabel = {
         let label = UILabel()
-        label.text = ".\n. \n. "
+        label.text = Constants.Design.skeletonTextForSummaryLabel
         label.numberOfLines = 3
         label.font = .systemFont(ofSize: 14)
         return label
@@ -55,7 +55,7 @@ final class FeedCell: UITableViewCell {
 
     private let yearLabel: UILabel = {
         let label = UILabel()
-        label.text = "2000년"
+        label.text = Constants.Design.skeletonTextForYearLabel
         label.font = .preferredFont(forTextStyle: .caption2)
         label.textColor = .lightGray
         return label

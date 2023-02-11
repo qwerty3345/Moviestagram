@@ -29,7 +29,7 @@ final class ProfileHeader: UICollectionReusableView {
         label.font = UIFont.boldSystemFont(ofSize: 14)
         label.textColor = .black
         label.textAlignment = .center
-        label.text = "Mason Kim"
+        label.text = Constants.Design.initialUsername
         return label
     }()
 
@@ -44,7 +44,7 @@ final class ProfileHeader: UICollectionReusableView {
         let label = UILabel()
         label.numberOfLines = 2
         label.textAlignment = .center
-        label.text = "0\nRating"
+        label.text = Constants.Design.initialRatingLabelText
         return label
     }()
 
@@ -52,7 +52,7 @@ final class ProfileHeader: UICollectionReusableView {
         let label = UILabel()
         label.numberOfLines = 2
         label.textAlignment = .center
-        label.text = "0\nBookmark"
+        label.text = Constants.Design.initialBookmarkLabelText
         return label
     }()
 

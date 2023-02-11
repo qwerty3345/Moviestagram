@@ -32,7 +32,7 @@ final class FeedController: UITableViewController {
         configureTableView()
         configureRefreshControl()
         configureNavigationMenu()
-        setNavigationBarTitle(with: "Movies")
+        setNavigationBarTitle(with: Constants.Design.feedNavigationTitle)
 
         feedViewModel.fetchMovie()
         bind(to: feedViewModel)
@@ -70,11 +70,11 @@ final class FeedController: UITableViewController {
     }
 
     private func configureNavigationMenu() {
-        let sortByLikeAction = UIAction(title: "인기순 정렬",
+        let sortByLikeAction = UIAction(title: Constants.Design.sortByLikeActionTitle,
                  image: UIImage(systemName: "heart"),
                  handler: { _ in self.feedViewModel.searchOption = .sortByLike })
 
-        let sortByRatingAction = UIAction(title: "평점순 정렬",
+        let sortByRatingAction = UIAction(title: Constants.Design.sortByLikeRatingActionTitle,
                  image: UIImage(systemName: "star"),
                  handler: { _ in self.feedViewModel.searchOption = .sortByRating })
 
