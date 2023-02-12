@@ -19,7 +19,7 @@ final class ProfileViewModel {
         ratedMovies.value.count
     }
 
-    var listMode: Observable<ProfileListMode> = Observable(.bookmark)
+    var listMode: Observable<ProfileListMode> = Observable(.rating)
 
     // MARK: - Helpers
     func movieForCell(at indexPath: IndexPath) -> Movie? {
