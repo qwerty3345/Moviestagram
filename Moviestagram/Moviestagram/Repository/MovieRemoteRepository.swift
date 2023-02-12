@@ -9,8 +9,6 @@ import Foundation
 
 final class MovieRemoteRepository {
 
-    typealias MovieNetworkingCompletion = (Result<[Movie], NetworkError>) -> Void
-
     // MARK: - Properties
     static let shared = MovieRemoteRepository()
     private let baseURLString = "https://yts.mx/api/v2/list_movies.json"
@@ -19,16 +17,20 @@ final class MovieRemoteRepository {
 
     // MARK: - Helpers
     // TODO: 페이지 별로 로딩해서 띄우게도 구현...!
-    func fetchMovie(with options: [FetchMovieOptionQuery],
-                    completion: @escaping MovieNetworkingCompletion) {
-        let url = movieQueryURL(with: options)
-        performRequest(with: url, completion: completion)
+    func fetchMovie(with options: [FetchMovieOptionQuery]) async throws -> [Movie] {
+        guard let url = movieQueryURL(with: options) else {
+            throw NetworkError.networkingError
+        }
+        let movies = try await performRequest(with: url)
+        return movies
     }
 
-    func fetchMovie(with option: FetchMovieOptionQuery,
-                    completion: @escaping MovieNetworkingCompletion) {
-        let url = movieQueryURL(with: [option])
-        performRequest(with: url, completion: completion)
+    func fetchMovie(with option: FetchMovieOptionQuery) async throws -> [Movie] {
+        guard let url = movieQueryURL(with: [option]) else {
+            throw NetworkError.networkingError
+        }
+        let movies = try await performRequest(with: url)
+        return movies
     }
 
     private func movieQueryURL(with options: [FetchMovieOptionQuery]) -> URL? {
@@ -38,39 +40,24 @@ final class MovieRemoteRepository {
         return URL(string: urlString)
     }
 
-    private func performRequest(with url: URL?,
-                                completion: @escaping MovieNetworkingCompletion) {
-        guard let url else { return }
+    private func performRequest(with url: URL) async throws -> [Movie] {
         let session = URLSession(configuration: .default)
+        let (data, response) = try await session.data(from: url)
 
-        let task = session.dataTask(with: url) { (data, _, error) in
-            guard error == nil else {
-                print(error!.localizedDescription)
-                completion(.failure(.networkingError))
-                return
-            }
-
-            guard let safeData = data else {
-                completion(.failure(.dataError))
-                return
-            }
-
-            if let movies = self.parseJSON(safeData) {
-                completion(.success(movies))
-            } else {
-                completion(.failure(.parseError))
-            }
+        guard let statusCode = (response as? HTTPURLResponse)?.statusCode,
+              (200...299) ~= statusCode else {
+            throw NetworkError.networkingError
         }
-        task.resume()
+
+        guard let movies = try parseJSON(data) else {
+            throw NetworkError.parseError
+        }
+
+        return movies
     }
 
-    private func parseJSON(_ movieData: Data) -> [Movie]? {
-        do {
-            let movieData = try JSONDecoder().decode(MovieResponse.self, from: movieData)
-            return movieData.data.movies
-        } catch {
-            print(error.localizedDescription)
-            return nil
-        }
+    private func parseJSON(_ movieData: Data) throws -> [Movie]? {
+        let movieData = try JSONDecoder().decode(MovieResponse.self, from: movieData)
+        return movieData.data.movies
     }
 }

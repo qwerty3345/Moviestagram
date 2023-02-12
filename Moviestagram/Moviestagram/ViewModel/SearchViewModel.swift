@@ -14,13 +14,9 @@ final class SearchViewModel: MovieListViewModelProtocol {
 
     // MARK: - API
     func searchMovie(with keyword: String) {
-        MovieRemoteRepository.shared.fetchMovie(with: [.search(keyword), .sortByLike]) { result in
-            switch result {
-            case .success(let movies):
-                self.movies.value = movies
-            case .failure(let error):
-                self.networkError.value = error
-            }
+        Task {
+            let movies = try await MovieRemoteRepository.shared.fetchMovie(with: [.search(keyword), .sortByLike])
+            self.movies.value = movies
         }
     }
 }
