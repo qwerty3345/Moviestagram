@@ -118,7 +118,7 @@ final class DetailController: UIViewController {
             self?.setStarImages(withRating: movie.myRating ?? 0)
         }
         viewModel.isBookmarked.bind { [weak self] isBookmarked in
-            let bookmarkImageName = isBookmarked ? "bookmark" : "bookmark.fill"
+            let bookmarkImageName = isBookmarked ? "bookmark.fill" : "bookmark"
             self?.bookmarkButton.image = UIImage(systemName: bookmarkImageName)
         }
     }

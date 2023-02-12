@@ -35,6 +35,8 @@ final class DetailViewModel {
     // MARK: - Lifecycle
     init(movie: Movie) {
         self.movie = Observable(movie)
+        checkIfUserBookmarkedMovie()
+        checkIfUserRatedMovie()
     }
 
     func checkIfUserRatedMovie() {
@@ -47,9 +49,11 @@ final class DetailViewModel {
 
     // MARK: - Repository
     func checkIfUserBookmarkedMovie() {
+        print(MovieLocalRepository.shared.bookmarkedMovies)
         if let _ = MovieLocalRepository.shared.bookmarkedMovies.first(where: {
             $0.id == movie.value.id
         }) {
+            print("북마크 존재함")
             isBookmarked.value = true
         }
     }
@@ -65,10 +69,12 @@ final class DetailViewModel {
 
     func tappedBookmark() {
         if isBookmarked.value {
+            print("북마크 이미 있기에 삭제함")
             MovieLocalRepository.shared.remove(bookmarkMovie: movie.value)
             isBookmarked.value = false
         } else {
-            MovieLocalRepository.shared.save(ratingMovie: movie.value)
+            print("북마크 저장함")
+            MovieLocalRepository.shared.save(bookmarkMovie: movie.value)
             isBookmarked.value = true
         }
     }
