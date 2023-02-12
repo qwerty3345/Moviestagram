@@ -8,7 +8,7 @@
 import Foundation
 
 // MARK: - ApiResponse
-struct MovieResponse: Codable {
+struct MovieResponse: Decodable {
     let status, statusMessage: String
     let data: DataClass
 
@@ -20,7 +20,7 @@ struct MovieResponse: Codable {
 }
 
 // MARK: - DataClass
-struct DataClass: Codable {
+struct DataClass: Decodable {
     let movieCount, limit: Int?
     let movies: [Movie]?
 
