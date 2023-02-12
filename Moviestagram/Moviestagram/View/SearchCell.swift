@@ -9,8 +9,10 @@ import UIKit
 
 final class SearchCell: UITableViewCell {
     // MARK: - Properties
-    var movie: Movie? {
-        didSet { configureData() }
+    var viewModel: SearchCellViewModel? {
+        didSet {
+            configureData()
+        }
     }
 
     // MARK: - UI Properties
@@ -58,11 +60,11 @@ final class SearchCell: UITableViewCell {
 
     // MARK: - Helpers
     private func configureData() {
-        guard let movie else { return }
-        posterImageView.setImage(with: movie.mediumCoverImage)
-        titleLabel.text = movie.title
-        ratingLabel.attributedText = Util.ratingAttributedText(with: movie.rating ?? 0.0)
-        yearLabel.text = "\(movie.year ?? 0)년"
+        guard let viewModel else { return }
+        posterImageView.setImage(with: viewModel.posterImageURLString)
+        titleLabel.text = viewModel.titleLabelText
+        ratingLabel.attributedText = viewModel.ratingLabelText
+        yearLabel.text = viewModel.yearLabelText
     }
 }
 

@@ -9,8 +9,10 @@ import UIKit
 
 final class FeedCell: UITableViewCell {
     // MARK: - Properties
-    var movie: Movie? {
-        didSet { configureData() }
+    var viewModel: FeedCellViewModel? {
+        didSet {
+            configureData()
+        }
     }
 
     // MARK: - UI Properties
@@ -73,13 +75,14 @@ final class FeedCell: UITableViewCell {
 
     // MARK: - Helpers
     private func configureData() {
-        guard let movie else { return }
-        movieTitleButton.setTitle(movie.title, for: .normal)
-        movieProfileImageView.setImage(with: movie.backgroundImage)
-        posterImageView.setImage(with: movie.mediumCoverImage)
-        summaryLabel.text = movie.summary
-        ratingLabel.attributedText = Util.ratingAttributedText(with: movie.rating ?? 0.0)
-        yearLabel.text = "\(movie.year ?? 0)년"
+        guard let viewModel else {return }
+
+        movieTitleButton.setTitle(viewModel.movieTitleButtonText, for: .normal)
+        movieProfileImageView.setImage(with: viewModel.profileImageURLString)
+        posterImageView.setImage(with: viewModel.posterImageURLString)
+        summaryLabel.text = viewModel.summaryLabelText
+        ratingLabel.attributedText = viewModel.ratingLabelText
+        yearLabel.text = viewModel.yearLabelText
     }
 }
 

@@ -95,7 +95,7 @@ extension SearchController {
         let cell = tableView.dequeueReusableCell(cellClass: SearchCell.self, for: indexPath)
 
         if let movie = searchViewModel.movieForCell(at: indexPath) {
-            cell.movie = movie
+            cell.viewModel = SearchCellViewModel(movie: movie)
         }
 
         return cell

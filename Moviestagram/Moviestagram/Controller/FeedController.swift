@@ -117,7 +117,7 @@ extension FeedController {
         let cell = tableView.dequeueReusableCell(cellClass: FeedCell.self, for: indexPath)
 
         if let movie = feedViewModel.movieForCell(at: indexPath) {
-            cell.movie = movie
+            cell.viewModel = FeedCellViewModel(movie: movie)
         }
 
         return cell

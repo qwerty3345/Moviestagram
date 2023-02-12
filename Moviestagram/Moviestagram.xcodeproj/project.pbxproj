@@ -41,6 +41,8 @@
 		B47B9AD8298E93BA00025D0C /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47B9AD7298E93BA00025D0C /* Util.swift */; };
 		B47B9ADA298E9BE900025D0C /* DetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47B9AD9298E9BE900025D0C /* DetailController.swift */; };
 		B484941029962AEC007D42AC /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B484940F29962AEC007D42AC /* Constants.swift */; };
+		B484941229989D87007D42AC /* FeedCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B484941129989D87007D42AC /* FeedCellViewModel.swift */; };
+		B484941429989FBA007D42AC /* SearchCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B484941329989FBA007D42AC /* SearchCellViewModel.swift */; };
 		B486627C2990FC7F002B4ACB /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B486627B2990FC7F002B4ACB /* Observable.swift */; };
 		B486627E2990FD0A002B4ACB /* FeedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B486627D2990FD0A002B4ACB /* FeedViewModel.swift */; };
 		B486628029910382002B4ACB /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B486627F29910382002B4ACB /* ProfileViewModel.swift */; };
@@ -99,6 +101,8 @@
 		B47B9AD7298E93BA00025D0C /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 		B47B9AD9298E9BE900025D0C /* DetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailController.swift; sourceTree = "<group>"; };
 		B484940F29962AEC007D42AC /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		B484941129989D87007D42AC /* FeedCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCellViewModel.swift; sourceTree = "<group>"; };
+		B484941329989FBA007D42AC /* SearchCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCellViewModel.swift; sourceTree = "<group>"; };
 		B486627B2990FC7F002B4ACB /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		B486627D2990FD0A002B4ACB /* FeedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewModel.swift; sourceTree = "<group>"; };
 		B486627F29910382002B4ACB /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
@@ -145,8 +149,10 @@
 			isa = PBXGroup;
 			children = (
 				B486627D2990FD0A002B4ACB /* FeedViewModel.swift */,
+				B484941129989D87007D42AC /* FeedCellViewModel.swift */,
 				B486627F29910382002B4ACB /* ProfileViewModel.swift */,
 				B48662812991151F002B4ACB /* SearchViewModel.swift */,
+				B484941329989FBA007D42AC /* SearchCellViewModel.swift */,
 				B486628329911DE8002B4ACB /* DetailViewModel.swift */,
 			);
 			path = ViewModel;
@@ -425,6 +431,7 @@
 				B456391A298E08D300C42861 /* Movie.swift in Sources */,
 				B4A4BD85298EC0C2006FC77B /* UICollectionView+.swift in Sources */,
 				B47B9AC6298E582D00025D0C /* ProfileController.swift in Sources */,
+				B484941429989FBA007D42AC /* SearchCellViewModel.swift in Sources */,
 				B448D39A298F92540042C0BF /* ProfileBookmarkCell.swift in Sources */,
 				B486628029910382002B4ACB /* ProfileViewModel.swift in Sources */,
 				B448D398298F77590042C0BF /* MovieLocalRepository.swift in Sources */,
@@ -440,6 +447,7 @@
 				B47B9AD0298E5C9E00025D0C /* UIFont+.swift in Sources */,
 				B4866286299128E8002B4ACB /* MovieListViewModelProtocol.swift in Sources */,
 				B47B9AD2298E602F00025D0C /* SearchCell.swift in Sources */,
+				B484941229989D87007D42AC /* FeedCellViewModel.swift in Sources */,
 				B4563918298DFEA300C42861 /* MovieRemoteRepository.swift in Sources */,
 				B456391D298E09DE00C42861 /* NetworkError.swift in Sources */,
 				B45638D2298DF02D00C42861 /* SceneDelegate.swift in Sources */,
