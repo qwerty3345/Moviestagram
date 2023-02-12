@@ -12,8 +12,12 @@ final class ProfileViewModel {
     // MARK: - Properties
     private(set) var bookmarkedMovies: Observable<[Movie]> = Observable([])
     private(set) var ratedMovies: Observable<[Movie]> = Observable([])
-    var numberOfBookmarkedMovies: Int { bookmarkedMovies.value.count }
-    var numberOfRatedMovies: Int { ratedMovies.value.count }
+    var numberOfBookmarkedMovies: Int {
+        bookmarkedMovies.value.count
+    }
+    var numberOfRatedMovies: Int {
+        ratedMovies.value.count
+    }
 
     var listMode: Observable<ProfileListMode> = Observable(.bookmark)
 
@@ -37,8 +41,12 @@ final class ProfileViewModel {
 // MARK: - Profile Header
 extension ProfileViewModel {
     // MARK: - Properties
-    var ratingsLabelText: String { "\(ratedMovies.value.count)\nRating" }
-    var bookmarkLabelText: String { "\(bookmarkedMovies.value.count)\nBookmark" }
+    var ratingsLabelText: String {
+        "\(ratedMovies.value.count)\nRating"
+    }
+    var bookmarkLabelText: String {
+        "\(bookmarkedMovies.value.count)\nBookmark"
+    }
     var ratingData: [Float: Int] {
         convertRatingData()
     }
@@ -47,7 +55,9 @@ extension ProfileViewModel {
     private func convertRatingData() -> [Float: Int] {
         var ratingData: [Float: Int] = [:]
         for movie in ratedMovies.value {
-            guard let rating = movie.myRating else { continue }
+            guard let rating = movie.myRating else {
+                continue
+            }
             ratingData[rating, default: 0] += 1
         }
         return ratingData

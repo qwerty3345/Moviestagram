@@ -10,7 +10,9 @@ import Foundation
 final class FeedViewModel: MovieListViewModelProtocol {
     // MARK: - Properties
     private(set) var movies: Observable<[Movie]> = Observable([])
-    private var currentPage: Int { movies.value.count / 20 }
+    private var currentPage: Int {
+        movies.value.count / 20
+    }
 
     var searchOption: FetchMovieOptionQuery = .sortByLike {
         didSet { fetchMovie() }

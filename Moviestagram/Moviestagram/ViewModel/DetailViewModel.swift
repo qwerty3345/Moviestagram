@@ -19,12 +19,18 @@ final class DetailViewModel {
         }
     }
 
-    var posterImageURLString: String? { movie.value.mediumCoverImage }
-    var summaryLabelText: String? { movie.value.summary }
+    var posterImageURLString: String? {
+        movie.value.mediumCoverImage
+    }
+    var summaryLabelText: String? {
+        movie.value.summary
+    }
     var ratingLabelAttributedString: NSAttributedString {
         Util.ratingAttributedText(with: movie.value.rating ?? 0.0)
     }
-    var yearLabelText: String { "\(movie.value.year ?? 0)년 개봉" }
+    var yearLabelText: String {
+        "\(movie.value.year ?? 0)년 개봉"
+    }
 
     // MARK: - Lifecycle
     init(movie: Movie) {
@@ -32,14 +38,18 @@ final class DetailViewModel {
     }
 
     func checkIfUserRatedMovie() {
-        if let ratedMovie = MovieLocalRepository.shared.ratedMovies.first(where: { $0.id == movie.value.id }) {
+        if let ratedMovie = MovieLocalRepository.shared.ratedMovies.first(where: {
+            $0.id == movie.value.id
+        }) {
             self.movie.value = ratedMovie
         }
     }
 
     // MARK: - Repository
     func checkIfUserBookmarkedMovie() {
-        if MovieLocalRepository.shared.bookmarkedMovies.first(where: { $0.id == movie.value.id }) != nil {
+        if let _ = MovieLocalRepository.shared.bookmarkedMovies.first(where: {
+            $0.id == movie.value.id
+        }) {
             isBookmarked.value = true
         }
     }

@@ -53,7 +53,8 @@ final class MainTabController: UITabBarController {
 
 // MARK: - UITabBarControllerDelegate
 extension MainTabController: UITabBarControllerDelegate {
-    func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
+    func tabBarController(_ tabBarController: UITabBarController,
+                          shouldSelect viewController: UIViewController) -> Bool {
         let navigationVC = viewController as? UINavigationController
         let currentVC = navigationVC?.viewControllers.last
 

@@ -61,8 +61,7 @@ final class SearchController: UITableViewController {
 
     private func showCannotSearchAlert() {
         let alert = UIAlertController(title: "검색에 실패했습니다.", message: "다른키워드로 검색 해 주세요", preferredStyle: .actionSheet)
-        let action = UIAlertAction(title: "OK", style: .default) { _ in
-        }
+        let action = UIAlertAction(title: "OK", style: .default)
         alert.addAction(action)
 
         DispatchQueue.main.async {
@@ -75,13 +74,12 @@ final class SearchController: UITableViewController {
     }
 
     private func configureTapToHideSearchAction() {
-        let gesture = UITapGestureRecognizer(target: self, action: #selector(hideSearchController))
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(endEdittingSearchController))
         view.addGestureRecognizer(gesture)
     }
 
-    @objc private func hideSearchController() {
-        print("handle!")
-        searchController.isActive = false
+    @objc private func endEdittingSearchController() {
+        searchController.searchBar.endEditing(true)
     }
 }
 

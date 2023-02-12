@@ -70,13 +70,19 @@ final class FeedController: UITableViewController {
     }
 
     private func configureNavigationMenu() {
-        let sortByLikeAction = UIAction(title: Constants.Design.sortByLikeActionTitle,
-                 image: UIImage(systemName: "heart"),
-                 handler: { _ in self.feedViewModel.searchOption = .sortByLike })
+        let sortByLikeAction = UIAction(
+            title: Constants.Design.sortByLikeActionTitle,
+            image: UIImage(systemName: "heart"),
+            handler: { _ in
+                self.feedViewModel.searchOption = .sortByLike
+            })
 
-        let sortByRatingAction = UIAction(title: Constants.Design.sortByLikeRatingActionTitle,
-                 image: UIImage(systemName: "star"),
-                 handler: { _ in self.feedViewModel.searchOption = .sortByRating })
+        let sortByRatingAction = UIAction(
+            title: Constants.Design.sortByLikeRatingActionTitle,
+            image: UIImage(systemName: "star"),
+            handler: { _ in
+                self.feedViewModel.searchOption = .sortByRating
+            })
 
         let menuItems: [UIAction] = [sortByLikeAction, sortByRatingAction]
 
@@ -109,7 +115,10 @@ final class FeedController: UITableViewController {
 extension FeedController {
     override func tableView(_ tableView: UITableView,
                             numberOfRowsInSection section: Int) -> Int {
-        return feedViewModel.numberOfMovies == 0 ? 2 : feedViewModel.numberOfMovies
+        guard feedViewModel.numberOfMovies != 0 else {
+            return 2
+        }
+        return feedViewModel.numberOfMovies
     }
 
     override func tableView(_ tableView: UITableView,
@@ -137,7 +146,6 @@ extension FeedController {
                             willDisplay cell: UITableViewCell,
                             forRowAt indexPath: IndexPath) {
         if indexPath.row == feedViewModel.numberOfMovies - 1 {
-            print("load more!")
             feedViewModel.loadMoreMovieData()
         }
     }
