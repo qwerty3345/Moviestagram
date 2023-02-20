@@ -35,7 +35,8 @@ final class ProfileController: UICollectionViewController {
     private func configureCollectionView() {
         collectionView.registerCell(cellClass: ProfileRatingCell.self)
         collectionView.registerCell(cellClass: ProfileBookmarkCell.self)
-        collectionView.register(ProfileHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader)
+        collectionView.register(ProfileHeader.self,
+                                forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader)
     }
 
     private func configureRefreshControl() {
@@ -45,14 +46,14 @@ final class ProfileController: UICollectionViewController {
     }
 
     private func bind(to viewModel: ProfileViewModel) {
-        viewModel.bookmarkedMovies.bind { [weak self] movies in
+        viewModel.bookmarkedMovies.bind { [weak self] _ in
             DispatchQueue.main.async {
                 self?.collectionView.reloadData()
                 self?.collectionView.refreshControl?.endRefreshing()
             }
         }
 
-        viewModel.ratedMovies.bind { [weak self] movies in
+        viewModel.ratedMovies.bind { [weak self] _ in
             DispatchQueue.main.async {
                 self?.collectionView.reloadData()
                 self?.collectionView.refreshControl?.endRefreshing()
@@ -78,7 +79,8 @@ extension ProfileController {
         }
     }
 
-    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    override func collectionView(_ collectionView: UICollectionView,
+                                 cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: ProfileCell = {
             switch profileViewModel.listMode.value {
             case .rating:
@@ -97,8 +99,13 @@ extension ProfileController {
         return cell
     }
 
-    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, cellClass: ProfileHeader.self , for: indexPath)
+    override func collectionView(_ collectionView: UICollectionView,
+                                 viewForSupplementaryElementOfKind kind: String,
+                                 at indexPath: IndexPath) -> UICollectionReusableView {
+        let header = collectionView
+            .dequeueReusableSupplementaryView(ofKind: kind,
+                                              cellClass: ProfileHeader.self,
+                                              for: indexPath)
         header.viewModel = profileViewModel
         return header
     }

@@ -11,10 +11,10 @@ final class ProfileRatingCell: UICollectionViewCell, ProfileCell {
 
     // MARK: - UI Properties
     private let postImageView: UIImageView = {
-        let iv = UIImageView()
-        iv.contentMode = .scaleAspectFill
-        iv.clipsToBounds = true
-        return iv
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
+        return imageView
     }()
 
     // MARK: - Lifecycle

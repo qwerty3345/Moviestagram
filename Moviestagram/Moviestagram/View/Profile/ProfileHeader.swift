@@ -16,12 +16,12 @@ final class ProfileHeader: UICollectionReusableView {
 
     // MARK: - UI Properties
     private let profileImageView: UIImageView = {
-        let iv = UIImageView()
-        iv.tintColor = appColor
-        iv.image = UIImage(systemName: "seal")
-        iv.contentMode = .scaleAspectFill
-        iv.clipsToBounds = true
-        return iv
+        let imageView = UIImageView()
+        imageView.tintColor = appColor
+        imageView.image = UIImage(systemName: "seal")
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
+        return imageView
     }()
 
     private let usernameLabel: UILabel = {
@@ -151,7 +151,6 @@ extension ProfileHeader {
             make.top.left.equalToSuperview()
                 .inset(16)
         }
-
 
         addSubview(statusStack)
         statusStack.snp.makeConstraints { make in

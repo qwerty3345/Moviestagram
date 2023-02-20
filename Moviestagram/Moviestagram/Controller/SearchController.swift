@@ -41,7 +41,7 @@ final class SearchController: UITableViewController {
     private func configureTableView() {
         tableView.registerCell(cellClass: SearchCell.self)
         tableView.dataSource = self
-        
+
         setTableViewRowHeight()
         configureTapToHideSearchAction()
     }
@@ -51,7 +51,7 @@ final class SearchController: UITableViewController {
         rowHeight += 16
         tableView.rowHeight = 136
     }
-    
+
     private func configureSearchController() {
         searchController.hidesNavigationBarDuringPresentation = false
         searchController.searchBar.placeholder = "영화 검색"

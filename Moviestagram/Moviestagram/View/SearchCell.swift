@@ -17,12 +17,12 @@ final class SearchCell: UITableViewCell {
 
     // MARK: - UI Properties
     private let posterImageView: UIImageView = {
-        let iv = UIImageView()
-        iv.contentMode = .scaleAspectFit
-        iv.clipsToBounds = true
-        iv.layer.cornerRadius = 8
-        iv.backgroundColor = appColor
-        return iv
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFit
+        imageView.clipsToBounds = true
+        imageView.layer.cornerRadius = 8
+        imageView.backgroundColor = appColor
+        return imageView
     }()
 
     private let titleLabel: UILabel = {

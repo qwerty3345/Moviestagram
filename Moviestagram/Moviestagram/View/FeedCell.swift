@@ -17,11 +17,11 @@ final class FeedCell: UITableViewCell {
 
     // MARK: - UI Properties
     private lazy var movieProfileImageView: UIImageView = {
-        let iv = UIImageView()
-        iv.contentMode = .scaleAspectFill
-        iv.clipsToBounds = true
-        iv.backgroundColor = .lightGray
-        return iv
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
+        imageView.backgroundColor = .lightGray
+        return imageView
     }()
 
     private lazy var movieTitleButton: UIButton = {
@@ -33,11 +33,11 @@ final class FeedCell: UITableViewCell {
     }()
 
     private let posterImageView: UIImageView = {
-        let iv = UIImageView()
-        iv.contentMode = .scaleAspectFit
-        iv.clipsToBounds = true
-        iv.backgroundColor = .lightGray
-        return iv
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFit
+        imageView.clipsToBounds = true
+        imageView.backgroundColor = .lightGray
+        return imageView
     }()
 
     private let ratingLabel: UILabel = {

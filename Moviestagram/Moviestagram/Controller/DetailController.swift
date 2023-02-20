@@ -17,12 +17,12 @@ final class DetailController: UIViewController {
     private let contentView = UIView()
 
     private let posterImageView: UIImageView = {
-        let iv = UIImageView()
-        iv.contentMode = .scaleAspectFit
-        iv.clipsToBounds = true
-        iv.layer.cornerRadius = 8
-        iv.backgroundColor = appColor
-        return iv
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFit
+        imageView.clipsToBounds = true
+        imageView.layer.cornerRadius = 8
+        imageView.backgroundColor = appColor
+        return imageView
     }()
 
     private let ratingLabel: UILabel = {
@@ -81,11 +81,13 @@ final class DetailController: UIViewController {
     }()
 
     private lazy var bookmarkButton: UIBarButtonItem = {
-        let button = UIBarButtonItem(image: UIImage(systemName: "bookmark"), style: .plain, target: self, action: #selector(tappedBookmarkButton))
+        let button = UIBarButtonItem(image: UIImage(systemName: "bookmark"),
+                                     style: .plain,
+                                     target: self,
+                                     action: #selector(tappedBookmarkButton))
         button.tintColor = appColor
         return button
     }()
-
 
     // MARK: - Lifecycle
     init(movie: Movie) {
@@ -106,7 +108,6 @@ final class DetailController: UIViewController {
 
         bind(to: detailViewModel)
     }
-
 
     @objc private func tappedBookmarkButton() {
         detailViewModel.tappedBookmark()
@@ -136,13 +137,13 @@ final class DetailController: UIViewController {
     }
 
     private func screenShotImageView(with imageURL: String) -> UIImageView {
-        let iv = UIImageView()
-        iv.contentMode = .scaleAspectFit
-        iv.clipsToBounds = true
-        iv.layer.cornerRadius = 8
-        iv.backgroundColor = appColor
-        iv.setImage(with: imageURL)
-        return iv
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFit
+        imageView.clipsToBounds = true
+        imageView.layer.cornerRadius = 8
+        imageView.backgroundColor = appColor
+        imageView.setImage(with: imageURL)
+        return imageView
     }
 }
 
@@ -190,7 +191,6 @@ extension DetailController {
             make.top.left.right.bottom.equalTo(ratingStarStack)
         }
 
-
         contentView.addSubview(summaryLabel)
         summaryLabel.snp.makeConstraints { make in
             make.top.equalTo(ratingStarStack.snp.bottom).offset(16)
@@ -205,13 +205,8 @@ extension DetailController {
             make.top.equalTo(ratingStarStack.snp.bottom).offset(8)
             make.left.right.equalTo(summaryLabel)
         }
-
-
-        // TODO: 스크린샷 스크롤뷰로 3개 띄우기
-        //        let screenshot1 = screenShotImageView(with: <#T##String#>)
     }
 }
-
 
 // MARK: - Rating Slider
 extension DetailController {

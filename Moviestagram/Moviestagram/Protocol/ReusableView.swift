@@ -16,5 +16,3 @@ extension ReusableView {
         String(describing: self)
     }
 }
-
-

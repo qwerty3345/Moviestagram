@@ -16,7 +16,6 @@ final class MovieRemoteRepository {
     private init() { }
 
     // MARK: - Helpers
-    // TODO: 페이지 별로 로딩해서 띄우게도 구현...!
     func fetchMovie(with options: [FetchMovieOptionQuery]) async throws -> [Movie] {
         guard let url = movieQueryURL(with: options) else {
             throw NetworkError.networkingError

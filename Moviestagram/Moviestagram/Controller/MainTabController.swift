@@ -58,10 +58,10 @@ extension MainTabController: UITabBarControllerDelegate {
         let navigationVC = viewController as? UINavigationController
         let currentVC = navigationVC?.viewControllers.last
 
-        if let vc = currentVC as? UITableViewController,
+        if let viewController = currentVC as? UITableViewController,
            tabBarController.selectedViewController == viewController {
 
-            vc.tableView.scrollToRow(at: IndexPath(row: NSNotFound, section: 0), at: .top, animated: true)
+            viewController.tableView.scrollToRow(at: IndexPath(row: NSNotFound, section: 0), at: .top, animated: true)
 
             return false
         }
