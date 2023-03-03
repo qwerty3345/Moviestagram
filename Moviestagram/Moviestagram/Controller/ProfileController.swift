@@ -10,7 +10,10 @@ import UIKit
 final class ProfileController: UICollectionViewController {
 
     // MARK: - Properties
-    private let profileViewModel = ProfileViewModel()
+    private let profileViewModel = ProfileViewModel(
+        ratingMovieLocalRepository: appEnvironment.ratingMovieLocalRepository,
+        bookmarkMovieLocalRepository: appEnvironment.bookmarkMovieLocalRepository
+    )
 
     // MARK: - Lifecycle
     override func viewDidLoad() {

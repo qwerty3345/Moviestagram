@@ -10,7 +10,9 @@ import UIKit
 final class SearchController: UITableViewController {
 
     // MARK: - Properties
-    private let searchViewModel = SearchViewModel()
+    private let searchViewModel = SearchViewModel(
+        movieRemoteRepository: appEnvironment.movieRemoteRepository
+    )
     private let searchController = UISearchController(searchResultsController: nil)
 
     // MARK: - Lifecycle

@@ -91,7 +91,11 @@ final class DetailController: UIViewController {
 
     // MARK: - Lifecycle
     init(movie: Movie) {
-        detailViewModel = DetailViewModel(movie: movie)
+        detailViewModel = DetailViewModel(
+            movie: movie,
+            ratingMovieLocalRepository: appEnvironment.ratingMovieLocalRepository,
+            bookmarkMovieLocalRepository: appEnvironment.bookmarkMovieLocalRepository
+        )
         super.init(nibName: nil, bundle: nil)
     }
 

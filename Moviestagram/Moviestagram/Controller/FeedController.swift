@@ -10,7 +10,9 @@ import UIKit
 final class FeedController: UITableViewController {
 
     // MARK: - Properties
-    private let feedViewModel = FeedViewModel()
+    private let feedViewModel = FeedViewModel(
+        movieRemoteRepository: appEnvironment.movieRemoteRepository
+    )
 
     private lazy var spinnerFooter: UIView = {
         let footerView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 100))

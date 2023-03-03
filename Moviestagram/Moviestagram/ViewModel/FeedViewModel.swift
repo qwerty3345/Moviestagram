@@ -18,37 +18,27 @@ final class FeedViewModel: MovieListViewModelProtocol {
         didSet { fetchMovie() }
     }
 
+    private let movieRemoteRepository: MovieRemoteRepositoryProtocol
+
+    init(movieRemoteRepository: MovieRemoteRepositoryProtocol) {
+        self.movieRemoteRepository = movieRemoteRepository
+    }
+
     // MARK: - API
     func fetchMovie() {
         Task {
-            let movies = try await MovieRemoteRepository.shared.fetchMovie(with: searchOption)
+            let movies = try await movieRemoteRepository.fetchMovie(with: searchOption)
             self.movies.value = movies
         }
-//        MovieRemoteRepository.shared.fetchMovie(with: searchOption) { result in
-//            switch result {
-//            case .success(let movies):
-//                self.movies.value = movies
-//            case .failure(let error):
-//                print(error.localizedDescription)
-//            }
-//        }
     }
 
     func loadMoreMovieData() {
         Task {
-            let moreLoadedMovies = try await MovieRemoteRepository.shared.fetchMovie(
+            let moreLoadedMovies = try await movieRemoteRepository.fetchMovie(
                 with: [searchOption, .page(currentPage + 1)]
             )
 
             self.movies.value += moreLoadedMovies
         }
-//        MovieRemoteRepository.shared.fetchMovie(with: [searchOption, .page(currentPage + 1)]) { result in
-//            switch result {
-//            case .success(let movies):
-//                self.movies.value += movies
-//            case .failure(let error):
-//                print(error.localizedDescription)
-//            }
-//        }
     }
 }

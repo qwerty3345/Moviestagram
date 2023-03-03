@@ -7,25 +7,14 @@
 
 import Foundation
 
-final class MovieRemoteRepository {
+final class MovieRemoteRepository: MovieRemoteRepositoryProtocol {
 
     // MARK: - Properties
-    static let shared = MovieRemoteRepository()
-    private let baseURLString = "https://yts.mx/api/v2/list_movies.json"
-
-    private init() { }
+    let baseURLString = "https://yts.mx/api/v2/list_movies.json"
 
     // MARK: - Helpers
     func fetchMovie(with options: [FetchMovieOptionQuery]) async throws -> [Movie] {
         guard let url = movieQueryURL(with: options) else {
-            throw NetworkError.networkingError
-        }
-        let movies = try await performRequest(with: url)
-        return movies
-    }
-
-    func fetchMovie(with option: FetchMovieOptionQuery) async throws -> [Movie] {
-        guard let url = movieQueryURL(with: [option]) else {
             throw NetworkError.networkingError
         }
         let movies = try await performRequest(with: url)

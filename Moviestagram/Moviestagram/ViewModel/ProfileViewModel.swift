@@ -21,6 +21,18 @@ final class ProfileViewModel {
 
     var listMode: Observable<ProfileListMode> = Observable(.rating)
 
+    private let ratingMovieLocalRepository: MovieLocalRepositoryProtocol
+    private let bookmarkMovieLocalRepository: MovieLocalRepositoryProtocol
+
+    // MARK: - Lifecycle
+    init(
+        ratingMovieLocalRepository: MovieLocalRepositoryProtocol,
+        bookmarkMovieLocalRepository: MovieLocalRepositoryProtocol
+    ) {
+        self.ratingMovieLocalRepository = ratingMovieLocalRepository
+        self.bookmarkMovieLocalRepository = bookmarkMovieLocalRepository
+    }
+
     // MARK: - Helpers
     func movieForCell(at indexPath: IndexPath) -> Movie? {
         switch listMode.value {
@@ -33,8 +45,8 @@ final class ProfileViewModel {
 
     // MARK: - API
     func fetchLocalSavedData() {
-        ratedMovies.value = MovieLocalRepository.shared.ratedMovies
-        bookmarkedMovies.value = MovieLocalRepository.shared.bookmarkedMovies
+        ratedMovies.value = ratingMovieLocalRepository.movies
+        bookmarkedMovies.value = bookmarkMovieLocalRepository.movies
     }
 }
 

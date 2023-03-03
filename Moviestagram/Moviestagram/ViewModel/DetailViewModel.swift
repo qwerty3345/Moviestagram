@@ -32,15 +32,24 @@ final class DetailViewModel {
         "\(movie.value.year ?? 0)년 개봉"
     }
 
+    private let ratingMovieLocalRepository: MovieLocalRepositoryProtocol
+    private let bookmarkMovieLocalRepository: MovieLocalRepositoryProtocol
+
     // MARK: - Lifecycle
-    init(movie: Movie) {
+    init(
+        movie: Movie,
+        ratingMovieLocalRepository: MovieLocalRepositoryProtocol,
+        bookmarkMovieLocalRepository: MovieLocalRepositoryProtocol
+    ) {
         self.movie = Observable(movie)
+        self.ratingMovieLocalRepository = ratingMovieLocalRepository
+        self.bookmarkMovieLocalRepository = bookmarkMovieLocalRepository
         checkIfUserBookmarkedMovie()
         checkIfUserRatedMovie()
     }
 
     func checkIfUserRatedMovie() {
-        if let ratedMovie = MovieLocalRepository.shared.ratedMovies.first(where: {
+        if let ratedMovie = ratingMovieLocalRepository.movies.first(where: {
             $0.id == movie.value.id
         }) {
             self.movie.value = ratedMovie
@@ -49,7 +58,7 @@ final class DetailViewModel {
 
     // MARK: - Repository
     func checkIfUserBookmarkedMovie() {
-        if MovieLocalRepository.shared.bookmarkedMovies.first(where: {
+        if bookmarkMovieLocalRepository.movies.first(where: {
             $0.id == movie.value.id
         }) != nil {
             isBookmarked.value = true
@@ -59,18 +68,18 @@ final class DetailViewModel {
     func saveRatingMovie(with rating: Float) {
         movie.value.myRating = rating
         guard rating != 0 else {
-            MovieLocalRepository.shared.remove(ratingMovie: movie.value)
+            ratingMovieLocalRepository.remove(movie: movie.value)
             return
         }
-        MovieLocalRepository.shared.save(ratingMovie: movie.value)
+        ratingMovieLocalRepository.save(movie: movie.value)
     }
 
     func tappedBookmark() {
         if isBookmarked.value {
-            MovieLocalRepository.shared.remove(bookmarkMovie: movie.value)
+            bookmarkMovieLocalRepository.remove(movie: movie.value)
             isBookmarked.value = false
         } else {
-            MovieLocalRepository.shared.save(bookmarkMovie: movie.value)
+            bookmarkMovieLocalRepository.save(movie: movie.value)
             isBookmarked.value = true
         }
     }
