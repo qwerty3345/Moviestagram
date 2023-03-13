@@ -189,6 +189,7 @@
 			children = (
 				B45638CF298DF02D00C42861 /* AppDelegate.swift */,
 				B45638D1298DF02D00C42861 /* SceneDelegate.swift */,
+				B4B5702A29B1FA1000A69F82 /* AppEnvironment.swift */,
 				B45638FF298DF31C00C42861 /* Model */,
 				B4563900298DF32000C42861 /* View */,
 				B448D39C298F9B940042C0BF /* ViewModel */,
@@ -200,7 +201,6 @@
 				B4563905298DF35600C42861 /* Util */,
 				B47B9AC9298E5C0C00025D0C /* Resource */,
 				B45638DD298DF02F00C42861 /* Info.plist */,
-				B4B5702A29B1FA1000A69F82 /* AppEnvironment.swift */,
 			);
 			path = Moviestagram;
 			sourceTree = "<group>";
