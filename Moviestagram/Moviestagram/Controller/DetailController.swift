@@ -6,11 +6,13 @@
 //
 
 import UIKit
+import Combine
 
 final class DetailController: UIViewController {
 
     // MARK: - Properties
     private let detailViewModel: DetailViewModel
+    private var bag = Set<AnyCancellable>()
 
     // MARK: - UI Properties
     private let scrollView = UIScrollView()
@@ -119,18 +121,23 @@ final class DetailController: UIViewController {
 
     // MARK: - Helpers
     private func bind(to viewModel: DetailViewModel) {
-        viewModel.movie.bind { [weak self] movie in
-            self?.setStarImages(withRating: movie.myRating ?? 0)
-        }
-        viewModel.isBookmarked.bind { [weak self] isBookmarked in
-            let bookmarkImageName = isBookmarked ? "bookmark.fill" : "bookmark"
-            self?.bookmarkButton.image = UIImage(systemName: bookmarkImageName)
-        }
+        viewModel.$movie
+            .sink { [weak self] movie in
+                self?.setStarImages(withRating: movie.myRating ?? 0)
+            }
+            .store(in: &bag)
+
+        viewModel.$isBookmarked
+            .sink { [weak self] isBookmarked in
+                let bookmarkImageName = isBookmarked ? "bookmark.fill" : "bookmark"
+                self?.bookmarkButton.image = UIImage(systemName: bookmarkImageName)
+            }
+            .store(in: &bag)
     }
 
     private func configureNavigationBar() {
         navigationItem.rightBarButtonItem = bookmarkButton
-        setNavigationBarTitle(with: detailViewModel.movie.value.title ?? "")
+        setNavigationBarTitle(with: detailViewModel.movie.title ?? "")
     }
 
     private func configureData() {

@@ -10,7 +10,7 @@ import Foundation
 final class SearchViewModel: MovieListViewModelProtocol {
     // MARK: - Properties
     @Published var movies: [Movie] = []
-    var networkError: Observable<NetworkError?> = Observable(nil)
+    @Published var networkError: NetworkError? = nil
 
     private let movieRemoteRepository: MovieRemoteRepositoryProtocol
 

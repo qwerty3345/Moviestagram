@@ -14,7 +14,7 @@ final class SearchController: UITableViewController {
     private let searchViewModel = SearchViewModel(
         movieRemoteRepository: appEnvironment.movieRemoteRepository
     )
-    var bag = Set<AnyCancellable>()
+    private var bag = Set<AnyCancellable>()
 
     private let searchController = UISearchController(searchResultsController: nil)
 
@@ -39,10 +39,12 @@ final class SearchController: UITableViewController {
             }
             .store(in: &bag)
 
-        viewModel.networkError.bind { [weak self] error in
-            guard error != nil else { return }
-            self?.showCannotSearchAlert()
-        }
+        viewModel.$networkError
+            .sink { [weak self] error in
+                guard error != nil else { return }
+                self?.showCannotSearchAlert()
+            }
+            .store(in: &bag)
     }
 
     private func configureTableView() {

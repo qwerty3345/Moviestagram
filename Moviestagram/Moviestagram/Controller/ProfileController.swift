@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 
 final class ProfileController: UICollectionViewController {
 
@@ -14,6 +15,7 @@ final class ProfileController: UICollectionViewController {
         ratingMovieLocalRepository: appEnvironment.ratingMovieLocalRepository,
         bookmarkMovieLocalRepository: appEnvironment.bookmarkMovieLocalRepository
     )
+    private var bag = Set<AnyCancellable>()
 
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -49,32 +51,38 @@ final class ProfileController: UICollectionViewController {
     }
 
     private func bind(to viewModel: ProfileViewModel) {
-        viewModel.bookmarkedMovies.bind { [weak self] _ in
-            DispatchQueue.main.async {
-                self?.collectionView.reloadData()
-                self?.collectionView.refreshControl?.endRefreshing()
+        viewModel.$bookmarkedMovies
+            .sink { [weak self] _ in
+                DispatchQueue.main.async {
+                    self?.collectionView.reloadData()
+                    self?.collectionView.refreshControl?.endRefreshing()
+                }
             }
-        }
+            .store(in: &bag)
 
-        viewModel.ratedMovies.bind { [weak self] _ in
-            DispatchQueue.main.async {
-                self?.collectionView.reloadData()
-                self?.collectionView.refreshControl?.endRefreshing()
+        viewModel.$ratedMovies
+            .sink { [weak self] _ in
+                DispatchQueue.main.async {
+                    self?.collectionView.reloadData()
+                    self?.collectionView.refreshControl?.endRefreshing()
+                }
             }
-        }
+            .store(in: &bag)
 
-        viewModel.listMode.bind { [weak self] _ in
-            DispatchQueue.main.async {
-                self?.collectionView.reloadData()
+        viewModel.$listMode
+            .sink { [weak self] _ in
+                DispatchQueue.main.async {
+                    self?.collectionView.reloadData()
+                }
             }
-        }
+            .store(in: &bag)
     }
 }
 
 // MARK: - UICollectionViewDataSource
 extension ProfileController {
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        switch profileViewModel.listMode.value {
+        switch profileViewModel.listMode {
         case .rating:
             return profileViewModel.numberOfRatedMovies
         case .bookmark:
@@ -85,7 +93,7 @@ extension ProfileController {
     override func collectionView(_ collectionView: UICollectionView,
                                  cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: ProfileCell = {
-            switch profileViewModel.listMode.value {
+            switch profileViewModel.listMode {
             case .rating:
                 return collectionView.dequeueReusableCell(
                     cellClass: ProfileRatingCell.self, for: indexPath)

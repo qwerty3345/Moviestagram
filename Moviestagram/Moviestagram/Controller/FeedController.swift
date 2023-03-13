@@ -14,7 +14,7 @@ final class FeedController: UITableViewController {
     private let feedViewModel = FeedViewModel(
         movieRemoteRepository: appEnvironment.movieRemoteRepository
     )
-    var bag = Set<AnyCancellable>()
+    private var bag = Set<AnyCancellable>()
 
     private lazy var spinnerFooter: UIView = {
         let footerView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 100))

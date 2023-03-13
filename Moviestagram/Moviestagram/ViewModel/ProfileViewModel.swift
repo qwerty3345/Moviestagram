@@ -10,16 +10,16 @@ import Foundation
 // MARK: - Profile Controller
 final class ProfileViewModel {
     // MARK: - Properties
-    private(set) var bookmarkedMovies: Observable<[Movie]> = Observable([])
-    private(set) var ratedMovies: Observable<[Movie]> = Observable([])
+    @Published private(set) var bookmarkedMovies: [Movie] = []
+    @Published private(set) var ratedMovies: [Movie] = []
     var numberOfBookmarkedMovies: Int {
-        bookmarkedMovies.value.count
+        bookmarkedMovies.count
     }
     var numberOfRatedMovies: Int {
-        ratedMovies.value.count
+        ratedMovies.count
     }
 
-    var listMode: Observable<ProfileListMode> = Observable(.rating)
+    @Published var listMode: ProfileListMode = .rating
 
     private let ratingMovieLocalRepository: MovieLocalRepositoryProtocol
     private let bookmarkMovieLocalRepository: MovieLocalRepositoryProtocol
@@ -35,18 +35,18 @@ final class ProfileViewModel {
 
     // MARK: - Helpers
     func movieForCell(at indexPath: IndexPath) -> Movie? {
-        switch listMode.value {
+        switch listMode {
         case .rating:
-            return ratedMovies.value[safe: indexPath.row]
+            return ratedMovies[safe: indexPath.row]
         case .bookmark:
-            return bookmarkedMovies.value[safe: indexPath.row]
+            return bookmarkedMovies[safe: indexPath.row]
         }
     }
 
     // MARK: - API
     func fetchLocalSavedData() {
-        ratedMovies.value = ratingMovieLocalRepository.movies
-        bookmarkedMovies.value = bookmarkMovieLocalRepository.movies
+        ratedMovies = ratingMovieLocalRepository.movies
+        bookmarkedMovies = bookmarkMovieLocalRepository.movies
     }
 }
 
@@ -54,10 +54,10 @@ final class ProfileViewModel {
 extension ProfileViewModel {
     // MARK: - Properties
     var ratingsLabelText: String {
-        "\(ratedMovies.value.count)\nRating"
+        "\(ratedMovies.count)\nRating"
     }
     var bookmarkLabelText: String {
-        "\(bookmarkedMovies.value.count)\nBookmark"
+        "\(bookmarkedMovies.count)\nBookmark"
     }
     var ratingData: [Float: Int] {
         convertRatingData()
@@ -66,7 +66,7 @@ extension ProfileViewModel {
     // MARK: - Helpers
     private func convertRatingData() -> [Float: Int] {
         var ratingData: [Float: Int] = [:]
-        for movie in ratedMovies.value {
+        for movie in ratedMovies {
             guard let rating = movie.myRating else {
                 continue
             }

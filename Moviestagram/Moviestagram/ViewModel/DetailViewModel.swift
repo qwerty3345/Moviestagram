@@ -9,10 +9,10 @@ import Foundation
 
 final class DetailViewModel {
     // MARK: - Properties
-    private(set) var movie: Observable<Movie>
-    var isBookmarked = Observable(false)
+    @Published private(set) var movie: Movie
+    @Published var isBookmarked = false
 
-    lazy var rating: Float = movie.value.myRating ?? 0 {
+    lazy var rating: Float = movie.myRating ?? 0 {
         didSet {
             guard oldValue != rating else { return }
                 saveRatingMovie(with: rating)
@@ -20,16 +20,16 @@ final class DetailViewModel {
     }
 
     var posterImageURLString: String? {
-        movie.value.mediumCoverImage
+        movie.mediumCoverImage
     }
     var summaryLabelText: String? {
-        movie.value.summary
+        movie.summary
     }
     var ratingLabelAttributedString: NSAttributedString {
-        Util.ratingAttributedText(with: movie.value.rating ?? 0.0)
+        Util.ratingAttributedText(with: movie.rating ?? 0.0)
     }
     var yearLabelText: String {
-        "\(movie.value.year ?? 0)년 개봉"
+        "\(movie.year ?? 0)년 개봉"
     }
 
     private let ratingMovieLocalRepository: MovieLocalRepositoryProtocol
@@ -41,7 +41,7 @@ final class DetailViewModel {
         ratingMovieLocalRepository: MovieLocalRepositoryProtocol,
         bookmarkMovieLocalRepository: MovieLocalRepositoryProtocol
     ) {
-        self.movie = Observable(movie)
+        self.movie = movie
         self.ratingMovieLocalRepository = ratingMovieLocalRepository
         self.bookmarkMovieLocalRepository = bookmarkMovieLocalRepository
         checkIfUserBookmarkedMovie()
@@ -50,37 +50,37 @@ final class DetailViewModel {
 
     func checkIfUserRatedMovie() {
         if let ratedMovie = ratingMovieLocalRepository.movies.first(where: {
-            $0.id == movie.value.id
+            $0.id == movie.id
         }) {
-            self.movie.value = ratedMovie
+            self.movie = ratedMovie
         }
     }
 
     // MARK: - Repository
     func checkIfUserBookmarkedMovie() {
         if bookmarkMovieLocalRepository.movies.first(where: {
-            $0.id == movie.value.id
+            $0.id == movie.id
         }) != nil {
-            isBookmarked.value = true
+            isBookmarked = true
         }
     }
 
     func saveRatingMovie(with rating: Float) {
-        movie.value.myRating = rating
+        movie.myRating = rating
         guard rating != 0 else {
-            ratingMovieLocalRepository.remove(movie: movie.value)
+            ratingMovieLocalRepository.remove(movie: movie)
             return
         }
-        ratingMovieLocalRepository.save(movie: movie.value)
+        ratingMovieLocalRepository.save(movie: movie)
     }
 
     func tappedBookmark() {
-        if isBookmarked.value {
-            bookmarkMovieLocalRepository.remove(movie: movie.value)
-            isBookmarked.value = false
+        if isBookmarked {
+            bookmarkMovieLocalRepository.remove(movie: movie)
+            isBookmarked = false
         } else {
-            bookmarkMovieLocalRepository.save(movie: movie.value)
-            isBookmarked.value = true
+            bookmarkMovieLocalRepository.save(movie: movie)
+            isBookmarked = true
         }
     }
 
