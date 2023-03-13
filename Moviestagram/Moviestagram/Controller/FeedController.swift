@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 
 final class FeedController: UITableViewController {
 
@@ -13,6 +14,7 @@ final class FeedController: UITableViewController {
     private let feedViewModel = FeedViewModel(
         movieRemoteRepository: appEnvironment.movieRemoteRepository
     )
+    var bag = Set<AnyCancellable>()
 
     private lazy var spinnerFooter: UIView = {
         let footerView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 100))
@@ -47,12 +49,14 @@ final class FeedController: UITableViewController {
 
     // MARK: - Helpers
     private func bind(to viewModel: FeedViewModel) {
-        viewModel.movies.bind { [weak self] _ in
-            DispatchQueue.main.async {
-                self?.tableView.reloadData(with: .curveEaseInOut)
-                self?.endRefreshing()
+        viewModel.$movies
+            .sink { [weak self] _ in
+                DispatchQueue.main.async {
+                    self?.tableView.reloadData(with: .curveEaseInOut)
+                    self?.endRefreshing()
+                }
             }
-        }
+            .store(in: &bag)
     }
 
     private func configureTableView() {

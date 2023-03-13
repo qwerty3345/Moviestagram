@@ -156,6 +156,7 @@
 		B448D39C298F9B940042C0BF /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				B47DBD0D29BF48E50006D8E2 /* Interface */,
 				B486627D2990FD0A002B4ACB /* FeedViewModel.swift */,
 				B484941129989D87007D42AC /* FeedCellViewModel.swift */,
 				B486627F29910382002B4ACB /* ProfileViewModel.swift */,
@@ -307,10 +308,17 @@
 			path = Font;
 			sourceTree = "<group>";
 		};
-		B486628729912E04002B4ACB /* Protocol */ = {
+		B47DBD0D29BF48E50006D8E2 /* Interface */ = {
 			isa = PBXGroup;
 			children = (
 				B4866285299128E8002B4ACB /* MovieListViewModelProtocol.swift */,
+			);
+			path = Interface;
+			sourceTree = "<group>";
+		};
+		B486628729912E04002B4ACB /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
 				B4563909298DF4F400C42861 /* ReusableView.swift */,
 				B486628829912E34002B4ACB /* ProfileCell.swift */,
 			);

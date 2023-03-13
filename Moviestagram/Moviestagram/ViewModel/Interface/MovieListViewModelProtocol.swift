@@ -8,13 +8,13 @@
 import Foundation
 
 protocol MovieListViewModelProtocol {
-    var movies: Observable<[Movie]> { get }
+    var movies: [Movie] { get }
 }
 
 extension MovieListViewModelProtocol {
-    var numberOfMovies: Int { movies.value.count }
+    var numberOfMovies: Int { movies.count }
 
     func movieForCell(at indexPath: IndexPath) -> Movie? {
-        return movies.value[safe: indexPath.row]
+        return movies[safe: indexPath.row]
     }
 }

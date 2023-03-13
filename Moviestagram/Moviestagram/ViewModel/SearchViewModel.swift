@@ -9,7 +9,7 @@ import Foundation
 
 final class SearchViewModel: MovieListViewModelProtocol {
     // MARK: - Properties
-    var movies: Observable<[Movie]> = Observable([])
+    @Published var movies: [Movie] = []
     var networkError: Observable<NetworkError?> = Observable(nil)
 
     private let movieRemoteRepository: MovieRemoteRepositoryProtocol
@@ -22,7 +22,7 @@ final class SearchViewModel: MovieListViewModelProtocol {
     func searchMovie(with keyword: String) {
         Task {
             let movies = try await movieRemoteRepository.fetchMovie(with: [.search(keyword), .sortByLike])
-            self.movies.value = movies
+            self.movies = movies
         }
     }
 }

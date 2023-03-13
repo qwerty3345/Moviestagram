@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 
 final class SearchController: UITableViewController {
 
@@ -13,6 +14,8 @@ final class SearchController: UITableViewController {
     private let searchViewModel = SearchViewModel(
         movieRemoteRepository: appEnvironment.movieRemoteRepository
     )
+    var bag = Set<AnyCancellable>()
+
     private let searchController = UISearchController(searchResultsController: nil)
 
     // MARK: - Lifecycle
@@ -28,11 +31,13 @@ final class SearchController: UITableViewController {
 
     // MARK: - Helpers
     private func bind(to viewModel: SearchViewModel) {
-        viewModel.movies.bind { [weak self] _ in
-            DispatchQueue.main.async {
-                self?.tableView.reloadData()
+        viewModel.$movies
+            .sink { [weak self] _ in
+                DispatchQueue.main.async {
+                    self?.tableView.reloadData()
+                }
             }
-        }
+            .store(in: &bag)
 
         viewModel.networkError.bind { [weak self] error in
             guard error != nil else { return }

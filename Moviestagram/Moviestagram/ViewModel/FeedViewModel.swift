@@ -9,9 +9,9 @@ import Foundation
 
 final class FeedViewModel: MovieListViewModelProtocol {
     // MARK: - Properties
-    private(set) var movies: Observable<[Movie]> = Observable([])
+    @Published private(set) var movies: [Movie] = []
     private var currentPage: Int {
-        movies.value.count / 20
+        movies.count / 20
     }
 
     var searchOption: FetchMovieOptionQuery = .sortByLike {
@@ -28,7 +28,7 @@ final class FeedViewModel: MovieListViewModelProtocol {
     func fetchMovie() {
         Task {
             let movies = try await movieRemoteRepository.fetchMovie(with: searchOption)
-            self.movies.value = movies
+            self.movies = movies
         }
     }
 
@@ -38,7 +38,7 @@ final class FeedViewModel: MovieListViewModelProtocol {
                 with: [searchOption, .page(currentPage + 1)]
             )
 
-            self.movies.value += moreLoadedMovies
+            self.movies += moreLoadedMovies
         }
     }
 }
