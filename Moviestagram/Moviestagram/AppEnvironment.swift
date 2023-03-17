@@ -8,7 +8,10 @@
 import Foundation
 
 final class AppEnvironment {
-    lazy var movieRemoteRepository: MovieRemoteRepositoryProtocol = MovieRemoteRepository()
+    lazy var movieAPIService = MovieAPIService(session: .shared)
+    lazy var movieRemoteRepository: MovieRemoteRepositoryProtocol = MovieRemoteRepository(
+        service: movieAPIService
+    )
     lazy var bookmarkMovieLocalRepository: MovieLocalRepositoryProtocol = BookmarkMovieLocalRepository()
     lazy var ratingMovieLocalRepository: MovieLocalRepositoryProtocol = RatingMovieLocalRepository()
 }

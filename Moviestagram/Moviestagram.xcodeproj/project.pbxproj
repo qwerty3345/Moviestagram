@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B408C04A29C4A422007E5C8A /* MovieAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B408C04929C4A422007E5C8A /* MovieAPIService.swift */; };
 		B4148AE62995182400CB1B20 /* ProfileListMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4148AE52995182400CB1B20 /* ProfileListMode.swift */; };
 		B448D390298F53140042C0BF /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = B448D38F298F53140042C0BF /* SnapKit */; };
 		B448D394298F61540042C0BF /* RatingSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B448D393298F61540042C0BF /* RatingSlider.swift */; };
@@ -69,6 +70,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B408C04929C4A422007E5C8A /* MovieAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieAPIService.swift; sourceTree = "<group>"; };
 		B4148AE52995182400CB1B20 /* ProfileListMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileListMode.swift; sourceTree = "<group>"; };
 		B448D393298F61540042C0BF /* RatingSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingSlider.swift; sourceTree = "<group>"; };
 		B448D397298F77590042C0BF /* BookmarkMovieLocalRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkMovieLocalRepository.swift; sourceTree = "<group>"; };
@@ -141,6 +143,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B408C04829C4A3EA007E5C8A /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				B456391B298E09D100C42861 /* Enum */,
+				B408C04929C4A422007E5C8A /* MovieAPIService.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
 		B448D39B298F92560042C0BF /* Profile */ = {
 			isa = PBXGroup;
 			children = (
@@ -193,10 +204,9 @@
 				B4563900298DF32000C42861 /* View */,
 				B448D39C298F9B940042C0BF /* ViewModel */,
 				B4563901298DF32300C42861 /* Controller */,
-				B4563902298DF32700C42861 /* Repository */,
+				B4563902298DF32700C42861 /* Data */,
+				B408C04829C4A3EA007E5C8A /* Networking */,
 				B4563906298DF35F00C42861 /* Extension */,
-				B486628729912E04002B4ACB /* Protocol */,
-				B456391B298E09D100C42861 /* Enum */,
 				B4563905298DF35600C42861 /* Util */,
 				B47B9AC9298E5C0C00025D0C /* Resource */,
 				B45638DD298DF02F00C42861 /* Info.plist */,
@@ -215,6 +225,7 @@
 		B45638FF298DF31C00C42861 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				B4148AE52995182400CB1B20 /* ProfileListMode.swift */,
 				B4563913298DFE1900C42861 /* MovieResponse.swift */,
 				B4563919298E08D300C42861 /* Movie.swift */,
 			);
@@ -224,6 +235,7 @@
 		B4563900298DF32000C42861 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				B486628729912E04002B4ACB /* Protocol */,
 				B448D39B298F92560042C0BF /* Profile */,
 				B456390F298DF66B00C42861 /* FeedCell.swift */,
 				B47B9AD1298E602F00025D0C /* SearchCell.swift */,
@@ -244,13 +256,13 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
-		B4563902298DF32700C42861 /* Repository */ = {
+		B4563902298DF32700C42861 /* Data */ = {
 			isa = PBXGroup;
 			children = (
 				B4B5701E29B1F21C00A69F82 /* Remote */,
 				B4B5701D29B1F21800A69F82 /* Local */,
 			);
-			path = Repository;
+			path = Data;
 			sourceTree = "<group>";
 		};
 		B4563905298DF35600C42861 /* Util */ = {
@@ -280,7 +292,6 @@
 			children = (
 				B456391C298E09DE00C42861 /* NetworkError.swift */,
 				B47B9AD5298E8BFF00025D0C /* FetchMovieOptionQuery.swift */,
-				B4148AE52995182400CB1B20 /* ProfileListMode.swift */,
 			);
 			path = Enum;
 			sourceTree = "<group>";
@@ -504,6 +515,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B408C04A29C4A422007E5C8A /* MovieAPIService.swift in Sources */,
 				B45638D4298DF02D00C42861 /* FeedController.swift in Sources */,
 				B4563914298DFE1900C42861 /* MovieResponse.swift in Sources */,
 				B4B5702B29B1FA1000A69F82 /* AppEnvironment.swift in Sources */,

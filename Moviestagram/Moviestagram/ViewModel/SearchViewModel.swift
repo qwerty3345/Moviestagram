@@ -21,7 +21,7 @@ final class SearchViewModel: MovieListViewModelProtocol {
     // MARK: - API
     func searchMovie(with keyword: String) {
         Task {
-            let movies = try await movieRemoteRepository.fetchMovie(with: [.search(keyword), .sortByLike])
+            guard let movies = try await movieRemoteRepository.fetchMovie(with: [.search(keyword), .sortByLike]) else { return }
             self.movies = movies
         }
     }

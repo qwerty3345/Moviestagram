@@ -11,13 +11,20 @@ final class MovieRemoteRepository: MovieRemoteRepositoryProtocol {
 
     // MARK: - Properties
     let baseURLString = "https://yts.mx/api/v2/list_movies.json"
+    let service: MovieAPIService
+
+    // MARK: - Lifecycle
+    init(service: MovieAPIService) {
+        self.service = service
+    }
 
     // MARK: - Helpers
-    func fetchMovie(with options: [FetchMovieOptionQuery]) async throws -> [Movie] {
+    func fetchMovie(with options: [FetchMovieOptionQuery]) async throws -> [Movie]? {
         guard let url = movieQueryURL(with: options) else {
             throw NetworkError.networkingError
         }
-        let movies = try await performRequest(with: url)
+        let data = try await service.performRequest(with: url)
+        let movies = try parseJSON(data)
         return movies
     }
 
@@ -26,22 +33,6 @@ final class MovieRemoteRepository: MovieRemoteRepositoryProtocol {
             "\(partialResult)&\(option.queryString)"
         }
         return URL(string: urlString)
-    }
-
-    private func performRequest(with url: URL) async throws -> [Movie] {
-        let session = URLSession(configuration: .default)
-        let (data, response) = try await session.data(from: url)
-
-        guard let statusCode = (response as? HTTPURLResponse)?.statusCode,
-              (200...299) ~= statusCode else {
-            throw NetworkError.networkingError
-        }
-
-        guard let movies = try parseJSON(data) else {
-            throw NetworkError.parseError
-        }
-
-        return movies
     }
 
     private func parseJSON(_ movieData: Data) throws -> [Movie]? {
