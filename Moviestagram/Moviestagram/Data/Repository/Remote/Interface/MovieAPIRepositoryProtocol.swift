@@ -7,12 +7,12 @@
 
 import Foundation
 
-protocol MovieRemoteRepositoryProtocol {
+protocol MovieAPIRepositoryProtocol {
     var baseURLString: String { get }
     func fetchMovie(with options: [FetchMovieOptionQuery]) async throws -> [Movie]?
 }
 
-extension MovieRemoteRepositoryProtocol {
+extension MovieAPIRepositoryProtocol {
     func fetchMovie(with option: FetchMovieOptionQuery) async throws -> [Movie]? {
         try await fetchMovie(with: [option])
     }

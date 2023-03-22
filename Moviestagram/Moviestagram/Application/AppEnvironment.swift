@@ -9,9 +9,13 @@ import Foundation
 
 final class AppEnvironment {
     lazy var movieAPIService = MovieAPIService(session: .shared)
-    lazy var movieRemoteRepository: MovieRemoteRepositoryProtocol = MovieRemoteRepository(
+    lazy var movieRemoteRepository: MovieAPIRepositoryProtocol = YTSMovieAPIRepository(
         service: movieAPIService
     )
-    lazy var bookmarkMovieLocalRepository: MovieLocalRepositoryProtocol = BookmarkMovieLocalRepository()
-    lazy var ratingMovieLocalRepository: MovieLocalRepositoryProtocol = RatingMovieLocalRepository()
+
+    lazy var bookmarkStorage: StorageProtocol = UserDefaultsStorage(key: "bookmark_movie")
+    lazy var bookmarkMovieLocalRepository: MovieLocalRepositoryProtocol = BookmarkMovieRepository(storage: bookmarkStorage)
+
+    lazy var ratingStorage: StorageProtocol = UserDefaultsStorage(key: "rating_movie")
+    lazy var ratingMovieLocalRepository: MovieLocalRepositoryProtocol = RatingMovieRepository(storage: ratingStorage)
 }

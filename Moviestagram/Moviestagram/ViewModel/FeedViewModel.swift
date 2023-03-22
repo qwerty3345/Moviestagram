@@ -18,9 +18,9 @@ final class FeedViewModel: MovieListViewModelProtocol {
         didSet { fetchMovie() }
     }
 
-    private let movieRemoteRepository: MovieRemoteRepositoryProtocol
+    private let movieRemoteRepository: MovieAPIRepositoryProtocol
 
-    init(movieRemoteRepository: MovieRemoteRepositoryProtocol) {
+    init(movieRemoteRepository: MovieAPIRepositoryProtocol) {
         self.movieRemoteRepository = movieRemoteRepository
     }
 

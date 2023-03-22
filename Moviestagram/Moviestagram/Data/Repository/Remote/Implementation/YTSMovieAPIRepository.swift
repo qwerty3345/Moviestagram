@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class MovieRemoteRepository: MovieRemoteRepositoryProtocol {
+final class YTSMovieAPIRepository: MovieAPIRepositoryProtocol {
 
     // MARK: - Properties
     let baseURLString = "https://yts.mx/api/v2/list_movies.json"

@@ -12,9 +12,9 @@ final class SearchViewModel: MovieListViewModelProtocol {
     @Published var movies: [Movie] = []
     @Published var networkError: NetworkError? = nil
 
-    private let movieRemoteRepository: MovieRemoteRepositoryProtocol
+    private let movieRemoteRepository: MovieAPIRepositoryProtocol
 
-    init(movieRemoteRepository: MovieRemoteRepositoryProtocol) {
+    init(movieRemoteRepository: MovieAPIRepositoryProtocol) {
         self.movieRemoteRepository = movieRemoteRepository
     }
 
