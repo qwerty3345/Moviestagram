@@ -8,7 +8,7 @@
 import Foundation
 
 final class AppEnvironment {
-    lazy var movieAPIService = MovieAPIService(session: .shared)
+    lazy var movieAPIService = NetworkService(session: .shared)
     lazy var movieRemoteRepository: MovieAPIRepositoryProtocol = YTSMovieAPIRepository(
         service: movieAPIService
     )

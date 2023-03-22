@@ -11,10 +11,10 @@ final class YTSMovieAPIRepository: MovieAPIRepositoryProtocol {
 
     // MARK: - Properties
     let baseURLString = "https://yts.mx/api/v2/list_movies.json"
-    let service: MovieAPIService
+    let service: NetworkService
 
     // MARK: - Lifecycle
-    init(service: MovieAPIService) {
+    init(service: NetworkService) {
         self.service = service
     }
 

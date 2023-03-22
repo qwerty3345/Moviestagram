@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B408C04A29C4A422007E5C8A /* MovieAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B408C04929C4A422007E5C8A /* MovieAPIService.swift */; };
+		B408C04A29C4A422007E5C8A /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B408C04929C4A422007E5C8A /* NetworkService.swift */; };
 		B4148AE62995182400CB1B20 /* ProfileListMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4148AE52995182400CB1B20 /* ProfileListMode.swift */; };
 		B448D390298F53140042C0BF /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = B448D38F298F53140042C0BF /* SnapKit */; };
 		B448D394298F61540042C0BF /* RatingSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B448D393298F61540042C0BF /* RatingSlider.swift */; };
@@ -72,7 +72,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		B408C04929C4A422007E5C8A /* MovieAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieAPIService.swift; sourceTree = "<group>"; };
+		B408C04929C4A422007E5C8A /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		B4148AE52995182400CB1B20 /* ProfileListMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileListMode.swift; sourceTree = "<group>"; };
 		B448D393298F61540042C0BF /* RatingSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingSlider.swift; sourceTree = "<group>"; };
 		B448D397298F77590042C0BF /* BookmarkMovieRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkMovieRepository.swift; sourceTree = "<group>"; };
@@ -349,7 +349,7 @@
 			isa = PBXGroup;
 			children = (
 				B456391B298E09D100C42861 /* Enum */,
-				B408C04929C4A422007E5C8A /* MovieAPIService.swift */,
+				B408C04929C4A422007E5C8A /* NetworkService.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -545,7 +545,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B408C04A29C4A422007E5C8A /* MovieAPIService.swift in Sources */,
+				B408C04A29C4A422007E5C8A /* NetworkService.swift in Sources */,
 				B45638D4298DF02D00C42861 /* FeedController.swift in Sources */,
 				B4563914298DFE1900C42861 /* MovieResponse.swift in Sources */,
 				B4B5702B29B1FA1000A69F82 /* AppEnvironment.swift in Sources */,

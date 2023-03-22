@@ -1,5 +1,5 @@
 //
-//  MovieAPIService.swift
+//  NetworkService.swift
 //  Moviestagram
 //
 //  Created by Mason Kim on 2023/03/17.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class MovieAPIService {
+final class NetworkService {
 
     // MARK: - Properties
 
