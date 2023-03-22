@@ -8,7 +8,9 @@
 import Foundation
 
 protocol MovieAPIRepositoryProtocol {
+    var service: NetworkService { get }
     var baseURLString: String { get }
+
     func fetchMovie(with options: [FetchMovieOptionQuery]) async throws -> [Movie]?
 }
 

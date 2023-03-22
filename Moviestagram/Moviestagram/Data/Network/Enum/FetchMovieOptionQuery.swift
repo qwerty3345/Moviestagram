@@ -14,18 +14,18 @@ enum FetchMovieOptionQuery {
     case search(String)
     case page(Int)
 
-    var queryString: String {
+    var urlQueryItem: URLQueryItem {
         switch self {
         case .sortByRating:
-            return "sort_by=rating"
+            return URLQueryItem(name: "sort_by", value: "rating")
         case .sortByLike:
-            return "sort_by=like_count"
+            return URLQueryItem(name: "sort_by", value: "like_count")
         case .sortByRecent:
-            return "sort_by=date_added"
+            return URLQueryItem(name: "sort_by", value: "date_added")
         case .search(let keyword):
-            return "query_term=\(keyword)"
+            return URLQueryItem(name: "query_term", value: "\(keyword)")
         case .page(let page):
-            return "page=\(page)"
+            return URLQueryItem(name: "page", value: "\(page)")
         }
     }
 }

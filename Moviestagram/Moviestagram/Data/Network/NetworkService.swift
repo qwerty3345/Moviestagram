@@ -26,7 +26,7 @@ final class NetworkService {
 
         guard let statusCode = (response as? HTTPURLResponse)?.statusCode,
               (200...299) ~= statusCode else {
-            throw NetworkError.networkingError
+            throw NetworkError.networking
         }
 
         return data
