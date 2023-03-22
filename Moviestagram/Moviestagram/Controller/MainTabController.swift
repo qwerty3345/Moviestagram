@@ -33,7 +33,7 @@ final class MainTabController: UITabBarController {
 
     // MARK: - Helpers
     private func configureViewControllers() {
-        tabBar.tintColor = appColor
+        tabBar.tintColor = Constants.Color.appColor
 
         let feedNavigation = navigationController(
             unselected: UIImage(systemName: "film.stack"),
@@ -59,7 +59,7 @@ final class MainTabController: UITabBarController {
         let nav = UINavigationController(rootViewController: viewController)
         nav.tabBarItem.image = unselected
         nav.tabBarItem.selectedImage = selected
-        nav.navigationBar.tintColor = appColor
+        nav.navigationBar.tintColor = Constants.Color.appColor
         return nav
     }
 }

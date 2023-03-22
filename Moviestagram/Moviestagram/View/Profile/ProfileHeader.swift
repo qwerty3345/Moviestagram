@@ -17,7 +17,7 @@ final class ProfileHeader: UICollectionReusableView {
     // MARK: - UI Properties
     private let profileImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.tintColor = appColor
+        imageView.tintColor = Constants.Color.appColor
         imageView.image = UIImage(systemName: "seal")
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
@@ -66,7 +66,7 @@ final class ProfileHeader: UICollectionReusableView {
     private lazy var ratingButton: UIButton = {
         let button = UIButton(type: .system)
         button.setImage(UIImage(systemName: "star.fill"), for: .normal)
-        button.tintColor = appColor
+        button.tintColor = Constants.Color.appColor
         button.addTarget(self, action: #selector(tappedRatingButton), for: .touchUpInside)
         return button
     }()
@@ -74,7 +74,7 @@ final class ProfileHeader: UICollectionReusableView {
     private lazy var bookmarkButton: UIButton = {
         let button = UIButton(type: .system)
         button.setImage(UIImage(systemName: "bookmark"), for: .normal)
-        button.tintColor = appColor
+        button.tintColor = Constants.Color.appColor
         button.addTarget(self, action: #selector(tappedBookmarkButton), for: .touchUpInside)
         return button
     }()
@@ -88,13 +88,13 @@ final class ProfileHeader: UICollectionReusableView {
 
     private let ratingUnderLineView: UIView = {
         let line = UIView()
-        line.backgroundColor = appColor
+        line.backgroundColor = Constants.Color.appColor
         return line
     }()
 
     private let bookmarkUnderLineView: UIView = {
         let line = UIView()
-        line.backgroundColor = appColor
+        line.backgroundColor = Constants.Color.appColor
         line.isHidden = true
         return line
     }()

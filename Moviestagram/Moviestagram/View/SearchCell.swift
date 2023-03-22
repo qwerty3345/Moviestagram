@@ -21,7 +21,7 @@ final class SearchCell: UITableViewCell {
         imageView.contentMode = .scaleAspectFit
         imageView.clipsToBounds = true
         imageView.layer.cornerRadius = 8
-        imageView.backgroundColor = appColor
+        imageView.backgroundColor = Constants.Color.appColor
         return imageView
     }()
 

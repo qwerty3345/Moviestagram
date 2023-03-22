@@ -24,7 +24,7 @@ final class DetailController: UIViewController {
         imageView.contentMode = .scaleAspectFit
         imageView.clipsToBounds = true
         imageView.layer.cornerRadius = 8
-        imageView.backgroundColor = appColor
+        imageView.backgroundColor = Constants.Color.appColor
         return imageView
     }()
 
@@ -56,7 +56,7 @@ final class DetailController: UIViewController {
         var imageViews: [UIImageView] = []
         for _ in 0..<5 {
             let starImageView = UIImageView(image: UIImage(systemName: "star"))
-            starImageView.tintColor = appColor
+            starImageView.tintColor = Constants.Color.appColor
             starImageView.snp.makeConstraints { make in
                 make.height.width.equalTo(40)
             }
@@ -88,7 +88,7 @@ final class DetailController: UIViewController {
                                      style: .plain,
                                      target: self,
                                      action: #selector(tappedBookmarkButton))
-        button.tintColor = appColor
+        button.tintColor = Constants.Color.appColor
         return button
     }()
 
@@ -159,7 +159,7 @@ final class DetailController: UIViewController {
         imageView.contentMode = .scaleAspectFit
         imageView.clipsToBounds = true
         imageView.layer.cornerRadius = 8
-        imageView.backgroundColor = appColor
+        imageView.backgroundColor = Constants.Color.appColor
         imageView.setImage(with: imageURL)
         return imageView
     }

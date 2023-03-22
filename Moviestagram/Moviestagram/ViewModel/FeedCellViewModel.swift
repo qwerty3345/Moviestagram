@@ -24,7 +24,7 @@ final class FeedCellViewModel {
         movie.summary
     }
     var ratingLabelText: NSAttributedString {
-        Util.ratingAttributedText(with: movie.rating ?? 0.0)
+        StringUtil.ratingAttributedText(with: movie.rating ?? 0.0)
     }
     var yearLabelText: String? {
         "\(movie.year ?? 0)년"
