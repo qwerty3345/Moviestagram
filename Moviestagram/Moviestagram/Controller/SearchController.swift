@@ -140,6 +140,7 @@ extension SearchController {
 extension SearchController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let searchText = searchController.searchBar.text?.lowercased() else { return }
-        searchViewModel.searchMovie(with: searchText)
+
+        searchViewModel.searchTextSubject.send(searchText)
     }
 }
