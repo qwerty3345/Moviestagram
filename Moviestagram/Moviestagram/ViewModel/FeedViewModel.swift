@@ -8,7 +8,9 @@
 import Foundation
 
 final class FeedViewModel: MovieListViewModelProtocol {
+
     // MARK: - Properties
+
     @Published private(set) var movies: [Movie] = []
     private var currentPage: Int {
         movies.count / 20
@@ -20,11 +22,14 @@ final class FeedViewModel: MovieListViewModelProtocol {
 
     private let movieRemoteRepository: MovieAPIRepositoryProtocol
 
+    // MARK: - Lifecycle
+
     init(movieRemoteRepository: MovieAPIRepositoryProtocol) {
         self.movieRemoteRepository = movieRemoteRepository
     }
 
-    // MARK: - API
+    // MARK: - Public
+
     func fetchMovie() {
         Task {
             guard let movies = try await movieRemoteRepository.fetchMovie(with: searchOption) else { return }

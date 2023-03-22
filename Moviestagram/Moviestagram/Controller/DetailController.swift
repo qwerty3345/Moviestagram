@@ -11,11 +11,13 @@ import Combine
 final class DetailController: UIViewController {
 
     // MARK: - Properties
+
     private let environment: AppEnvironment
     private let detailViewModel: DetailViewModel
     private var bag = Set<AnyCancellable>()
 
-    // MARK: - UI Properties
+    // MARK: - UI Components
+
     private let scrollView = UIScrollView()
     private let contentView = UIView()
 
@@ -127,6 +129,7 @@ final class DetailController: UIViewController {
     }
 
     // MARK: - Helpers
+
     private func bind(to viewModel: DetailViewModel) {
         viewModel.$movie
             .sink { [weak self] movie in
@@ -166,6 +169,7 @@ final class DetailController: UIViewController {
 }
 
 // MARK: - Layout
+
 extension DetailController {
     private func configureLayout() {
         view.addSubview(scrollView)
@@ -227,6 +231,7 @@ extension DetailController {
 }
 
 // MARK: - Rating Slider
+
 extension DetailController {
     @objc private func sliderValueChanged(_ sender: UISlider) {
         setStarImages(sliderValue: sender.value)

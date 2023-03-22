@@ -249,8 +249,8 @@
 		B4563902298DF32700C42861 /* Repository */ = {
 			isa = PBXGroup;
 			children = (
-				B4B5701E29B1F21C00A69F82 /* Remote */,
-				B4B5701D29B1F21800A69F82 /* Local */,
+				B4B5701E29B1F21C00A69F82 /* Network */,
+				B4B5701D29B1F21800A69F82 /* Storage */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -278,13 +278,13 @@
 			path = Extension;
 			sourceTree = "<group>";
 		};
-		B456391B298E09D100C42861 /* Enum */ = {
+		B456391B298E09D100C42861 /* Model */ = {
 			isa = PBXGroup;
 			children = (
 				B456391C298E09DE00C42861 /* NetworkError.swift */,
 				B47B9AD5298E8BFF00025D0C /* FetchMovieOptionQuery.swift */,
 			);
-			path = Enum;
+			path = Model;
 			sourceTree = "<group>";
 		};
 		B47B9AC9298E5C0C00025D0C /* Resource */ = {
@@ -348,7 +348,7 @@
 		B4B3693829CB10A400CE572D /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				B456391B298E09D100C42861 /* Enum */,
+				B456391B298E09D100C42861 /* Model */,
 				B408C04929C4A422007E5C8A /* NetworkService.swift */,
 			);
 			path = Network;
@@ -363,22 +363,22 @@
 			path = PersistentStorage;
 			sourceTree = "<group>";
 		};
-		B4B5701D29B1F21800A69F82 /* Local */ = {
+		B4B5701D29B1F21800A69F82 /* Storage */ = {
 			isa = PBXGroup;
 			children = (
 				B4B5702329B1F23800A69F82 /* Interface */,
 				B4B5702129B1F22E00A69F82 /* Implementation */,
 			);
-			path = Local;
+			path = Storage;
 			sourceTree = "<group>";
 		};
-		B4B5701E29B1F21C00A69F82 /* Remote */ = {
+		B4B5701E29B1F21C00A69F82 /* Network */ = {
 			isa = PBXGroup;
 			children = (
 				B4B5701F29B1F21F00A69F82 /* Interface */,
 				B4B5702029B1F22300A69F82 /* Implementation */,
 			);
-			path = Remote;
+			path = Network;
 			sourceTree = "<group>";
 		};
 		B4B5701F29B1F21F00A69F82 /* Interface */ = {

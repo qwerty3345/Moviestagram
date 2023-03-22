@@ -8,7 +8,9 @@
 import Foundation
 
 final class SearchCellViewModel {
+
     // MARK: - Properties
+
     private let movie: Movie
 
     var posterImageURLString: String? {
@@ -25,6 +27,7 @@ final class SearchCellViewModel {
     }
 
     // MARK: - Lifecycle
+    
     init(movie: Movie) {
         self.movie = movie
     }

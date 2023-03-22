@@ -8,11 +8,15 @@
 import Foundation
 
 final class SearchViewModel: MovieListViewModelProtocol {
+
     // MARK: - Properties
+
     @Published var movies: [Movie] = []
-    @Published var networkError: NetworkError? = nil
+    @Published var networkError: NetworkError?
 
     private let movieRemoteRepository: MovieAPIRepositoryProtocol
+
+    // MARK: - Lifecycle
 
     init(movieRemoteRepository: MovieAPIRepositoryProtocol) {
         self.movieRemoteRepository = movieRemoteRepository
@@ -21,7 +25,10 @@ final class SearchViewModel: MovieListViewModelProtocol {
     // MARK: - API
     func searchMovie(with keyword: String) {
         Task {
-            guard let movies = try await movieRemoteRepository.fetchMovie(with: [.search(keyword), .sortByLike]) else { return }
+            guard let movies = try await movieRemoteRepository.fetchMovie(
+                with: [.search(keyword), .sortByLike]
+            ) else { return }
+
             self.movies = movies
         }
     }

@@ -11,6 +11,7 @@ import Combine
 final class ProfileController: UICollectionViewController {
 
     // MARK: - Properties
+
     private let environment: AppEnvironment
     private lazy var profileViewModel = ProfileViewModel(
         ratingMovieLocalRepository: environment.ratingMovieLocalRepository,
@@ -19,6 +20,7 @@ final class ProfileController: UICollectionViewController {
     private var bag = Set<AnyCancellable>()
 
     // MARK: - Lifecycle
+
     init(environment: AppEnvironment) {
         self.environment = environment
         super.init(collectionViewLayout: UICollectionViewFlowLayout())
@@ -43,11 +45,13 @@ final class ProfileController: UICollectionViewController {
     }
 
     // MARK: - Actions
-    @objc func refreshProfile() {
+
+    @objc private func refreshProfile() {
         profileViewModel.fetchLocalSavedData()
     }
 
     // MARK: - Helpers
+
     private func configureCollectionView() {
         collectionView.registerCell(cellClass: ProfileRatingCell.self)
         collectionView.registerCell(cellClass: ProfileBookmarkCell.self)
@@ -91,6 +95,7 @@ final class ProfileController: UICollectionViewController {
 }
 
 // MARK: - UICollectionViewDataSource
+
 extension ProfileController {
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch profileViewModel.listMode {
@@ -134,6 +139,7 @@ extension ProfileController {
 }
 
 // MARK: - UICollectionViewDelegate
+
 extension ProfileController {
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let movie = profileViewModel.movieForCell(at: indexPath) else { return }
@@ -144,6 +150,7 @@ extension ProfileController {
 }
 
 // MARK: - UICollectionViewDelegateFlowLayout
+
 extension ProfileController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,

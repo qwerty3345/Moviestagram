@@ -8,14 +8,17 @@
 import UIKit
 
 final class SearchCell: UITableViewCell {
+
     // MARK: - Properties
+
     var viewModel: SearchCellViewModel? {
         didSet {
             configureData()
         }
     }
 
-    // MARK: - UI Properties
+    // MARK: - UI Components
+
     private let posterImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
@@ -49,6 +52,7 @@ final class SearchCell: UITableViewCell {
     }()
 
     // MARK: - Lifecycle
+
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         configureLayout()
@@ -59,6 +63,7 @@ final class SearchCell: UITableViewCell {
     }
 
     // MARK: - Helpers
+
     private func configureData() {
         guard let viewModel else { return }
         posterImageView.setImage(with: viewModel.posterImageURLString)
@@ -69,6 +74,7 @@ final class SearchCell: UITableViewCell {
 }
 
 // MARK: - Layout
+
 extension SearchCell {
     private func configureLayout() {
         addSubview(posterImageView)

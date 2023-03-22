@@ -32,6 +32,7 @@ final class MainTabController: UITabBarController {
     }
 
     // MARK: - Helpers
+
     private func configureViewControllers() {
         tabBar.tintColor = Constants.Color.appColor
 
@@ -65,6 +66,7 @@ final class MainTabController: UITabBarController {
 }
 
 // MARK: - UITabBarControllerDelegate
+
 extension MainTabController: UITabBarControllerDelegate {
     func tabBarController(_ tabBarController: UITabBarController,
                           shouldSelect viewController: UIViewController) -> Bool {

@@ -1,20 +1,27 @@
 //
-//  BookmarkMovieLocalRepository.swift
+//  RatingMovieLocalRepository.swift
 //  Moviestagram
 //
-//  Created by Mason Kim on 2023/02/05.
+//  Created by Mason Kim on 2023/03/03.
 //
 
-import UIKit
+import Foundation
 
-final class BookmarkMovieRepository: MovieLocalRepositoryProtocol {
+final class RatingMovieRepository: MovieLocalRepositoryProtocol {
+
+    // MARK: - Properties
+
     var movies: [Movie] = []
     let storage: StorageProtocol
+
+    // MARK: - Lifecycle
 
     init(storage: StorageProtocol) {
         self.storage = storage
         movies = load()
     }
+
+    // MARK: - Properties
 
     func save(movie: Movie) {
         storage.save(movie: movie)

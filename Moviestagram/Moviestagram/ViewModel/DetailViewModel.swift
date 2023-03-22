@@ -9,6 +9,7 @@ import Foundation
 
 final class DetailViewModel {
     // MARK: - Properties
+
     @Published private(set) var movie: Movie
     @Published var isBookmarked = false
 
@@ -36,6 +37,7 @@ final class DetailViewModel {
     private let bookmarkMovieLocalRepository: MovieLocalRepositoryProtocol
 
     // MARK: - Lifecycle
+
     init(
         movie: Movie,
         ratingMovieLocalRepository: MovieLocalRepositoryProtocol,
@@ -48,6 +50,8 @@ final class DetailViewModel {
         checkIfUserRatedMovie()
     }
 
+    // MARK: - Public
+
     func checkIfUserRatedMovie() {
         if let ratedMovie = ratingMovieLocalRepository.movies.first(where: {
             $0.id == movie.id
@@ -56,7 +60,6 @@ final class DetailViewModel {
         }
     }
 
-    // MARK: - Repository
     func checkIfUserBookmarkedMovie() {
         if bookmarkMovieLocalRepository.movies.first(where: {
             $0.id == movie.id

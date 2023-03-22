@@ -9,9 +9,12 @@ import Foundation
 
 // MARK: - Profile Controller
 final class ProfileViewModel {
+
     // MARK: - Properties
+
     @Published private(set) var bookmarkedMovies: [Movie] = []
     @Published private(set) var ratedMovies: [Movie] = []
+
     var numberOfBookmarkedMovies: Int {
         bookmarkedMovies.count
     }
@@ -25,6 +28,7 @@ final class ProfileViewModel {
     private let bookmarkMovieLocalRepository: MovieLocalRepositoryProtocol
 
     // MARK: - Lifecycle
+
     init(
         ratingMovieLocalRepository: MovieLocalRepositoryProtocol,
         bookmarkMovieLocalRepository: MovieLocalRepositoryProtocol
@@ -33,7 +37,8 @@ final class ProfileViewModel {
         self.bookmarkMovieLocalRepository = bookmarkMovieLocalRepository
     }
 
-    // MARK: - Helpers
+    // MARK: - Public
+
     func movieForCell(at indexPath: IndexPath) -> Movie? {
         switch listMode {
         case .rating:
@@ -43,7 +48,6 @@ final class ProfileViewModel {
         }
     }
 
-    // MARK: - API
     func fetchLocalSavedData() {
         ratedMovies = ratingMovieLocalRepository.movies
         bookmarkedMovies = bookmarkMovieLocalRepository.movies
@@ -51,8 +55,11 @@ final class ProfileViewModel {
 }
 
 // MARK: - Profile Header
+
 extension ProfileViewModel {
+
     // MARK: - Properties
+
     var ratingsLabelText: String {
         "\(ratedMovies.count)\nRating"
     }
@@ -64,6 +71,7 @@ extension ProfileViewModel {
     }
 
     // MARK: - Helpers
+
     private func convertRatingData() -> [Float: Int] {
         var ratingData: [Float: Int] = [:]
         for movie in ratedMovies {

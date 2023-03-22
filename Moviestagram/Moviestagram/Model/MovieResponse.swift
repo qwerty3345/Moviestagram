@@ -7,22 +7,22 @@
 
 import Foundation
 
-// MARK: - ApiResponse
+// MARK: - MovieResponse
 struct MovieResponse: Decodable {
     let status, statusMessage: String
-    let data: DataClass
+    let movieData: MovieData
 
     enum CodingKeys: String, CodingKey {
         case status
         case statusMessage = "status_message"
-        case data
+        case movieData = "data"
     }
 }
 
-// MARK: - DataClass
-struct DataClass: Decodable {
-    let movieCount, limit: Int?
-    let movies: [Movie]?
+// MARK: - MovieData
+struct MovieData: Decodable {
+    let movieCount, limit: Int
+    let movies: [Movie]
 
     enum CodingKeys: String, CodingKey {
         case movieCount = "movie_count"

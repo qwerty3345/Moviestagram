@@ -8,7 +8,9 @@
 import Foundation
 
 final class FeedCellViewModel {
+
     // MARK: - Properties
+
     private let movie: Movie
 
     var movieTitleButtonText: String? {
@@ -31,6 +33,7 @@ final class FeedCellViewModel {
     }
 
     // MARK: - Lifecycle
+
     init(movie: Movie) {
         self.movie = movie
     }

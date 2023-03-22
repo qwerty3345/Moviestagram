@@ -11,15 +11,19 @@ import Combine
 final class SearchController: UITableViewController {
 
     // MARK: - Properties
+
     private let environment: AppEnvironment
     private lazy var searchViewModel = SearchViewModel(
         movieRemoteRepository: environment.movieRemoteRepository
     )
     private var bag = Set<AnyCancellable>()
 
+    // MARK: - UI Components
+
     private let searchController = UISearchController(searchResultsController: nil)
 
     // MARK: - Lifecycle
+
     init(environment: AppEnvironment) {
         self.environment = environment
         super.init(style: .plain)
@@ -40,6 +44,7 @@ final class SearchController: UITableViewController {
     }
 
     // MARK: - Helpers
+
     private func bind(to viewModel: SearchViewModel) {
         viewModel.$movies
             .sink { [weak self] _ in
@@ -103,6 +108,7 @@ final class SearchController: UITableViewController {
 }
 
 // MARK: - UITableViewDataSource
+
 extension SearchController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return searchViewModel.numberOfMovies
@@ -120,6 +126,7 @@ extension SearchController {
 }
 
 // MARK: - UITableViewDelegate
+
 extension SearchController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let movie = searchViewModel.movieForCell(at: indexPath) else { return }
@@ -129,6 +136,7 @@ extension SearchController {
 }
 
 // MARK: - UISearchBarDelegate
+
 extension SearchController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let searchText = searchController.searchBar.text?.lowercased() else { return }

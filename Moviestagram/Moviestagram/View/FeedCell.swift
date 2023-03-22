@@ -8,14 +8,17 @@
 import UIKit
 
 final class FeedCell: UITableViewCell {
+
     // MARK: - Properties
+
     var viewModel: FeedCellViewModel? {
         didSet {
             configureData()
         }
     }
 
-    // MARK: - UI Properties
+    // MARK: - UI Components
+
     private lazy var movieProfileImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
@@ -64,6 +67,7 @@ final class FeedCell: UITableViewCell {
     }()
 
     // MARK: - Lifecycle
+
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         configureLayout()
@@ -74,6 +78,7 @@ final class FeedCell: UITableViewCell {
     }
 
     // MARK: - Helpers
+
     private func configureData() {
         guard let viewModel else {return }
 
@@ -87,6 +92,7 @@ final class FeedCell: UITableViewCell {
 }
 
 // MARK: - Layout
+
 extension FeedCell {
     private func configureLayout() {
         addSubview(movieProfileImageView)

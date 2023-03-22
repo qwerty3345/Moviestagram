@@ -10,11 +10,13 @@ import UIKit
 final class ProfileHeader: UICollectionReusableView {
 
     // MARK: - Properties
+
     var viewModel: ProfileViewModel? {
         didSet { configure() }
     }
 
-    // MARK: - UI Properties
+    // MARK: - UI Components
+
     private let profileImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.tintColor = Constants.Color.appColor
@@ -100,6 +102,7 @@ final class ProfileHeader: UICollectionReusableView {
     }()
 
     // MARK: - Lifecycle
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         configureLayout()
@@ -110,6 +113,7 @@ final class ProfileHeader: UICollectionReusableView {
     }
 
     // MARK: - Actions
+
     @objc func tappedRatingButton() {
         ratingButton.setImage(UIImage(systemName: "star.fill"), for: .normal)
         bookmarkButton.setImage(UIImage(systemName: "bookmark"), for: .normal)
@@ -129,6 +133,7 @@ final class ProfileHeader: UICollectionReusableView {
     }
 
     // MARK: - Helpers
+
     func configure() {
         guard let viewModel else { return }
         ratingsLabel.text = viewModel.ratingsLabelText
@@ -139,6 +144,7 @@ final class ProfileHeader: UICollectionReusableView {
 }
 
 // MARK: - Layout
+
 extension ProfileHeader {
     private func configureLayout() {
         profileImageView.snp.makeConstraints { make in

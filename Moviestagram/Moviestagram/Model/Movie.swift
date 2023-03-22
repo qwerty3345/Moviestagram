@@ -8,14 +8,14 @@
 import Foundation
 
 struct Movie: Codable {
-    let id: Int?
-    let url: String?
-    let title: String?
-    let summary: String?
-    let backgroundImage: String?
-    let mediumCoverImage: String?
-    let rating: Double?
-    let year: Int?
+    let id: Int
+    let url: String
+    let title: String
+    let summary: String
+    let backgroundImage: String
+    let mediumCoverImage: String
+    let rating: Double
+    let year: Int
     var myRating: Float?
 
     enum CodingKeys: String, CodingKey {

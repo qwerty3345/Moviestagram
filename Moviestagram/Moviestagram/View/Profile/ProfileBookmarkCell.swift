@@ -8,7 +8,9 @@
 import UIKit
 
 final class ProfileBookmarkCell: UICollectionViewCell, ProfileCell {
-    // MARK: - UI Properties
+
+    // MARK: - UI Components
+
     private let postImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
@@ -17,6 +19,7 @@ final class ProfileBookmarkCell: UICollectionViewCell, ProfileCell {
     }()
 
     // MARK: - Lifecycle
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = .lightGray
@@ -32,6 +35,7 @@ final class ProfileBookmarkCell: UICollectionViewCell, ProfileCell {
     }
 
     // MARK: - Helpers
+    
     func configure(with movie: Movie) {
         postImageView.setImage(with: movie.mediumCoverImage)
     }
