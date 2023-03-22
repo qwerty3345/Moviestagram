@@ -108,7 +108,7 @@ extension ProfileController {
 
     override func collectionView(_ collectionView: UICollectionView,
                                  cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell: ProfileCell = {
+        let cell: ProfileCellType = {
             switch profileViewModel.listMode {
             case .rating:
                 return collectionView.dequeueReusableCell(

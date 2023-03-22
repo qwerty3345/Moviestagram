@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class ProfileRatingCell: UICollectionViewCell, ProfileCell {
+final class ProfileRatingCell: UICollectionViewCell, ProfileCellType {
 
     // MARK: - UI Components
 

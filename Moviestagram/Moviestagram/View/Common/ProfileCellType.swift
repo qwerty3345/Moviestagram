@@ -1,5 +1,5 @@
 //
-//  ProfileCell.swift
+//  ProfileCellType.swift
 //  Moviestagram
 //
 //  Created by Mason Kim on 2023/02/06.
@@ -7,6 +7,6 @@
 
 import UIKit
 
-protocol ProfileCell: UICollectionViewCell {
+protocol ProfileCellType: UICollectionViewCell {
     func configure(with movie: Movie)
 }
