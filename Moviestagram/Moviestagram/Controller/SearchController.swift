@@ -11,14 +11,24 @@ import Combine
 final class SearchController: UITableViewController {
 
     // MARK: - Properties
-    private let searchViewModel = SearchViewModel(
-        movieRemoteRepository: appEnvironment.movieRemoteRepository
+    private let environment: AppEnvironment
+    private lazy var searchViewModel = SearchViewModel(
+        movieRemoteRepository: environment.movieRemoteRepository
     )
     private var bag = Set<AnyCancellable>()
 
     private let searchController = UISearchController(searchResultsController: nil)
 
     // MARK: - Lifecycle
+    init(environment: AppEnvironment) {
+        self.environment = environment
+        super.init(style: .plain)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -113,7 +123,7 @@ extension SearchController {
 extension SearchController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let movie = searchViewModel.movieForCell(at: indexPath) else { return }
-        let detailVC = DetailController(movie: movie)
+        let detailVC = DetailController(environment: environment, movie: movie)
         navigationController?.pushViewController(detailVC, animated: true)
     }
 }

@@ -8,7 +8,6 @@
 import UIKit
 
 let appColor = #colorLiteral(red: 0.8431372549, green: 0.1058823529, blue: 0.2666666667, alpha: 1) // UIColor(red: 215, green: 27, blue: 68, alpha: 1)
-let appEnvironment = AppEnvironment()
 
 @main
 final class AppDelegate: UIResponder, UIApplicationDelegate {

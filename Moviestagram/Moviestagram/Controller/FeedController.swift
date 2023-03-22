@@ -11,8 +11,9 @@ import Combine
 final class FeedController: UITableViewController {
 
     // MARK: - Properties
-    private let feedViewModel = FeedViewModel(
-        movieRemoteRepository: appEnvironment.movieRemoteRepository
+    private let environment: AppEnvironment
+    private lazy var feedViewModel = FeedViewModel(
+        movieRemoteRepository: environment.movieRemoteRepository
     )
     private var bag = Set<AnyCancellable>()
 
@@ -30,6 +31,15 @@ final class FeedController: UITableViewController {
     }()
 
     // MARK: - Lifecycle
+    init(environment: AppEnvironment) {
+        self.environment = environment
+        super.init(style: .plain)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -144,7 +154,7 @@ extension FeedController {
     override func tableView(_ tableView: UITableView,
                             didSelectRowAt indexPath: IndexPath) {
         guard let movie = feedViewModel.movieForCell(at: indexPath) else { return }
-        let detailVC = DetailController(movie: movie)
+        let detailVC = DetailController(environment: environment, movie: movie)
         navigationController?.pushViewController(detailVC, animated: true)
     }
 

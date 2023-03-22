@@ -11,6 +11,7 @@ import Combine
 final class DetailController: UIViewController {
 
     // MARK: - Properties
+    private let environment: AppEnvironment
     private let detailViewModel: DetailViewModel
     private var bag = Set<AnyCancellable>()
 
@@ -92,11 +93,17 @@ final class DetailController: UIViewController {
     }()
 
     // MARK: - Lifecycle
-    init(movie: Movie) {
+
+    init(
+        environment: AppEnvironment,
+        movie: Movie
+    ) {
+        self.environment = environment
+
         detailViewModel = DetailViewModel(
             movie: movie,
-            ratingMovieLocalRepository: appEnvironment.ratingMovieLocalRepository,
-            bookmarkMovieLocalRepository: appEnvironment.bookmarkMovieLocalRepository
+            ratingMovieLocalRepository: environment.ratingMovieLocalRepository,
+            bookmarkMovieLocalRepository: environment.bookmarkMovieLocalRepository
         )
         super.init(nibName: nil, bundle: nil)
     }

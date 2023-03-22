@@ -11,13 +11,24 @@ import Combine
 final class ProfileController: UICollectionViewController {
 
     // MARK: - Properties
-    private let profileViewModel = ProfileViewModel(
-        ratingMovieLocalRepository: appEnvironment.ratingMovieLocalRepository,
-        bookmarkMovieLocalRepository: appEnvironment.bookmarkMovieLocalRepository
+    private let environment: AppEnvironment
+    private lazy var profileViewModel = ProfileViewModel(
+        ratingMovieLocalRepository: environment.ratingMovieLocalRepository,
+        bookmarkMovieLocalRepository: environment.bookmarkMovieLocalRepository
     )
     private var bag = Set<AnyCancellable>()
 
     // MARK: - Lifecycle
+    init(environment: AppEnvironment) {
+        self.environment = environment
+        super.init(collectionViewLayout: UICollectionViewFlowLayout())
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+
     override func viewDidLoad() {
         super.viewDidLoad()
         configureCollectionView()
@@ -127,7 +138,7 @@ extension ProfileController {
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let movie = profileViewModel.movieForCell(at: indexPath) else { return }
 
-        let detailVC = DetailController(movie: movie)
+        let detailVC = DetailController(environment: environment, movie: movie)
         navigationController?.pushViewController(detailVC, animated: true)
     }
 }

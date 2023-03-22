@@ -10,7 +10,21 @@ import SnapKit
 
 final class MainTabController: UITabBarController {
 
+    // MARK: - Properties
+
+    private let environment: AppEnvironment
+
     // MARK: - Lifecycle
+
+    init(environment: AppEnvironment) {
+        self.environment = environment
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         delegate = self
@@ -24,18 +38,17 @@ final class MainTabController: UITabBarController {
         let feedNavigation = navigationController(
             unselected: UIImage(systemName: "film.stack"),
             selected: UIImage(systemName: "film.stack.fill"),
-            viewController: FeedController())
+            viewController: FeedController(environment: environment))
 
         let searchNavigation = navigationController(
             unselected: UIImage(systemName: "magnifyingglass"),
             selected: UIImage(systemName: "magnifyingglass"),
-            viewController: SearchController())
+            viewController: SearchController(environment: environment))
 
-        let layout = UICollectionViewFlowLayout()
         let profileNavigation = navigationController(
             unselected: UIImage(systemName: "person.crop.circle"),
             selected: UIImage(systemName: "person.crop.circle.fill"),
-            viewController: ProfileController(collectionViewLayout: layout))
+            viewController: ProfileController(environment: environment))
 
         viewControllers = [feedNavigation, searchNavigation, profileNavigation]
     }
