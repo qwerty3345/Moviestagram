@@ -11,7 +11,6 @@ protocol MovieLocalRepositoryProtocol: AnyObject {
 
     // MARK: - Properties
 
-    var movies: [Movie] { get set }
     var storage: StorageProtocol { get }
 
     // MARK: - Method

@@ -11,14 +11,12 @@ final class BookmarkMovieRepository: MovieLocalRepositoryProtocol {
 
     // MARK: - Properties
 
-    var movies: [Movie] = []
     let storage: StorageProtocol
 
     // MARK: - Lifecycle
 
     init(storage: StorageProtocol) {
         self.storage = storage
-        movies = load()
     }
 
     // MARK: - Public

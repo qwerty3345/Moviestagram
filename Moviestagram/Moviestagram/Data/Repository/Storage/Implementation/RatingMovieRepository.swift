@@ -11,17 +11,15 @@ final class RatingMovieRepository: MovieLocalRepositoryProtocol {
 
     // MARK: - Properties
 
-    var movies: [Movie] = []
     let storage: StorageProtocol
 
     // MARK: - Lifecycle
 
     init(storage: StorageProtocol) {
         self.storage = storage
-        movies = load()
     }
 
-    // MARK: - Properties
+    // MARK: - Public
 
     func save(movie: Movie) {
         storage.save(movie: movie)

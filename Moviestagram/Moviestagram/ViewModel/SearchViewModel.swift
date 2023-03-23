@@ -30,7 +30,6 @@ final class SearchViewModel: MovieListViewModelProtocol {
     // MARK: - Private
 
     private func searchMovie(with keyword: String) {
-        print("searchMovie")
         Task {
             guard let movies = try await movieRemoteRepository.fetchMovie(
                 with: [.search(keyword), .sortByLike]

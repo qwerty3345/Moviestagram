@@ -53,7 +53,7 @@ final class DetailViewModel {
     // MARK: - Public
 
     func checkIfUserRatedMovie() {
-        if let ratedMovie = ratingMovieLocalRepository.movies.first(where: {
+        if let ratedMovie = ratingMovieLocalRepository.load().first(where: {
             $0.id == movie.id
         }) {
             self.movie = ratedMovie
@@ -61,7 +61,7 @@ final class DetailViewModel {
     }
 
     func checkIfUserBookmarkedMovie() {
-        if bookmarkMovieLocalRepository.movies.first(where: {
+        if bookmarkMovieLocalRepository.load().first(where: {
             $0.id == movie.id
         }) != nil {
             isBookmarked = true

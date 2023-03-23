@@ -9,6 +9,7 @@ import Foundation
 
 protocol StorageProtocol {
     func save(movie: Movie)
+    func update(movie: Movie)
     func remove(movie: Movie)
     func load() -> [Movie]
 }

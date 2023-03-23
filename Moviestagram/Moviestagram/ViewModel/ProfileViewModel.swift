@@ -49,8 +49,8 @@ final class ProfileViewModel {
     }
 
     func fetchLocalSavedData() {
-        ratedMovies = ratingMovieLocalRepository.movies
-        bookmarkedMovies = bookmarkMovieLocalRepository.movies
+        ratedMovies = ratingMovieLocalRepository.load()
+        bookmarkedMovies = bookmarkMovieLocalRepository.load()
     }
 }
 

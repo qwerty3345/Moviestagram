@@ -22,21 +22,32 @@ final class UserDefaultsStorage: StorageProtocol {
     }
 
     // MARK: - Public
+
     func save(movie: Movie) {
         var movies = load()
 
-        if let index = movies.firstIndex(where: { $0.id == movie.id}) {
-            movies[index] = movie
-        } else {
-            movies.append(movie)
+        guard movies.firstIndex(where: { $0.id == movie.id}) == nil else {
+            update(movie: movie)
+            return
         }
 
+        movies.append(movie)
         save(movies: movies)
     }
 
-    private func save(movies: [Movie]) {
-        let value = try? PropertyListEncoder().encode(movies)
-        UserDefaults.standard.setValue(value, forKey: key)
+    func load() -> [Movie] {
+        guard let data = userDefaults.value(forKey: key) as? Data,
+              let loadedMovies = try? PropertyListDecoder().decode([Movie].self, from: data) else { return [] }
+        return loadedMovies
+    }
+
+    func update(movie: Movie) {
+        var movies = load()
+
+        guard let index = movies.firstIndex(where: { $0.id == movie.id }) else { return }
+        movies[index] = movie
+
+        save(movies: movies)
     }
 
     func remove(movie: Movie) {
@@ -48,10 +59,11 @@ final class UserDefaultsStorage: StorageProtocol {
         }
     }
 
-    func load() -> [Movie] {
-        guard let data = userDefaults.value(forKey: key) as? Data,
-              let loadedMovies = try? PropertyListDecoder().decode([Movie].self, from: data) else { return [] }
-        return loadedMovies
-    }
-}
+    // MARK: - Private
 
+    private func save(movies: [Movie]) {
+        let value = try? PropertyListEncoder().encode(movies)
+        userDefaults.setValue(value, forKey: key)
+    }
+
+}

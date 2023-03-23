@@ -138,8 +138,6 @@ final class ProfileHeader: UICollectionReusableView {
         guard let viewModel else { return }
         ratingsLabel.text = viewModel.ratingsLabelText
         bookmarkLabel.text = viewModel.bookmarkLabelText
-
-        print(viewModel.ratingData)
     }
 }
 
