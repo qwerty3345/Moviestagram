@@ -13,7 +13,7 @@ final class SearchViewModel: MovieListViewModelProtocol {
     // MARK: - Properties
 
     @Published var movies: [Movie] = []
-    @Published var networkError: NetworkError?
+    @Published var isFailedToSearch: Bool = false
 
     let searchTextSubject = PassthroughSubject<String, Never>()
     private var bag = Set<AnyCancellable>()
@@ -31,11 +31,21 @@ final class SearchViewModel: MovieListViewModelProtocol {
 
     private func searchMovie(with keyword: String) {
         Task {
-            guard let movies = try await movieRemoteRepository.fetchMovie(
-                with: [.search(keyword), .sortByLike]
-            ) else { return }
+            do {
+                let movies = try await movieRemoteRepository.fetchMovie(
+                    with: [.search(keyword), .sortByLike]
+                )
 
-            self.movies = movies
+                guard let movies, !movies.isEmpty else {
+                    isFailedToSearch = true
+                    return
+                }
+
+                self.movies = movies
+
+            } catch {
+                isFailedToSearch = true
+            }
         }
     }
 

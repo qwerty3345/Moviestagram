@@ -356,7 +356,6 @@
 		B4B3693829CB10A400CE572D /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				B456391B298E09D100C42861 /* Model */,
 				B408C04929C4A422007E5C8A /* NetworkService.swift */,
 			);
 			path = Network;
@@ -403,6 +402,7 @@
 		B4B5701E29B1F21C00A69F82 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				B456391B298E09D100C42861 /* Model */,
 				B4B5701F29B1F21F00A69F82 /* Interface */,
 				B4B5702029B1F22300A69F82 /* Implementation */,
 			);

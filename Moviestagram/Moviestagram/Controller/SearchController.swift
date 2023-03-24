@@ -54,9 +54,9 @@ final class SearchController: UITableViewController {
             }
             .store(in: &bag)
 
-        viewModel.$networkError
-            .sink { [weak self] error in
-                guard error != nil else { return }
+        viewModel.$isFailedToSearch
+            .sink { [weak self] isFailed in
+                guard isFailed else { return }
                 self?.showCannotSearchAlert()
             }
             .store(in: &bag)
