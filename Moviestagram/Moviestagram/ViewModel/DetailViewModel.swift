@@ -27,10 +27,10 @@ final class DetailViewModel {
         movie.summary
     }
     var ratingLabelAttributedString: NSAttributedString {
-        StringUtil.ratingAttributedText(with: movie.rating ?? 0.0)
+        StringUtil.ratingAttributedText(with: movie.rating)
     }
     var yearLabelText: String {
-        "\(movie.year ?? 0)년 개봉"
+        "\(movie.year)년 개봉"
     }
 
     private let ratingMovieLocalRepository: MovieLocalRepositoryProtocol

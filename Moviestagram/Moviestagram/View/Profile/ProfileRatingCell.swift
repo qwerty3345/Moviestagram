@@ -35,7 +35,7 @@ final class ProfileRatingCell: UICollectionViewCell, ProfileCellType {
     }
 
     // MARK: - Helpers
-    
+
     func configure(with movie: Movie) {
         postImageView.setImage(with: movie.mediumCoverImage)
     }

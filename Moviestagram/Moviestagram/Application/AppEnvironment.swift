@@ -15,9 +15,13 @@ final class AppEnvironment {
 
 //    lazy var bookmarkStorage: StorageProtocol = UserDefaultsStorage(key: "bookmark_movie")
     lazy var bookmarkStorage: StorageProtocol = CoreDataStorage(key: "bookmark_movie")
-    lazy var bookmarkMovieLocalRepository: MovieLocalRepositoryProtocol = BookmarkMovieRepository(storage: bookmarkStorage)
+    lazy var bookmarkMovieLocalRepository: MovieLocalRepositoryProtocol = BookmarkMovieRepository(
+        storage: bookmarkStorage
+    )
 
 //    lazy var ratingStorage: StorageProtocol = UserDefaultsStorage(key: "rating_movie")
     lazy var ratingStorage: StorageProtocol = CoreDataStorage(key: "rating_movie")
-    lazy var ratingMovieLocalRepository: MovieLocalRepositoryProtocol = RatingMovieRepository(storage: ratingStorage)
+    lazy var ratingMovieLocalRepository: MovieLocalRepositoryProtocol = RatingMovieRepository(
+        storage: ratingStorage
+    )
 }
