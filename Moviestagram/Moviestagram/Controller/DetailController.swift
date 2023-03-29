@@ -147,7 +147,7 @@ final class DetailController: UIViewController {
 
     private func configureNavigationBar() {
         navigationItem.rightBarButtonItem = bookmarkButton
-        setNavigationBarTitle(with: detailViewModel.movie.title ?? "")
+        setNavigationBarTitle(with: detailViewModel.movie.title)
     }
 
     private func configureData() {

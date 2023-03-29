@@ -26,10 +26,10 @@ final class FeedCellViewModel {
         movie.summary
     }
     var ratingLabelText: NSAttributedString {
-        StringUtil.ratingAttributedText(with: movie.rating ?? 0.0)
+        StringUtil.ratingAttributedText(with: movie.rating)
     }
     var yearLabelText: String? {
-        "\(movie.year ?? 0)년"
+        "\(movie.year)년"
     }
 
     // MARK: - Lifecycle

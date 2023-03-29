@@ -34,7 +34,7 @@ final class CoreDataStorage: StorageProtocol {
     // MARK: - Public
 
     func save(movie: Movie) {
-        var movies = load()
+        let movies = load()
 
         guard movies.firstIndex(where: { $0.id == movie.id}) == nil else {
             update(movie: movie)

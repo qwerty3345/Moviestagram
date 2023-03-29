@@ -65,11 +65,12 @@ final class FeedController: UITableViewController {
     // MARK: - Helpers
 
     private func bind(to viewModel: FeedViewModel) {
-        viewModel.$movies
+        viewModel.output.$movies
             .sink { [weak self] _ in
                 DispatchQueue.main.async {
-                    self?.tableView.reloadData(with: .curveEaseInOut)
-                    self?.endRefreshing()
+                    guard let self else { return }
+                    self.tableView.reloadData(with: .curveEaseInOut)
+                    self.endRefreshing()
                 }
             }
             .store(in: &bag)
@@ -96,14 +97,14 @@ final class FeedController: UITableViewController {
             title: Constants.Design.sortByLikeActionTitle,
             image: UIImage(systemName: "heart"),
             handler: { _ in
-                self.feedViewModel.searchOption = .sortByLike
+                self.feedViewModel.input.searchOption = .sortByLike
             })
 
         let sortByRatingAction = UIAction(
             title: Constants.Design.sortByLikeRatingActionTitle,
             image: UIImage(systemName: "star"),
             handler: { _ in
-                self.feedViewModel.searchOption = .sortByRating
+                self.feedViewModel.input.searchOption = .sortByRating
             })
 
         let menuItems: [UIAction] = [sortByLikeAction, sortByRatingAction]
