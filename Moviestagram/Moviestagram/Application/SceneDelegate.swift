@@ -11,6 +11,9 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
     var environment: AppEnvironment!
 
+    // SceneDelegate -> Scene 마다 분리될 수 있음.
+    // AppDelegate...
+
     func scene(_ scene: UIScene,
                willConnectTo session: UISceneSession,
                options connectionOptions: UIScene.ConnectionOptions) {

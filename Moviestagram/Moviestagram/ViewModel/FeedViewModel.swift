@@ -20,6 +20,9 @@ final class FeedViewModel: ViewModelType {
         @Published var movies: [Movie] = []
     }
 
+    // input -> output transform 해준다...
+    // input 을 받아서, output을 만든다...
+
     let input = Input()
     let output = Output()
     var bag = Set<AnyCancellable>()
@@ -29,10 +32,6 @@ final class FeedViewModel: ViewModelType {
     }
 
     var numberOfMovies: Int { output.movies.count }
-
-    func movieForCell(at indexPath: IndexPath) -> Movie? {
-        return output.movies[safe: indexPath.row]
-    }
 
     private let movieRemoteRepository: MovieAPIRepositoryProtocol
 
@@ -61,6 +60,10 @@ final class FeedViewModel: ViewModelType {
 
             self.output.movies += moreLoadedMovies
         }
+    }
+
+    func movieForCell(at indexPath: IndexPath) -> Movie? {
+        return output.movies[safe: indexPath.row]
     }
 
     // MARK: - Private

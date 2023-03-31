@@ -53,6 +53,7 @@
 		B4A4BD81298EBFA3006FC77B /* ProfileRatingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A4BD80298EBFA3006FC77B /* ProfileRatingCell.swift */; };
 		B4A4BD83298EBFBB006FC77B /* ProfileHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A4BD82298EBFBB006FC77B /* ProfileHeader.swift */; };
 		B4A4BD85298EC0C2006FC77B /* UICollectionView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A4BD84298EC0C2006FC77B /* UICollectionView+.swift */; };
+		B4AAC10929D3D052008932A0 /* ViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4AAC10829D3D052008932A0 /* ViewModelType.swift */; };
 		B4B3693C29CB12F100CE572D /* StorageProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B3693B29CB12F100CE572D /* StorageProtocol.swift */; };
 		B4B3693E29CB131900CE572D /* UserDefaultsStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B3693D29CB131900CE572D /* UserDefaultsStorage.swift */; };
 		B4B3694B29CB300800CE572D /* CoreDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B3694A29CB300800CE572D /* CoreDataStorage.swift */; };
@@ -123,6 +124,7 @@
 		B4A4BD80298EBFA3006FC77B /* ProfileRatingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRatingCell.swift; sourceTree = "<group>"; };
 		B4A4BD82298EBFBB006FC77B /* ProfileHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeader.swift; sourceTree = "<group>"; };
 		B4A4BD84298EC0C2006FC77B /* UICollectionView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+.swift"; sourceTree = "<group>"; };
+		B4AAC10829D3D052008932A0 /* ViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelType.swift; sourceTree = "<group>"; };
 		B4B3693B29CB12F100CE572D /* StorageProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageProtocol.swift; sourceTree = "<group>"; };
 		B4B3693D29CB131900CE572D /* UserDefaultsStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsStorage.swift; sourceTree = "<group>"; };
 		B4B3694A29CB300800CE572D /* CoreDataStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStorage.swift; sourceTree = "<group>"; };
@@ -320,6 +322,7 @@
 			isa = PBXGroup;
 			children = (
 				B4866285299128E8002B4ACB /* MovieListViewModelProtocol.swift */,
+				B4AAC10829D3D052008932A0 /* ViewModelType.swift */,
 			);
 			path = Interface;
 			sourceTree = "<group>";
@@ -591,6 +594,7 @@
 				B4A4BD85298EC0C2006FC77B /* UICollectionView+.swift in Sources */,
 				B4B5702729B1F40E00A69F82 /* MovieLocalRepositoryProtocol.swift in Sources */,
 				B4B3695429CC26AE00CE572D /* MovieEntity+CoreDataProperties.swift in Sources */,
+				B4AAC10929D3D052008932A0 /* ViewModelType.swift in Sources */,
 				B4B5702529B1F2AE00A69F82 /* MovieAPIRepositoryProtocol.swift in Sources */,
 				B47B9AC6298E582D00025D0C /* ProfileController.swift in Sources */,
 				B484941429989FBA007D42AC /* SearchCellViewModel.swift in Sources */,

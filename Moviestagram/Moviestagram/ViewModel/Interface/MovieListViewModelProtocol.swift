@@ -6,14 +6,6 @@
 //
 
 import Foundation
-import Combine
-
-protocol ViewModelType {
-    associatedtype Input
-    associatedtype Output
-
-    var bag: Set<AnyCancellable> { get set }
-}
 
 protocol MovieListViewModelProtocol {
     var movies: [Movie] { get }

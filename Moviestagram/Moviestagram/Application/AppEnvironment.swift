@@ -8,6 +8,9 @@
 import Foundation
 
 final class AppEnvironment {
+    // 상태공유목적 -> shared...
+    // Environment 객체... -> SwiftUI에서 자주 쓰는 개념.
+    // 객체의 LifeCycle에 대한 고민... -> lazy...
     lazy var movieAPIService = NetworkService(session: .shared)
     lazy var movieRemoteRepository: MovieAPIRepositoryProtocol = YTSMovieAPIRepository(
         service: movieAPIService
